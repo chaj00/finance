@@ -17,7 +17,7 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->       
-    <link rel="shortcut icon" href="/finance//images/ico/favicon.ico">
+    <link rel="shortcut icon" href="/finance/images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/finance/images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/finance/images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/finance/images/ico/apple-touch-icon-72-precomposed.png">
@@ -44,7 +44,7 @@
                         <li class="active"><a href="#">Home</a></li>          
                         <li><a href="/finance/analysis/analysis_main.html">투자분석</a></li>
                         <li><a href="/finance/product/product_main.html">금융상품</a></li>
-                        <li><a href="/finance/portfolio/">포트폴리오</a></li>
+                        <li><a href="/finance/portfolio/portfolio_survey.html">포트폴리오</a></li>
                      	
                     </ul>
                 </div>

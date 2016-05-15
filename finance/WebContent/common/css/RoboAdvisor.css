@@ -196,7 +196,7 @@
 	width:600px;
 	height:227px;
 	text-align:right;
-	background-image:url(/finance/images/Roboadvisor/img_emailtop.png);
+	background-image:url(/finance/images/roboadvisor/img_emailtop.png);
 	background-repeat: no-repeat;
 }
 
@@ -336,7 +336,7 @@
 	position:relative;
 	top:10px;
 	left:10px;
-	background-image:url(/finance/images/Roboadvisor/img_dot3.png);
+	background-image:url("/finance/images/roboadvisor/img_dot3.png");
 }
 
 .test_box1 .choice_dot4 {
@@ -345,7 +345,7 @@
 	position:relative;
 	top:10px;
 	left:10px;
-	background-image:url(/finance/images/Roboadvisor/img_dot4.png);
+	background-image:url("/finance/images/roboadvisor/img_dot4.png");
 }
 
 .test_box1 .choice_dot_step1 {
@@ -531,7 +531,7 @@
 	font-family: "Roboto", sans-serif, Arial, Helvetica Neue, Helvetica; 
 	font-size:50px;
 	font-weight:bold;
-	color:#62b5e0;
+	color: #c52d2f;
 }
 
 .test_box1 .result_table .td03 {

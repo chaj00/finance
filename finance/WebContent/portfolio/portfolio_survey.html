@@ -116,13 +116,7 @@
                         iClassPosition = 2;
                     }
 
-/*                     $("#txt_plan_err").text("");
-                    if (iSelNum == 0) {
-                        if ($.cookie('qbemail') != "Y") {
-                            $("#emailwrite").css("display", "block");
-                            return;
-                        }
-                    } */
+
                     //문항Check
                     if ((iSelNum > 0 && iSelNum < 6) || iSelNum == 8) {
                         for (i = 1; i <= imax; i++) {
@@ -151,15 +145,15 @@
                             case 8: objSurveyData.param07 = iCheckNumber; break;  //plan
                         }
                     }
-/* 
- 					//일시 보류 
+ 
+/*  					//일시 보류 
 
                      if (iSelNum == 5) {
                         var json_data = JSON.stringify({ data: objSurveyData });
                         $.ajax({
                             type: "POST",
                             async: false,
-                            url: "../data/survey",
+                            url: "/portfolio.do",
                             data: json_data,
                             processData: false,
                             contentType: "Application/json; charset=utf-8",
@@ -186,10 +180,9 @@
 
                         $("#tab_box1").css("display", "none");
                     } 
-                     */
-                     
+                      */
+                 
                      if(iSelNum ==5) {
-                      	alert($("#result_point").val(iCheckNum_total));
                          
                      	 iCheckNum_total
                      	 if(iCheckNum_total >= 5 && iCheckNum_total <= 7){
@@ -232,9 +225,9 @@
              			iCheckNum_total = 0;
              			sRiskPoint = 0;
                      }
-                    
 
-                    //Result 결과 처리 n 
+
+                    //Result 결과 처리
                     if (iSelNum == 6 || iSelNum == 7) {	//G, K
                         if (iSelNum == 6) {
                             iNextNum = iSelNum + 2;
@@ -398,7 +391,7 @@
                             $("#txt_Riskpoint").val(objPlanData.param01);
                             $("#txt_Region").val(objSurveyData.param06);
                             $("#txt_Plantype").val(objSurveyData.param07);
-                            $('#form_plan').attr({ action: 'step2.aspx', method: 'post' }).submit();
+                            $('#form_plan').attr({ action: 'portfolio_result.html', method: 'post' }).submit();
                         }
 
                         return;
@@ -482,10 +475,12 @@
                     var objRisk = new Object();
                     objRisk.param01 = data.from;
                     var json_data = JSON.stringify({ data: objRisk });
+                    
+                    
                     $.ajax({
                         type: "POST",
                         async: false,
-                        url: "roboadvisor.asmx/RiskPoint",
+                        url: "/portfolio.do",
                         data: json_data,
                         processData: false,
                         contentType: "Application/json; charset=utf-8",
