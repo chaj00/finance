@@ -3,11 +3,14 @@ package product.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.oracle.jrockit.jfr.RequestDelegate;
 
 import product.dto.ProductDTO;
 import product.service.ProductService;
@@ -28,10 +31,10 @@ public class ProductSearchServlet extends HttpServlet {
 		
 		productlist = service.select();
 		
-		int length = opNamelist.size();
+		/*int length = opNamelist.size();
 		for(int i=0; i<length; i++){
 			System.out.println(opNamelist.get(i).toString());
-		}
+		}*/
 		/*int length = productlist.size();
 		for(int i=0; i<length; i++){
 			ProductDTO prd = productlist.get(i);
@@ -41,7 +44,10 @@ public class ProductSearchServlet extends HttpServlet {
 
 			
 		}*/
-		System.out.println("dkjdf");
+		req.setAttribute("opNamelist", opNamelist);
+		req.setAttribute("productlist", productlist);
+		
+		RequestDispatcher rd = req.getRequestDispatcher("/product/product_main.jsp");
+		rd.forward(req, res);
 	}
-
 }
