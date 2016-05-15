@@ -38,10 +38,10 @@ public class ProductDAOImpl implements ProductDAO{
 		while(rs.next()){
 			prd = new ProductDTO(rs.getString(1),
 				rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)
-				, rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11));
+				, rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11),rs.getString(12));
 			prdlist.add(prd);
 		}
-			/*int length = prdlist.size();
+			int length = prdlist.size();
 			for(int i=0; i<length; i++){
 				ProductDTO prd2 = prdlist.get(i);
 				System.out.println(prd2.getTitle()+prd2.getPrdate()+prd2.getClassify()+prd2.getType()
@@ -49,7 +49,7 @@ public class ProductDAOImpl implements ProductDAO{
 				prd2.getSixprofit()+prd2.getTwelveprofit()+prd2.getStd());
 			
 
-		}*/
+			}
 		close(rs);
 		close(ptmt);
 		return prdlist;

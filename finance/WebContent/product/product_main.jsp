@@ -1,3 +1,5 @@
+<%@page import="product.dto.ProductDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -5,6 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<%
+	ArrayList<ProductDTO> prdlist = (ArrayList<ProductDTO>)request.getAttribute("productlist"); 
+	ArrayList<String> opNamelist = (ArrayList<String>)request.getAttribute("opNamelist");
+	%>
 <link rel="shortcut icon" type="image/ico" href="/images/common/logo.ico" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script type="text/javascript">
@@ -100,7 +106,15 @@
  		
  	}
 	</script>
-
+	<style type="text/css">
+	.scroll{
+		overflow: auto;
+		
+	
+	}
+	
+	
+	</style>
 
 </head>
 <body>
@@ -242,6 +256,15 @@
                  </td>
                  <td>
                      <ul class="scroll" id="getOperCoListUl">
+                     <li><input type="checkbox" class="chk8" name="OperCoCdListAll" id="fund8All" value="">전체</li>
+                    <%
+                     int opNameLen=opNamelist.size();
+                     for(int i=0; i<opNameLen;i++){
+                    %> 
+                  
+                      <li><input type="checkbox" class="chk8" name="OperCoCdList" id="fund8-<%=i+1%>" value="<%=opNamelist.get(i).toString()%>">
+                       <%=opNamelist.get(i).toString()%></li>
+                    	<%} %>		 
                      </ul>
                  </td>
              </tr>
@@ -322,13 +345,7 @@
     <col style="width:11%">
 </colgroup>
     <thead class="sort">
-        <tr>
-            <th scope="col" rowspan="2"><input type="checkbox" name="compareAllChk" id="compareAllChk" value="" title="펀드 전체 선택"></th>
-            <th scope="col" rowspan="2" class="off"><a column="FundKrNm" href="#" class="up" title="올림차순으로 정렬">펀드명</a></th>
-            <th scope="colgroup" colspan="4">수익률(%)</th>
-            <th scope="col" rowspan="2">3개월 설정액 추이<br>(억)</th>
-            <th scope="col" rowspan="2">바로가기</th>
-        </tr>
+       
         <tr>
             <th scope="col" class="off"><a column="Yield1M" href="#" class="down" title="내림차순으로 정렬">1개월</a></th>
             <th scope="col" class="off"><a column="Yield3M" href="#" class="down" title="내림차순으로 정렬">3개월</a></th>
@@ -339,6 +356,7 @@
 
     <tbody id="bodyList">
     </tbody>
+    
 </table>
 <div class="btn-area">
     <span class="fl">
@@ -391,17 +409,88 @@
 </colgroup>
     <thead class="sort">
         <tr>
-            <th scope="col" class="off"><a column="FundKrNm" href="#" class="up" title="올림차순으로 정렬">펀드명</a></th>
-            <th scope="col" >유형</th>
-            <th scope="col" >기준가</th>
-            <th scope="col" >대비</th>
-            <th scope="col" class="off"><a column="AnnYieldOrd" href="#" class="down" title="내림차순으로 정렬">연 수익률</a></th>
-            <th scope="col" >바로가기</th>
+            <th scope="col" rowspan="4"><input type="checkbox" name="compareAllChk" id="compareAllChk" value="" title="펀드 전체 선택"></th>
+            <th scope="col" rowspan="4" class="off"><a column="FundKrNm" href="#" class="up" title="올림차순으로 정렬">펀드명</a></th>
+            <th scope="colgroup" colspan="4">수익률(%)</th>
+            <th scope="col" rowspan="2">3개월 설정액 추이<br>(억)</th>
+            <th scope="col" rowspan="2">바로가기</th>
+        </tr>
+        <tr>
+            <th scope="col" class="off"><a column="Yield1M" href="#" class="down" title="내림차순으로 정렬">1개월</a></th>
+            <th scope="col" class="off"><a column="Yield3M" href="#" class="down" title="내림차순으로 정렬">3개월</a></th>
+            <th scope="col" class="off"><a column="Yield6M" href="#" class="down" title="내림차순으로 정렬">6개월</a></th>
+            <th scope="col" class="off"><a column="AnnYield" href="#" class="down" title="내림차순으로 정렬">1년</a></th>
         </tr>
     </thead>
 
     <tbody id="bodyMutuelList">
-    </tbody>
+    <%
+          int prdeLen=prdlist.size();
+          for(int i=0; i<prdeLen;i++){
+        	  ProductDTO prd = prdlist.get(i);
+                         
+          %> 
+    <tr>
+    	<td>
+    		<div class = "checkbox">
+    			<input type="checkbox" name="compareChk" id="compareChk" value=" " title="">
+    		</div>
+   		</td>
+   		 
+    	<td class="prd">
+    		<p class="title">
+    			<a href=""><%=prd.getTitle()%></a>
+   			</p>
+   			<ul class="fund-details">	
+   				<li> 
+   					<dl>
+   						<dt>설정일</dt>
+   						<dd><%=prd.getPrdate()%></dd>
+    					</dl>
+				</li>
+			 	<li>
+					 <dl>
+					 	 <dt>유형</dt>
+				 	 	 <dd><%=prd.getType()%></dd>
+			 	 	 </dl>
+		 	 	 </li>
+	 	 	 	<li class="bul">
+	 	 	 		<dl class="bold">
+		 	 	 		<dt>총설정액</dt>
+		 	 	 		<dd><%=prd.getScale()%>억원</dd>
+		 	 	 	</dl>
+ 			 	</li>
+	 			 <li>
+ 	 	 			 <dl>
+	 	 	 			 <dt>운용사</dt>
+	 	 	 			 <dd><%=prd.getOpname()%></dd>
+ 	 	 			 	</dl>
+ 			 	</li>
+ 			 	<li class="bul">
+ 			 	 	 <dl class="bold">
+ 			 	 	 	<dt>총보수</dt>
+		 	 	 		<dd><%=prd.getCharge()%>%</dd>
+	 	 	 		</dl>
+ 	 	 		</li>
+ 	 	 	
+ 			</ul>
+		</td>
+	
+      	<td class="prd">
+            <em class="up"><%=prd.getOneprofit()%>%</em>
+        </td>
+        <td class="prd">
+        	<em class="down"><%=prd.getThreeprofit()%>%</em>
+       	</td>
+       	<td class="prd">
+        	<em class="up"><%=prd.getSixprofit()%>%</em>
+       	</td>
+       	<td class="prd">
+        	<em class="down"><%=prd.getTwelveprofit()%>%</em>
+       	</td>
+     </tr>
+     <%} %>   
+   </tbody>
 </table>
 
 <div class="btn-area">

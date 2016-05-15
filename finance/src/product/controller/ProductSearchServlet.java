@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oracle.jrockit.jfr.RequestDelegate;
-
 import product.dto.ProductDTO;
 import product.service.ProductService;
 import product.service.ProductServiceImpl;
@@ -35,15 +33,15 @@ public class ProductSearchServlet extends HttpServlet {
 		for(int i=0; i<length; i++){
 			System.out.println(opNamelist.get(i).toString());
 		}*/
-		/*int length = productlist.size();
+		int length = productlist.size();
 		for(int i=0; i<length; i++){
 			ProductDTO prd = productlist.get(i);
-			System.out.println(prd.getTitle()+prd.getPrdate()+prd.getClassify()+prd.getType()
+			System.out.println(prd.getOpname()+prd.getTitle()+prd.getPrdate()+prd.getClassify()+prd.getType()
 			+prd.getScale()+prd.getCharge()+prd.getOneprofit()+prd.getThreeprofit()+
 			prd.getSixprofit()+prd.getTwelveprofit()+prd.getStd());
 
 			
-		}*/
+		}
 		req.setAttribute("opNamelist", opNamelist);
 		req.setAttribute("productlist", productlist);
 		

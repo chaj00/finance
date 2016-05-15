@@ -15,9 +15,15 @@ public class ProductDTO {
 	private String std;
 	private String opname;
 	
-	public ProductDTO(String title, String prdate, String classify, String type, String scale, String charge,
+	
+	public ProductDTO() {
+		super();
+	}
+
+	public ProductDTO(String opname,String title, String prdate, String classify, String type, String scale, String charge,
 			String oneprofit, String threeprofit, String sixprofit, String twelveprofit, String std) {
 		super();
+		this.opname = opname;
 		this.title = title;
 		this.prdate = prdate;
 		this.classify = classify;
