@@ -44,7 +44,7 @@ public class ProductDAOImpl implements ProductDAO{
 			int length = prdlist.size();
 			for(int i=0; i<length; i++){
 				ProductDTO prd2 = prdlist.get(i);
-				System.out.println(prd2.getTitle()+prd2.getPrdate()+prd2.getClassify()+prd2.getType()
+				System.out.println(prd2.getOpname()+prd2.getTitle()+prd2.getPrdate()+prd2.getClassify()+prd2.getType()
 				+prd2.getScale()+prd2.getCharge()+prd2.getOneprofit()+prd2.getThreeprofit()+
 				prd2.getSixprofit()+prd2.getTwelveprofit()+prd2.getStd());
 			

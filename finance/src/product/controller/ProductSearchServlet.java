@@ -33,7 +33,7 @@ public class ProductSearchServlet extends HttpServlet {
 		for(int i=0; i<length; i++){
 			System.out.println(opNamelist.get(i).toString());
 		}*/
-		int length = productlist.size();
+		/*int length = productlist.size();
 		for(int i=0; i<length; i++){
 			ProductDTO prd = productlist.get(i);
 			System.out.println(prd.getOpname()+prd.getTitle()+prd.getPrdate()+prd.getClassify()+prd.getType()
@@ -41,7 +41,7 @@ public class ProductSearchServlet extends HttpServlet {
 			prd.getSixprofit()+prd.getTwelveprofit()+prd.getStd());
 
 			
-		}
+		}*/
 		req.setAttribute("opNamelist", opNamelist);
 		req.setAttribute("productlist", productlist);
 		
