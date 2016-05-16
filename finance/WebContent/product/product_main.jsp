@@ -11,8 +11,13 @@
 	ArrayList<ProductDTO> prdlist = (ArrayList<ProductDTO>)request.getAttribute("productlist"); 
 	ArrayList<String> opNamelist = (ArrayList<String>)request.getAttribute("opNamelist");
 	%>
-<link rel="shortcut icon" type="image/ico" href="/images/common/logo.ico" />
+<link rel="stylesheet" href="/finance/common/css/bootstrap.css"/>	
+<link rel="stylesheet" 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<link rel="stylesheet" href="/finance/common/css/font-awesome.css"/>
+<link rel="stylesheet" href="/finance/common/css/build.css"/>
+<link rel="stylesheet" href="/finance/common/css/bootstrap.css"/>
 <script type="text/javascript">
 	var xhr;
 	$(document).ready(function(){ 
@@ -106,16 +111,51 @@
  		
  	}
 	</script>
+	
 	<style type="text/css">
-	.scroll{
+	
+	table.gridtable {
+		font-family: verdana,arial,sans-serif;
+		font-size:11px;
+		color:#333333;
+		border-width: 1px;
+		border-color: #f2f2f2;
+		border-collapse:separate;
+		margin-bottom: 20px;
+		display: block;
+		
+		
+		
+		
+ 	   	
+		
+		}
+	table.gridtable th {
+		border-width: 1px;
+		padding-right:8px;
+		border-style: solid;
+		border-color: #666666;
+		background-color: inherit;
+		text-align: center;
+		
+	}
+	table.gridtable td {
+		border-width: 1px;
+		border-style: solid;
+		padding-right:40px;
+		border-color: #666666;
+		background-color: #ffffff;
+		height: 100px;
 		overflow: auto;
 		
-	
+    	
 	}
 	
 	
-	</style>
+  
 
+	
+</style>
 </head>
 <body>
 <div id="wrap">
@@ -157,7 +197,8 @@
          </dl>
      </fieldset>
      <hr>
-     <table class="tbl-type">
+    
+     <table class="gridtable">
      <caption><strong>펀드 검색 조건 설정</strong></caption>
          <thead>
              <tr>
@@ -174,11 +215,13 @@
          <tbody>
              <tr>
  				 <td>
+					
                      <ul id ="ForgnSect">
-                         <li><input type="checkbox" class="chk1all" name="ForgnSectCdall" id="fund1All" value="1" >전체</li>
+                         <li><input type="checkbox" class="chk1all" name="ForgnSectCdall" id="fund1All" value="1">전체</li>
                          <li><input type="checkbox" class="chk1" name="ForgnSectCd" id="fund1-1" value="국내"> 국내</li>
                          <li><input type="checkbox" class="chk1" name="ForgnSectCd" id="fund1-2" value="해외" >해외</li>
                      </ul>
+                	
                  </td>
 
                  <td>
@@ -254,7 +297,8 @@
                          <li><input type="checkbox" class="chk7" name="TotRwrt" id="fund7-4" value="3|">3% 초과</label></li>
                      </ul>
                  </td>
-                 <td>
+                 <td style="overflow-y:scroll; height: 100px ">
+           
                      <ul class="scroll" id="getOperCoListUl">
                      <li><input type="checkbox" class="chk8" name="OperCoCdListAll" id="fund8All" value="">전체</li>
                     <%
@@ -270,15 +314,12 @@
              </tr>
          </tbody>
      </table>
-    
+   
 
      <div class="btn-area">
-         <a class="btn big" href="javascript:checkSelectedValue();">선택 조건으로 검색</a>
-         <a href="javascript:clearSmartSearch();" class="btn3 big refresh">조건 초기화</a>
-         <span class="fr">
-             <a href="javascript:toggleSearchDetail();" id="btnSearchDetail" class="btn4 big show">상세검색 열기</a>
-             <!-- <a href="#" class="btn4 big hide">상세검색 닫기</a>-->
-         </span>
+     <!-- Indicates a successful or positive action -->
+		<button type="button" class="btn btn-primary" onclick="javascript:checkSelectedValue();">선택 조건으로 검색</button>
+        <button type="button" class="btn btn-danger" onclick="javascript:checkSelectedValue();">조건 초기화</button>
      </div>
  </div>
 
