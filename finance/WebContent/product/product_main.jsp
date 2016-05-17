@@ -42,6 +42,9 @@
 	    $("#fund7All").change(function(){
 		      $(".chk7").prop('checked', $(this).prop("checked"));
 		      });
+	    $("#fund8All").change(function(){
+		      $(".chk8").prop('checked', $(this).prop("checked"));
+		      });
 	   
 		    
 	});
@@ -49,11 +52,12 @@
 		alert("µé¾î¿È");
 		var classify = [];
 		var type = [];
-		var date = [];
+		var prdate = [];
 		var scale = [];
 		var profit = [];
 		var charge = [];
 		var std = [];
+		var opname =[];
 		
     	$("input[name=ForgnSectCd]:checked").each(function(){
     		classify.push($(this).val());
@@ -64,7 +68,7 @@
     		//alert(chk2Val);
     	}); 
     	$("input[name=SetPeriodMM]:checked").each(function(){
-    		date.push($(this).val());
+    		prdate.push($(this).val());
     		//alert(chk3Val);
     	}); 
     	$("input[name=kfrEstabAmUk]:checked").each(function(){
@@ -83,22 +87,30 @@
     		std.push($(this).val());
     		//alert(chk6Val);
     	}); 
+    	$("input[name=OperCoCdList]:checked").each(function(){
+    		opname.push($(this).val());
+    		//alert(chk6Val);
+    	}); 
+    	
+    	
+    	
     	alert("classify :"+classify);
     	alert("type :"+type);
-    	alert("date :"+date);
+    	alert("prdate :"+prdate);
     	alert("scale :"+scale);
     	alert("profit :"+profit);
     	alert("charge :"+charge);
     	alert("std :"+std);
-    	runAjax(classify,type,date,scale,profit,charge,std)
+    	alert("opname :"+opname);
+    	runAjax(classify,type,prdate,scale,profit,charge,std,opname)
    	}
 	
-	function runAjax(classify,type,date,scale,profit,charge,std){
+	function runAjax(classify,type,prdate,scale,profit,charge,std,opname){
 		xhr=new XMLHttpRequest();
 		xhr.onreadystatechange=finfinanceSearchs;
 		xhr.open("GET", "/finance/financeSearchs.do?classify="+classify+"&type="+type
-				+"&date="+date+"&scale="+scale+"&profit="+profit+"&charge="+charge
-				+"&std="+std,true);
+				+"&prdate="+prdate+"&scale="+scale+"&profit="+profit+"&charge="+charge
+				+"&std="+std+"&opname="+opname,true);
 		xhr.send();
 	}
  	function finfinanceSearchs(){
@@ -124,11 +136,6 @@
 		margin-bottom: 20px;
 		display: block;
 		
-		
-		
-		
- 	   	
-		
 		}
 	table.gridtable th {
 		border-width: 1px;
@@ -147,6 +154,12 @@
 		background-color: #ffffff;
 		height: 100px;
 		overflow: auto;
+		
+    	
+	}
+	
+	.scl  {
+		height: 800px;
 		
     	
 	}
@@ -213,7 +226,7 @@
              </tr>
          </thead>
          <tbody>
-             <tr>
+             <tr class = "scl" style ="height: 800px">
  				 <td>
 					
                      <ul id ="ForgnSect">
@@ -511,6 +524,13 @@
  			 	 	 <dl class="bold">
  			 	 	 	<dt>ÃÑº¸¼ö</dt>
 		 	 	 		<dd><%=prd.getCharge()%>%</dd>
+	 	 	 		</dl>
+ 	 	 		</li>
+ 	 	 		
+ 	 	 		<li class="bul">
+ 			 	 	 <dl class="bold">
+ 			 	 	 	<dt>À§Çèµî±Þ</dt>
+		 	 	 		<dd><%=prd.getStd()%>%</dd>
 	 	 	 		</dl>
  	 	 		</li>
  	 	 	

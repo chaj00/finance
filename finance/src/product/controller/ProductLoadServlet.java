@@ -15,8 +15,8 @@ import product.service.ProductService;
 import product.service.ProductServiceImpl;
 
 
-@WebServlet(name = "search", urlPatterns = { "/prdSearch.do" })
-public class ProductSearchServlet extends HttpServlet {
+@WebServlet(name = "load", urlPatterns = { "/loadPrd.do" })
+public class ProductLoadServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
 		req.setCharacterEncoding("euc-kr");
