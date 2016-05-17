@@ -40,6 +40,13 @@ public class ProductServiceImpl implements ProductService{
 		}
 		return productlist;
 	}
+
+	@Override
+	public ArrayList<ProductDTO> search(ProductDTO prd) {
+		ArrayList<ProductDTO> productlist = null;
+		
+		return productlist;
+	}
 	
 	
 }

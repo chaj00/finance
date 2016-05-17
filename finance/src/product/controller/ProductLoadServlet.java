@@ -47,5 +47,7 @@ public class ProductLoadServlet extends HttpServlet {
 		
 		RequestDispatcher rd = req.getRequestDispatcher("/product/product_main.jsp");
 		rd.forward(req, res);
+		
+		
 	}
 }
