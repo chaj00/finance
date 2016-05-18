@@ -12,7 +12,7 @@ public class prdates {
 		String prdate;
 		System.out.println(length);
 		if (splitcom.length == 5) {
-			prdate = "p.prdate like= %";
+			prdate = "p.prdate like %";
 		} else {
 			for (int i = 0; i < length; i++) {
 				System.out.println(splitcom[i]);

@@ -42,8 +42,8 @@ public class prdate {
 		String prdate;
 		String query = "";
 		String query2 = "";
-		int a =1;
-		int b =24;
+		int a =3;
+		int b =6;
 			
 	    //"1-"1개월 미만", 1-3 "1~3개월" ,3-6 ,6-12,12-24,24-"
 	    String test = "1-,1-3,3-6,6-12,12-24,24-";
