@@ -96,7 +96,6 @@
     	
     	
     	alert("classify :"+classify);
-    	
     	alert("type :"+type);
     	alert("prdate :"+prdate);
     	alert("scale :"+scale);
@@ -273,10 +272,10 @@
                  <td>
                      <ul id ="kfrEstabAm">
                          <li><input type="checkbox" class="chk4" name="kfrEstabAmUkAll" id="fund4All" value=""> <label for="fund5-1">전체</label></li>
-                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-2" value="10|"> 10억 미만</label></li>
-                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-3" value="10|30">10~30억</label></li>
-                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-4" value="30|50"> <label for="fund5-4">30~50억</label></li>
-                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-5" value="50|100"> <label for="fund5-5">50~100억</label></li>
+                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-2" value="10|"> 10억 미만</li>
+                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-3" value="10|30">10~30억</li>
+                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-4" value="30|50">30~50억</li>
+                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-5" value="50|100">50~100억</li>
                          <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-6" value="100|500"> <label for="fund5-6">100~500억</label></li>
                          <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-7" value="500|"> <label for="fund5-7">500억 초과</label></li>
                      </ul>
@@ -285,7 +284,7 @@
                  <td>
                      <ul id ="Yld" >
                          <li><input type="checkbox" class="chk5" name="YieldAll" id="fund5All" value=""> <label for="fund6-1">전체</label></li>
-                         <li><input type="checkbox" class="chk5" name="Yield" id="fund5-1" value="|0"> <label for="fund6-2">0% 미만</label></li>
+                         <li><input type="checkbox" class="chk5" name="Yield" id="fund5-1" value="0|"> <label for="fund6-2">0% 미만</label></li>
                          <li><input type="checkbox" class="chk5" name="Yield" id="fund5-2" value="0|10"> <label for="fund6-3">0~10%</label></li>
                          <li><input type="checkbox" class="chk5" name="Yield" id="fund5-3" value="10|20"> <label for="fund6-4">10~20%</label></li>
                          <li><input type="checkbox" class="chk5" name="Yield" id="fund5-4" value="20|30"> <label for="fund6-5">20~30%</label></li>
