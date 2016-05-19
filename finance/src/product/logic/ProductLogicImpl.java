@@ -43,7 +43,7 @@ public class ProductLogicImpl implements ProductLogic {
 
 		System.out.println(length);
 		System.out.println(splitcom[0].toString());
-		if (splitcom.length == 2 | splitcom.length ==1) {
+		if (splitcom.length == 2 | splitcom[0].toString() == null) {
 			classToQuery = "(p.classify like '%')";
 		} else {
 			classToQuery = "(p.classify = '" + splitcom[0].toString() + "')";
