@@ -80,11 +80,11 @@
     		profit.push($(this).val());
     		//alert(chk5Val);
     	}); 
-    	$("input[name=StdGrade]:checked").each(function(){
+    	$("input[name=TotRwrt]:checked").each(function(){
     		charge.push($(this).val());
     		//alert(chk6Val);
-    	}); 
-    	$("input[name=TotRwrt]:checked").each(function(){
+    	});
+    	$("input[name=StdGrade]:checked").each(function(){
     		std.push($(this).val());
     		//alert(chk6Val);
     	}); 
@@ -245,14 +245,14 @@
                  <td>
                      <ul id ="FundInvstType" >
                          <li><input type="checkbox" class="chk2" name="FundInvstTypeCdAll" id="fund2All" value="">전체</li>
-                         <li><input type="checkbox" class="chk2" name="FundInvstTypeCd" id="fund2-2" value="주식형" >주식형</li>
-                         <li><input type="checkbox" class="chk2" name="FundInvstTypeCd" id="fund2-3" value="주식혼합형" >주식혼합형</li>
-                         <li><input type="checkbox" class="chk2" name="FundInvstTypeCd" id="fund2-4" value="채권혼합형" > 채권혼합형</li>
-                         <li><input type="checkbox" class="chk2" name="FundInvstTypeCd" id="fund2-5" value="채권형"   > 채권형</li>
-                         <li><input type="checkbox" class="chk2" name="FundInvstTypeCd" id="fund2-6" value="인덱스" >인덱스형</li>
-                         <li><input type="checkbox" class="chk2" name="FundInvstTypeCd" id="fund2-7" value="MMF"   > MMF</li>
-                         <li><input type="checkbox" class="chk2" name="FundInvstTypeCd" id="fund2-8" value="파생상품"   > 파생상품</li>
-                         <li><input type="checkbox" class="chk2" name="FundInvstTypeCd" id="fund2-9" value="기타"  >기타</li>
+                         <li><input type="checkbox" class="chk2" name="FundInvstTypeCd" id="fund2-2" value="주식형">주식형</li>
+                         <li><input type="checkbox" class="chk2" name="FundInvstTypeCd" id="fund2-3" value="주식혼합형">주식혼합형</li>
+                         <li><input type="checkbox" class="chk2" name="FundInvstTypeCd" id="fund2-4" value="채권혼합형">채권혼합형</li>
+                         <li><input type="checkbox" class="chk2" name="FundInvstTypeCd" id="fund2-5" value="채권형">채권형</li>
+                         <li><input type="checkbox" class="chk2" name="FundInvstTypeCd" id="fund2-6" value="인덱스">인덱스형</li>
+                         <li><input type="checkbox" class="chk2" name="FundInvstTypeCd" id="fund2-7" value="MMF">MMF</li>
+                         <li><input type="checkbox" class="chk2" name="FundInvstTypeCd" id="fund2-8" value="파생상품">파생상품</li>
+                         <li><input type="checkbox" class="chk2" name="FundInvstTypeCd" id="fund2-9" value="기타">기타</li>
                      </ul>
                  </td>
 
@@ -260,59 +260,59 @@
                  <td>
                      <ul id ="SetPeriod" >
                          <li><input type="checkbox" class="chk3" name="SetPeriodMMAll" id="fund3All" value="">전체</li>
-                         <li><input type="checkbox" class="chk3" name="SetPeriodMM" id="fund3-2" value="1|">1개월 미만</li>
-                         <li><input type="checkbox" class="chk3" name="SetPeriodMM" id="fund3-3" value="1|3"> 1~3개월</li>
-                         <li><input type="checkbox" class="chk3" name="SetPeriodMM" id="fund3-4" value="3|6"> 3~6개월</li>
-                         <li><input type="checkbox" class="chk3" name="SetPeriodMM" id="fund3-5" value="6|12">6개월~1년</li>
-                         <li><input type="checkbox" class="chk3" name="SetPeriodMM" id="fund3-6" value="12|24">1~2년</li>
-                         <li><input type="checkbox" class="chk3" name="SetPeriodMM" id="fund3-7" value="24|">2년 초과</li>
+                         <li><input type="checkbox" class="chk3" name="SetPeriodMM" id="fund3-2" value="1-">1개월 미만</li>
+                         <li><input type="checkbox" class="chk3" name="SetPeriodMM" id="fund3-3" value="1-3">1~3개월</li>
+                         <li><input type="checkbox" class="chk3" name="SetPeriodMM" id="fund3-4" value="3-6">3~6개월</li>
+                         <li><input type="checkbox" class="chk3" name="SetPeriodMM" id="fund3-5" value="6-12">6개월~1년</li>
+                         <li><input type="checkbox" class="chk3" name="SetPeriodMM" id="fund3-6" value="12-24">1~2년</li>
+                         <li><input type="checkbox" class="chk3" name="SetPeriodMM" id="fund3-7" value="24-">2년 초과</li>
                      </ul>
                  </td>
 
                  <td>
                      <ul id ="kfrEstabAm">
-                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUkAll" id="fund4All" value=""> <label for="fund5-1">전체</label></li>
-                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-2" value="10|"> 10억 미만</li>
-                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-3" value="10|30">10~30억</li>
-                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-4" value="30|50">30~50억</li>
-                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-5" value="50|100">50~100억</li>
-                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-6" value="100|500"> <label for="fund5-6">100~500억</label></li>
-                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-7" value="500|"> <label for="fund5-7">500억 초과</label></li>
+                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUkAll" id="fund4All" value=""><label for="fund5-1">전체</label></li>
+                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-2" value="10-">10억 미만</li>
+                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-3" value="10-30">10~30억</li>
+                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-4" value="30-50">30~50억</li>
+                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-5" value="50-100">50~100억</li>
+                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-6" value="100-500"><label for="fund5-6">100~500억</label></li>
+                         <li><input type="checkbox" class="chk4" name="kfrEstabAmUk" id="fund4-7" value="50-"><label for="fund5-7">500억 초과</label></li>
                      </ul>
                  </td>
 
                  <td>
                      <ul id ="Yld" >
                          <li><input type="checkbox" class="chk5" name="YieldAll" id="fund5All" value=""> <label for="fund6-1">전체</label></li>
-                         <li><input type="checkbox" class="chk5" name="Yield" id="fund5-1" value="0|"> <label for="fund6-2">0% 미만</label></li>
-                         <li><input type="checkbox" class="chk5" name="Yield" id="fund5-2" value="0|10"> <label for="fund6-3">0~10%</label></li>
-                         <li><input type="checkbox" class="chk5" name="Yield" id="fund5-3" value="10|20"> <label for="fund6-4">10~20%</label></li>
-                         <li><input type="checkbox" class="chk5" name="Yield" id="fund5-4" value="20|30"> <label for="fund6-5">20~30%</label></li>
-                         <li><input type="checkbox" class="chk5" name="Yield" id="fund5-5" value="30|40"> <label for="fund6-6">30~40%</label></li>
-                         <li><input type="checkbox" class="chk5" name="Yield" id="fund5-6" value="40|50"> <label for="fund6-7">40~50%</label></li>
-                         <li><input type="checkbox" class="chk5" name="Yield" id="fund5-7" value="50|"> <label for="fund6-8">50% 초과</label></li>
+                         <li><input type="checkbox" class="chk5" name="Yield" id="fund5-1" value="0-"> <label for="fund6-2">0% 미만</label></li>
+                         <li><input type="checkbox" class="chk5" name="Yield" id="fund5-2" value="0-10"> <label for="fund6-3">0~10%</label></li>
+                         <li><input type="checkbox" class="chk5" name="Yield" id="fund5-3" value="10-20"> <label for="fund6-4">10~20%</label></li>
+                         <li><input type="checkbox" class="chk5" name="Yield" id="fund5-4" value="20-30"> <label for="fund6-5">20~30%</label></li>
+                         <li><input type="checkbox" class="chk5" name="Yield" id="fund5-5" value="30-40"> <label for="fund6-6">30~40%</label></li>
+                         <li><input type="checkbox" class="chk5" name="Yield" id="fund5-6" value="40-50"> <label for="fund6-7">40~50%</label></li>
+                         <li><input type="checkbox" class="chk5" name="Yield" id="fund5-7" value="50-"> <label for="fund6-8">50% 초과</label></li>
                      </ul>
                  </td>
 
                  <td>
                      <ul id ="Std" >
                          <li><input type="checkbox" class="chk6" name="StdGradeAll" id="fund6All" value=""> 전체</li>    
-                         <li><input type="checkbox" class="chk6" name="StdGrade" id="fund6-1" value="25|">매우 높은 위험</li><!--수익률 변동성이 25%를 초과할 경우 1등급(매우 높은 위험)-->
-                         <li><input type="checkbox" class="chk6" name="StdGrade" id="fund6-2" value="15|25">높은 위험</li><!--15~25%일 때 2등급(높은 위험),   -->
-                         <li><input type="checkbox" class="chk6" name="StdGrade" id="fund6-3" value="10|15">다소 높은 위험</li> <!-- 10~15%일 때 3등급(다소 높은 위험) -->
-                         <li><input type="checkbox" class="chk6" name="StdGrade" id="fund6-4" value="5|10">보통 위험</li> <!-- 5~10%일 때 4등급(보통 위험) -->
-                          <li><input type="checkbox" class="chk6" name="StdGrade" id="fund6-5" value="0.5|5">낮은 위험</li> <!-- 0.5~5%일 때 5등급(낮은 위험) -->
-                           <li><input type="checkbox" class="chk6" name="StdGrade" id="fund6-6" value="0.5|">매우 낮음 위험</li><!-- 0.5% 이하일 때 6등급(매우 낮은 위험) -->
+                         <li><input type="checkbox" class="chk6" name="StdGrade" id="fund6-1" value="0.5-">매우 낮은 위험</li><!--0.5% 이하일 때 6등급(매우 낮은 위험)-->
+                         <li><input type="checkbox" class="chk6" name="StdGrade" id="fund6-2" value="0.5-5">낮은 위험</li><!-- 0.5~5%일 때 5등급(낮은 위험)-->
+                         <li><input type="checkbox" class="chk6" name="StdGrade" id="fund6-3" value="5-10">보통 위험</li> <!--  5~10%일 때 4등급(보통 위험 -->
+                         <li><input type="checkbox" class="chk6" name="StdGrade" id="fund6-4" value="10-15">다소 높은 위험</li> <!--10~15%일 때 3등급(다소 높은 위험)-->
+                          <li><input type="checkbox" class="chk6" name="StdGrade" id="fund6-5" value="15-25">높은 위험</li> <!-- 15~25%일 때 2등급(높은 위험)-->
+                           <li><input type="checkbox" class="chk6" name="StdGrade" id="fund6-6" value="25-">매우 높은 위험</li><!-- 수익률 변동성이 25%를 초과할 경우 1등급(매우 높은 위험)-->
                      </ul>
                  </td>
                  
                  <td>
                      <ul id ="Tot" >
                          <li><input type="checkbox" class="chk7" name="TotRwrtAll" id="fund7All" value="">전체</label></li>
-                         <li><input type="checkbox" class="chk7" name="TotRwrt" id="fund7-1" value="1|">1% 미만</label></li>
-                         <li><input type="checkbox" class="chk7" name="TotRwrt" id="fund7-2" value="1|2">1~2%</label></li>
-                         <li><input type="checkbox" class="chk7" name="TotRwrt" id="fund7-3" value="2|3">2~3%</label></li>
-                         <li><input type="checkbox" class="chk7" name="TotRwrt" id="fund7-4" value="3|">3% 초과</label></li>
+                         <li><input type="checkbox" class="chk7" name="TotRwrt" id="fund7-1" value="1-">1% 미만</label></li>
+                         <li><input type="checkbox" class="chk7" name="TotRwrt" id="fund7-2" value="1-2">1~2%</label></li>
+                         <li><input type="checkbox" class="chk7" name="TotRwrt" id="fund7-3" value="2-3">2~3%</label></li>
+                         <li><input type="checkbox" class="chk7" name="TotRwrt" id="fund7-4" value="3-">3% 초과</label></li>
                      </ul>
                  </td>
                  <td style="overflow-y:scroll; height: 100px ">

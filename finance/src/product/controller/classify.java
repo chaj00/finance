@@ -3,7 +3,7 @@ package product.controller;
 public class classify {
 
 	public static void main(String[] args) {
-		String test = "국내,해외";
+		String test = "국내";
 		String[] splitcom = test.split(",");
 		int length = splitcom.length;
 		String classify;
