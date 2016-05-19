@@ -24,6 +24,7 @@ public class prdates {
 
 
 		if (splitcom.length == 5) {
+
 			prdate = "p.prdate like %";
 		} else {
 			for (int i = 0; i < length; i++) {
@@ -33,21 +34,21 @@ public class prdates {
 				if (words.length == 1) {
 					if (query.length() == 0) {
 						if (words[0].toString().equals("1")) {
-							query += "(systate - " + Integer.parseInt(words[0])
+							query += "(sysdate - " + Integer.parseInt(words[0])
 									* 30 + "<p.prdate)";
 							System.out.println(query);
 						} else {
-							query += "(systate - " + Integer.parseInt(words[0])
+							query += "(sysdate - " + Integer.parseInt(words[0])
 									* 30 + ">p.prdate)";
 						}
 
 					} else {
 						if (words[0].toString().equals("1")) {
-							query += " or (systate - "
+							query += " or (sysdate - "
 									+ Integer.parseInt(words[0]) * 30
 									+ "<p.prdate)";
 						} else {
-							query += " or (systate - "
+							query += " or (sysdate - "
 									+ Integer.parseInt(words[0]) * 30
 									+ ">p.prdate)";
 						}
