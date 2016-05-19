@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import analysis.dto.BpsepsDTO;
 import analysis.dto.EnterpriseDTO;
 
+
+
 public class LOGICimpl implements LOGIC {
 	
 	

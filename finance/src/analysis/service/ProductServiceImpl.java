@@ -1,7 +1,6 @@
 package analysis.service;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
 import static fw.JdbcTemplate.*;
 import java.util.ArrayList;
 

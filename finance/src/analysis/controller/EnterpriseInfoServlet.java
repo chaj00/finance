@@ -19,7 +19,7 @@ import analysis.service.ProductServiceImpl;
 
 @WebServlet(name = "stocklist", urlPatterns = { "/stocklist.do" })
 public class EnterpriseInfoServlet extends HttpServlet {
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String encode="005930";	
 		//비지니스 메소드 call
 		
@@ -36,8 +36,8 @@ public class EnterpriseInfoServlet extends HttpServlet {
 //		System.out.println(bpsEps.toString());
 		
 		//요청 재지정- 응답화면을 분리하고 분리한 응답화면이 요청되도록 재지정(list.jsp)
-		RequestDispatcher rd = req.getRequestDispatcher("/topMain_analysis.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/analysis/Analysis_main.jsp");
 		rd.forward(req, res);
-	}
-
+	}	
+	
 }
