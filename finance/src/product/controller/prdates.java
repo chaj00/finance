@@ -21,7 +21,9 @@ public class prdates {
 		String query = "";
 		String prdate;
 		System.out.println(length);
-		if (splitcom.length == 6) {
+
+
+		if (splitcom.length == 5) {
 			prdate = "p.prdate like %";
 		} else {
 			for (int i = 0; i < length; i++) {

@@ -42,8 +42,12 @@ public class prdate {
 		String prdate;
 		String query = "";
 		String query2 = "";
-		int a =1;
-		int b =6;
+/*<<<<<<< HEAD
+		//int a =1;
+=======
+		//int a =3;
+>>>>>>> branch 'jh_product_search' of https://github.com/chaj00/finance.git
+		//int b =6;
 			
 	    //"1-"1개월 미만", 1-3 "1~3개월" ,3-6 ,6-12,12-24,24-"
 	    String test = "1-,1-3,3-6,6-12,12-24,24-";
@@ -54,7 +58,7 @@ public class prdate {
 		String convertDate2 =dateToConvert(b);
 		
 		System.out.println("convertDate :"+convertDate+"\n"
-				+"convertDate2 :"+convertDate2);
+				+"convertDate2 :"+convertDate2);*/
 	  //  System.out.println(r);
 		/*int length = splitcom.length;
 		
