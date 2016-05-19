@@ -15,14 +15,14 @@ public class prdates {
 	 */
 	public static void main(String[] args) {
 
-		String test = "1-3,3-6,6-12,12-24";
+		String test = "";
 		String[] splitcom = test.split(",");
 		int length = splitcom.length;
 		String query = "";
 		String prdate;
 		System.out.println(length);
 
-
+	
 		if (splitcom.length == 5) {
 
 			prdate = "p.prdate like %";

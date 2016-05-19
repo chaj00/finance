@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import product.dao.ProductDAO;
 import product.dao.ProductDAOImpl;
 import product.dto.ProductDTO;
+import product.logic.ProductLogic;
+import product.logic.ProductLogicImpl;
 
 public class ProductServiceImpl implements ProductService{
 
@@ -43,7 +45,21 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public ArrayList<ProductDTO> search(ProductDTO prd) {
+		System.out.println("dto·Î ³Ñ¾î¿È");
 		ArrayList<ProductDTO> productlist = null;
+		ProductLogic logic = new ProductLogicImpl();
+		ProductDAO dao = new ProductDAOImpl();
+		ProductDTO drdTodao = null;
+		Connection con = getConnect();
+		drdTodao =logic.convert(prd);
+		
+		try {
+			productlist = dao.search(con, drdTodao);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		return productlist;
 	}

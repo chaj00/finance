@@ -11,7 +11,7 @@ public class classify {
 		System.out.println(length);
 		System.out.println(splitcom[0].toString());
 		if (splitcom.length == 2) {
-			classify = "p.classify like= %";
+			classify = "p.classify like %";
 		} else {
 			classify = "p.type = '"+splitcom[0].toString()+"'";
 		}

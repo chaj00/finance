@@ -2,7 +2,7 @@ package product.dto;
 
 public class ProductDTO {
 
-	private String title;	//
+	private String title; //
 	private String prdate;
 	private String classify;
 	private String type;
@@ -14,14 +14,30 @@ public class ProductDTO {
 	private String twelveprofit;
 	private String std;
 	private String opname;
-	
-	
+	private String profit;
+
 	public ProductDTO() {
 		super();
 	}
 
-	public ProductDTO(String opname,String title, String prdate, String classify, String type, String scale, String charge,
-			String oneprofit, String threeprofit, String sixprofit, String twelveprofit, String std) {
+	public ProductDTO(String prdate, String classify, String type,
+			String scale, String charge, String std, String opname,
+			String profit) {
+		super();
+		this.prdate = prdate;
+		this.classify = classify;
+		this.type = type;
+		this.scale = scale;
+		this.charge = charge;
+		this.std = std;
+		this.opname = opname;
+		this.profit = profit;
+	}
+
+	public ProductDTO(String opname, String title, String prdate,
+			String classify, String type, String scale, String charge,
+			String oneprofit, String threeprofit, String sixprofit,
+			String twelveprofit, String std) {
 		super();
 		this.opname = opname;
 		this.title = title;
@@ -137,5 +153,13 @@ public class ProductDTO {
 	public void setOpname(String opname) {
 		this.opname = opname;
 	}
-		
+
+	public String getProfit() {
+		return profit;
+	}
+
+	public void setProfit(String profit) {
+		this.profit = profit;
+	}
+
 }
