@@ -162,4 +162,14 @@ public class ProductDTO {
 		this.profit = profit;
 	}
 
+	@Override
+	public String toString() {
+		return "ProductDTO [title=" + title + ", prdate=" + prdate
+				+ ", classify=" + classify + ", type=" + type + ", scale="
+				+ scale + ", charge=" + charge + ", oneprofit=" + oneprofit
+				+ ", threeprofit=" + threeprofit + ", sixprofit=" + sixprofit
+				+ ", twelveprofit=" + twelveprofit + ", std=" + std
+				+ ", opname=" + opname + ", profit=" + profit + "]";
+	}
+
 }

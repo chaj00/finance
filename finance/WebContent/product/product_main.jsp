@@ -117,15 +117,95 @@
 				+"&std="+std+"&opname="+opname+"&classify2="+classify2,true); */
 		xhr.send(); 
 	}
+	
  	function finfinanceSearchs(){
+ 		var prd;
  		alert("들어옴");
  		var text;
  		if(xhr.readyState==4 && xhr.status==200) {
- 		document.getElementById("bodyList").innerHTML
-		=text;
+ 			prd =JSON.parse(xhr.responseText);
+ 			prdView(prd);
  		}
- 		
  	}
+ 	
+ 	function prdView(prd){
+ 		var prdCount = prd.length;
+ 		alert(prdCount)
+ 		alert(prd[0].title);
+ 		alert(prd[1].title);
+ 		alert(prd[2].title);
+ 		alert(prd[3].title);
+		var strHtml='';
+ 		for (var i = 0; i<prdCount; i++){
+
+ 			strHtml +='<tr>';
+ 			strHtml +='		<td>';
+ 			strHtml +='			<div class = "checkbox">';
+ 			strHtml +='    			<input type="checkbox" name="compareChk" id="compareChk" value=" " title="">'		
+ 			strHtml +='			</div>';
+ 			strHtml +='		</td>';
+ 			strHtml +='		<td class="prd">';
+ 			strHtml +='			<p class="title">';
+ 			strHtml +='				<a href="">'+prd[i].title+'</a>';
+ 			strHtml +='			</p>';
+ 			strHtml +='			<ul class="fund-details">';
+ 			strHtml +='				<li>';
+ 			strHtml +='					<dl>';
+ 			strHtml +='						<dt>설정일</dt>';
+ 			strHtml +='						<dd>'+prd[i].prdate+'</dd>';
+			strHtml +='					</dl>';
+			strHtml +='				</li>';
+			strHtml +='				<li>';
+			strHtml +='					<dl>';	
+			strHtml +='						<dt>유형</dt>';
+ 			strHtml +='						<dd>'+prd[i].type+'</dd>';
+			strHtml +='					</dl>';	
+			strHtml +='				</li>';
+			strHtml +='				<li class ="bul">';
+			strHtml +='					<dl class="bold">';	
+			strHtml +='						<dt>총설정액</dt>';
+ 			strHtml +='						<dd>'+prd[i].scale+'</dd>';
+			strHtml +='					</dl>';	
+			strHtml +='				</li>';
+			strHtml +='				<li>';
+			strHtml +='					<dl>';	
+			strHtml +='						<dt>운용사</dt>';
+ 			strHtml +='						<dd>'+prd[i].opname+'</dd>';
+			strHtml +='					</dl>';	
+			strHtml +='				</li>';
+			strHtml +='				<li class="bul">';
+			strHtml +='					<dl class="bold">';	
+			strHtml +='						<dt>총보수</dt>';
+ 			strHtml +='						<dd>'+prd[i].charge+'</dd>';
+			strHtml +='					</dl>';	
+			strHtml +='				</li>';	
+			strHtml +='				<li class="bul">';
+			strHtml +='					<dl class="bold">';	
+			strHtml +='						<dt>위험등급</dt>';
+ 			strHtml +='						<dd>'+prd[i].std+'</dd>';
+			strHtml +='					</dl>';	
+			strHtml +='				</li>';	
+			strHtml +='			</ul>';	
+			strHtml +='		</td>';
+			strHtml +='		<td class="prd">';	
+			strHtml +='			<em class="up">'+prd[i].oneprofit+'%</em>';
+			strHtml +='		</td>';
+			strHtml +='		<td class="prd">';	
+			strHtml +='			<em class="up">'+prd[i].threeprofit+'%</em>';
+			strHtml +='		</td>';
+			strHtml +='		<td class="prd">';	
+			strHtml +='			<em class="up">'+prd[i].sixprofit+'%</em>';
+			strHtml +='		</td>';
+			strHtml +='		<td class="prd">';	
+			strHtml +='			<em class="up">'+prd[i].twelveprofit+'%</em>';
+			strHtml +='		</td>';
+			strHtml +='	</tr>';
+   
+ 		}
+		$("#bodyMutuelList").html(strHtml);
+ 	}
+ 	
+ 	
  	function doSmartSearchList(){
  		var schText=$("#SearchText").val();
  		
@@ -138,8 +218,7 @@
 		xhr.onreadystatechange=finfinanceSearchs;
 		xhr.open("GET", "/finance/ProductSearchOpnameServlet.do?opname="+schText,true);
 		xhr.send(); 
- 		
- 		
+ 			
  	}
 	</script>
 	
