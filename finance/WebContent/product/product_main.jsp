@@ -126,6 +126,21 @@
  		}
  		
  	}
+ 	function doSmartSearchList(){
+ 		var schText=$("#SearchText").val();
+ 		
+ 		opnSearchAjax(schText);
+ 	}
+ 	
+ 	function opnSearchAjax(schText){
+ 		alert("들어왔당"+schText);
+ 		xhr=new XMLHttpRequest();
+		xhr.onreadystatechange=finfinanceSearchs;
+		xhr.open("GET", "/finance/ProductSearchOpnameServlet.do?opname="+schText,true);
+		xhr.send(); 
+ 		
+ 		
+ 	}
 	</script>
 	
 	<style type="text/css">

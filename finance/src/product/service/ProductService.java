@@ -9,4 +9,6 @@ public interface ProductService {
 	ArrayList<String> opNameSelect();
 	ArrayList<ProductDTO> select(); 
 	ArrayList<ProductDTO> search(ProductDTO prd);
+	ArrayList<ProductDTO> searchOpname(String opname);
+	
 }

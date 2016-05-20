@@ -1,4 +1,4 @@
-package product.controller;
+package product.etc;
 
 public class opname {
 	public static void main(String[] args){

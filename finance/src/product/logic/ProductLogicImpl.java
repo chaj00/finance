@@ -43,7 +43,7 @@ public class ProductLogicImpl implements ProductLogic {
 
 		System.out.println(length);
 		System.out.println(splitcom[0].toString());
-		if (splitcom.length == 2 | splitcom[0].toString() == null) {
+		if (splitcom.length == 2 | splitcom[0]=="") {
 			classToQuery = "(p.classify like '%')";
 		} else {
 			classToQuery = "(p.classify = '" + splitcom[0].toString() + "')";
@@ -67,7 +67,7 @@ public class ProductLogicImpl implements ProductLogic {
 
 		System.out.println(length);
 		System.out.println(splitcom[0].toString());
-		if (splitcom.length == 8 | splitcom.length ==1) {
+		if (splitcom.length == 8 | splitcom[0]=="") {
 			query = "p.type like '%'";
 		} else {
 			for (int i = 0; i < length; i++) {
@@ -103,7 +103,7 @@ public class ProductLogicImpl implements ProductLogic {
 
 		System.out.println(length);
 
-		if (splitcom.length == 6 | splitcom.length==1) {
+		if (splitcom.length == 6 | splitcom[0]=="") {
 
 			prdateToQuery = "p.prdate like '%'";
 		} else {
@@ -173,7 +173,7 @@ public class ProductLogicImpl implements ProductLogic {
 		int length = splitcom.length;
 
 		System.out.println(length);
-		if (splitcom.length == 6 | splitcom.length == 1) {
+		if (splitcom.length == 6 | splitcom[0]=="") {
 			scaleToQuery = "p.scale like '%'";
 		} else {
 			for (int i = 0; i < length; i++) {
@@ -238,7 +238,7 @@ public class ProductLogicImpl implements ProductLogic {
 		int length = splitcom.length;
 
 		System.out.println(length);
-		if (splitcom.length == 7 | splitcom.length == 1) {
+		if (splitcom.length == 7 | splitcom[0]=="") {
 			profitToQuery = "p.THREEPROFIT like '%'";
 		} else {
 			for (int i = 0; i < length; i++) {
@@ -304,7 +304,7 @@ public class ProductLogicImpl implements ProductLogic {
 		int length = splitcom.length;
 
 		System.out.println(length);
-		if (splitcom.length == 4 | splitcom.length == 1) {
+		if (splitcom.length == 4 | splitcom[0]=="") {
 			chargeToQuery = "p.charge like '%'";
 		} else {
 			for (int i = 0; i < length; i++) {
@@ -370,7 +370,7 @@ public class ProductLogicImpl implements ProductLogic {
 		int length = splitcom.length;
 
 		System.out.println(length);
-		if (splitcom.length == 6 | splitcom.length == 1) {
+		if (splitcom.length == 6 | splitcom[0]=="") {
 			stdToQuery = "p.std like '%'";
 		} else {
 			for (int i = 0; i < length; i++) {
@@ -438,7 +438,7 @@ public class ProductLogicImpl implements ProductLogic {
 
 		System.out.println(length);
 		System.out.println(splitcom[0].toString());
-		if (splitcom.length == 38 | splitcom.length ==1) {// 변경예정
+		if (splitcom.length == 38 | splitcom[0]=="") {// 변경예정
 			query = "o.opname like '%'";
 		} else {
 			for (int i = 0; i < length; i++) {

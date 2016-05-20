@@ -17,4 +17,7 @@ public interface ProductDAO {
 	//전회 펀드상품 조회
 	ArrayList<ProductDTO> search(Connection con, ProductDTO prd) throws SQLException;
 	
+	//전회 펀드상품 조회
+		ArrayList<ProductDTO> searchOpname(Connection con, String opname) throws SQLException;
+	
 }

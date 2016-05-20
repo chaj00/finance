@@ -1,4 +1,4 @@
-package product.controller;
+package product.etc;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

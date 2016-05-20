@@ -1,4 +1,4 @@
-package product.controller;
+package product.etc;
 
 //select * from PRODUCTS where SYSDATE-180<prdate;
 public class prdates {

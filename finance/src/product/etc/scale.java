@@ -1,4 +1,4 @@
-package product.controller;
+package product.etc;
 
 public class scale {
 	/*and ((p.scale BETWEEN (10) and (30))

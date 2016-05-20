@@ -63,6 +63,22 @@ public class ProductServiceImpl implements ProductService{
 		
 		return productlist;
 	}
+
+	@Override
+	public ArrayList<ProductDTO> searchOpname(String opname) {
+		System.out.println("opname 서비스 들어옴==>"+ opname);
+		ArrayList<ProductDTO> productlist = null;
+		Connection con = getConnect();
+		ProductDAO dao = new ProductDAOImpl();
+		try {
+			productlist = dao.searchOpname(con, opname);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return productlist;
+	}
 	
 	
 }

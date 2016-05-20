@@ -1,4 +1,4 @@
-package product.controller;
+package product.etc;
 
 public class type {
 	public static void main(String[] args){
