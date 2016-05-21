@@ -196,6 +196,7 @@
 	width:600px;
 	height:227px;
 	text-align:right;
+<<<<<<< HEAD
 	background-image:url(../Images/Roboadvisor/img_emailtop.png);
 	background-repeat: no-repeat;
 }
@@ -1048,6 +1049,860 @@
 .result_box .resultmain_table .resultmain_td2 .Head3 {
 	margin-left:6px;
 	background-image:url(../images/roboadvisor/ico_Top3.png);
+=======
+	background-image:url(/finance/images/Roboadvisor/img_emailtop.png);
+	background-repeat: no-repeat;
+}
+
+.emailfull .emailadd .emailtop img{
+	margin-right:10px;
+	margin-top:10px;
+	cursor:pointer;
+}
+
+.emailfull .emailadd .tdemailbody{
+	font-size:35px;
+	letter-spacing: -2px;
+	line-height: 45px;
+}
+
+.emailfull .emailadd .tdemailbody input{
+	font-size:25px;
+	height:55px;
+	width:410px;
+	padding-top:-10px;
+	letter-spacing: -2px;
+	line-height: 45px;
+	text-align:center;
+}
+
+.emailfull .emailadd .tdemailbody input::-webkit-input-placeholder {
+    color: #999999;
+}
+.emailfull .emailadd .tdemailbody input:-moz-placeholder {
+    /* FF 4-18 */
+    color: #999999;
+}
+.emailfull .emailadd .tdemailbody input::-moz-placeholder {
+    /* FF 19+ */
+    color: #999999;
+}
+.emailfull .emailadd .tdemailbody input:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #999999;
+}
+
+.emailfull .emailadd .email_btn {
+	width:200px;
+	height:60px;
+	font-size:19px;
+	font-weight:bold;
+	padding-top:20px;
+	position:relative;
+	display:inline-block;
+}
+
+/*********************************************************************
+		Test Box   -  Step1
+**********************************************************************/
+.test_box1 .table_step1 {
+	margin-left:150px;
+	text-align:center;
+}
+
+.test_box1 .test_status_td {
+	width:39px;
+}
+
+.test_box1 .test_status_on {
+	width:27px;
+	height:30px;
+	padding-top:3px;
+	padding-left:6px;
+	padding-right:6px;
+	text-align:center;
+	background-image:url("/finance/images/roboadvisor/img_status_on.png");
+	
+	background-repeat: no-repeat;
+	color:#FFFFFF;
+	font-family: "Roboto", sans-serif, Arial, Helvetica Neue, Helvetica;
+	font-size:14px;
+
+}
+
+.test_box1 .test_status_off {
+	width:27px;
+	height:30px;
+	padding-top:3px;
+	text-align:center;
+	background-image:url("/finance/images/roboadvisor/img_status_off.png");
+	background-repeat: no-repeat;
+	color:#999999;
+	font-family: "Roboto", sans-serif, Arial, Helvetica Neue, Helvetica;
+	font-size:14px;
+
+}
+
+.test_box1 .table_step_td1 {
+	padding-left:345px;
+}
+
+.test_box1 .table_step_td2 {
+	font-size:30px;
+	color:#282828;
+	letter-spacing: -2px;
+	line-height: 41px;
+}
+
+.test_box1 .choice_set {
+	width:200px;
+	height:200px;
+	margin-right:20px;
+	display: inline-block;
+	font-size:16px;
+	text-align: center;
+	font-weight:bold;
+	letter-spacing: -1px;
+	cursor:pointer;
+}
+
+.test_box1 .choice_dot1 {
+	width:16px;
+	height:16px;
+	position:relative;
+	top:10px;
+	left:10px;
+	background-image:url("/finance/images/roboadvisor/img_dot1.png");
+}
+
+.test_box1 .choice_dot2 {
+	width:16px;
+	height:16px;
+	position:relative;
+	top:10px;
+	left:10px;
+	background-image:url("/finance/images/roboadvisor/img_dot2.png");
+}
+
+.test_box1 .choice_dot3 {
+	width:16px;
+	height:16px;
+	position:relative;
+	top:10px;
+	left:10px;
+	background-image:url(/finance/images/Roboadvisor/img_dot3.png);
+}
+
+.test_box1 .choice_dot4 {
+	width:16px;
+	height:16px;
+	position:relative;
+	top:10px;
+	left:10px;
+	background-image:url(/finance/images/Roboadvisor/img_dot4.png);
+}
+
+.test_box1 .choice_dot_step1 {
+	margin-top:80px;
+}
+
+.test_box1 .choice_off {
+	background-color:#f3f3f3;
+	color:#999999;
+	-webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+.test_box1 .choice_on {
+	background-color:#fcd50c;
+	color:#282828;
+	border-bottom: 5px solid #d2b10a;
+	background-image:url("/finance/images/roboadvisor/img_check.png");
+	background-repeat: no-repeat;
+	-webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+.test_box1 .choice_over {
+	background-color:#fcd50c;
+	color:#282828;
+	border-bottom: 5px solid #d2b10a;
+	-webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+.test_box1 .btn_prev {
+	position:relative;
+	display: inline-block;
+	width:200px;
+	height:60px;
+	font-size:19px;
+	padding-top:22px;
+	padding-left:30px;
+	color:#FFFFFF;
+	-webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+.test_box1 .btn_prev div {
+	position:absolute;
+	left:60px;
+	width:10px;
+	height:18px;
+	background-image:url("/finance/images/roboadvisor/btn_prev_arrow_off.png");
+	-webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+.test_box1 .btn_prev:hover div {
+	position:absolute;
+	width:10px;
+	height:18px;
+	-webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+	/*background-image:url(/finance/images/roboadvisor/btn_prev_arrow_off.png);*/
+}
+
+.test_box1 .btn_next {
+	position:relative;
+	display: inline-block;
+	width:200px;
+	height:60px;
+	font-size:19px;
+	padding-top:22px;
+	padding-right:30px;
+	color:#FFFFFF;
+	-webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+.test_box1 .btn_next div {
+	position:absolute;
+	display: inline-block;
+	right:60px;
+	width:10px;
+	height:18px;
+	background-image:url(/finance/images/roboadvisor/btn_next_arrow_off.png);
+	-webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+.test_box1 .btn_next:hover div {
+	position:absolute;
+	width:10px;
+	height:18px;
+	/*background-image:url(/finance/images/roboadvisor/btn_next_arrow_off.png);*/
+	-webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+
+
+/*********************************************************************
+		Test Box   -  Step2
+**********************************************************************/
+
+.test_box1 .choice_dot_step2 {
+	position:absolute;
+	margin-top:50px;
+	margin-left:50px;
+}
+
+.test_box1 .choice_dot_step2A {
+	position:absolute;
+	margin-top:50px;
+	margin-left:45px;
+}
+
+.test_box1 .choice_dot_step2B {
+	position:absolute;
+	margin-top:50px;
+	margin-left:50px;
+}
+
+
+/*********************************************************************
+		Test Box   -  Step3
+**********************************************************************/
+.test_box1 .choice_dot_step3 {
+	position:absolute;
+	margin-top:60px;
+	margin-left:45px;
+}
+
+.test_box1 .choice_dot_step3A {
+	position:absolute;
+	margin-top:55px;
+	margin-left:45px;
+}
+
+
+/*********************************************************************
+		Test Box   -  Step4
+**********************************************************************/
+.test_box1 .choice_dot_step4 {
+	position:absolute;
+	margin-top:65px;
+	margin-left:30px;
+}
+
+.test_box1 .choice_dot_step4 span{
+	font-family: "Roboto", sans-serif, Arial, Helvetica Neue, Helvetica; 
+}
+
+/*********************************************************************
+		Test Box   -  Step5
+**********************************************************************/
+.test_box1 .choice_dot_step5 {
+	margin-top:57px;
+	margin-left:27px;
+}
+
+.test_box1 .choice_dot_step5_value {
+	width:70px;
+	font-family: "Roboto", sans-serif, Arial, Helvetica Neue, Helvetica; 
+	text-align:right;
+}
+
+
+
+/*********************************************************************
+		Test Box   -  결과화면
+**********************************************************************/
+.test_box1 .result_table {
+	width:865px;
+	text-align:center;
+	margin-left:152px;
+}
+
+.test_box1 .result_table .td01 {
+	font-size:33px;
+	color: #282828;
+	letter-spacing:-3px;
+}
+
+.test_box1 .result_table .td02 {
+	font-family: "Roboto", sans-serif, Arial, Helvetica Neue, Helvetica; 
+	font-size:50px;
+	font-weight:bold;
+	color:#62b5e0;
+}
+
+.test_box1 .result_table .td03 {
+	text-align:center;
+}
+
+.test_box1 .result_table .retest {
+	width:200px;
+	height:45px;
+	font-size:18px;
+	letter-spacing:-1px;
+	padding-top:13px;
+	margin-left:330px;
+}
+
+.test_box1 .result_table .retest img {
+	margin-top:-5px;
+	margin-left:7px;
+}
+
+.test_box1 .result_table .risk {
+	font-size:18px;
+	font-weight:bold;
+	color:#aaaaaa;
+	letter-spacing:-1px;
+	display:inline-block;
+}
+
+.test_box1 .result_table .riskA {
+	margin-right:126px;
+}
+
+.test_box1 .result_table .riskB {
+	margin-left:126px;
+	margin-right:126px;
+}
+
+.test_box1 .result_table .riskC {
+	margin-left:126px;
+}
+
+
+.test_box1 .result_table .btnETF {
+	display:inline-block;
+	position:relative;
+	width:390px;
+	height:181px;
+	font-size:18px;
+	letter-spacing:-1px;
+	padding-top:16px;
+}
+
+.test_box1 .result_table .btnETF_term {
+	width:47px;
+	display:inline-block;
+}
+
+.test_box1 .result_table .btnETF span {
+	font-size:20px;
+	letter-spacing:-1px;
+	font-family: "Roboto", sans-serif, Arial, Helvetica Neue, Helvetica; 
+}
+
+.test_box1 .result_table .btnETF .ETF_Perfomance {
+	padding-top:19px;
+	font-family: "Roboto", sans-serif, Arial, Helvetica Neue, Helvetica; 
+	font-size:35px;
+	font-weight:bold;
+}
+
+.test_box1 .result_table .btnETF .ETF_Link {
+	font-size:16px;
+	letter-spacing:-2px;
+	padding-top:5px;
+	width:135px;
+	height:35px;
+	border: 1px solid #FFFFFF;
+	margin-left:127px;
+	margin-top:25px;
+}
+
+.test_box1 .result_table .btnETF .ETF_Link img {
+	margin-left:7px;
+	margin-bottom:2px;
+	height: 14px;
+	width: 8px;
+}
+
+.test_box1 .result_table .ETF_comment {
+	position:absolute;
+	font-size:12px;
+	letter-spacing:-1px;
+	line-height: 10px;
+	text-align:left;
+	line-height: 15px;
+	color:#999999;
+	margin-left:5px;
+	padding-left:3px;
+	border: 0px solid #999999;
+	width:855px;
+}
+
+.test_box1 .result_table .ETF_comment .ETF_sub_comment{
+	font-size:11px;
+	line-height: 14px;
+	color:#bbbbbb;
+}
+
+
+/*********************************************************************
+		Plan Box   -  Plan 선택
+**********************************************************************/
+.test_box1 .table_plan1 {
+	margin-left:150px;
+	text-align:center;
+}
+
+.test_box1 .table_plan_td1 {
+	font-size:35px;
+	color: #282828;
+	letter-spacing:-3px;
+}
+
+.test_box1 .table_plan_td2 {
+	font-size:30px;
+	color:#282828;
+	letter-spacing: -2px;
+	line-height: 41px;
+}
+
+
+.test_box1 .choice_plan_set {
+	width:270px;
+	height:240px;
+	margin-right:25px;
+	display: inline-block;
+	font-size:16px;
+	text-align: center;
+	font-weight:bold;
+	letter-spacing: -1px;
+	cursor:pointer;
+
+}
+
+.test_box1 .img01{
+	background-image:url(/finance/images/roboadvisor/img_plan01.png);
+	background-repeat: no-repeat;
+}
+
+.test_box1 .img02{
+	background-image:url(/finance/images/roboadvisor/img_plan02.png);
+	background-repeat: no-repeat;
+}
+
+.test_box1 .img03{
+	background-image:url(/finance/images/roboadvisor/img_plan03.png);
+	background-repeat: no-repeat;
+}
+
+.test_box1 .choiceplan_off {
+	background-color:#f3f3f3;
+	color:#999999;
+	border: 1px solid #dddddd;
+}
+
+.test_box1 .choiceplan_on {
+	background-color:#fcd50c;
+	color:#282828;
+	border-bottom: 5px solid #d2b10a;
+	background-image:url(/finance/images/roboadvisor/img_plan_check.png);
+	background-repeat: no-repeat;
+}
+
+.test_box1 .choiceplan_over {
+	background-color:#fcd50c;
+	color:#282828;
+	border-bottom: 5px solid #d2b10a;
+}
+
+
+.test_box1 .choice_dot_plan {
+	position:absolute;
+	margin-top:115px;
+	margin-left:70px;
+	font-size: 21px;
+	font-weight:bold;
+	letter-spacing: -1px;
+}
+
+.test_box1 .choice_dot_planA {
+	position:absolute;
+	margin-top:145px;
+	margin-left:53px;
+	letter-spacing: -2px;
+}
+
+.test_box1 .choice_dot_planB {
+	position:absolute;
+	margin-top:145px;
+	margin-left:37px;
+	letter-spacing: -2px;
+}
+
+.test_box1 .choice_dot_planC {
+	position:absolute;
+	margin-top:145px;
+	margin-left:35px;
+	letter-spacing: -2px;
+}
+
+.test_box1 .plan_name {
+	background-color:#f3f3f3;
+	height:80px;
+	width:868px;
+	font-size:13px;
+	font-weight: bold;
+	color:#282828;
+	padding-top:10px;
+	line-height: :0px;
+}
+
+.test_box1 .txtplan {
+	border: 1px solid #dddddd;
+	width:270px;
+	height:35px;
+	font-size:12px;
+	font-weight:bold;
+	color: #282828;
+	text-align:center;
+}
+
+.test_box1 .txtplan::-webkit-input-placeholder {
+    color: #999999;
+    width:270px;
+	height:35px;
+	font-size:12px;
+	font-weight:bold;
+	color: #282828;
+	text-align:center;
+}
+.test_box1 .txtplan:-moz-placeholder {
+    /* FF 4-18 */
+    color: #999999;
+    width:270px;
+	height:35px;
+	font-size:12px;
+	font-weight:bold;
+	color: #282828;
+	text-align:center;
+}
+.test_box1 .txtplan::-moz-placeholder {
+    /* FF 19+ */
+    color: #999999;
+    width:270px;
+	height:35px;
+	font-size:12px;
+	font-weight:bold;
+	color: #282828;
+	text-align:center;
+}
+.test_box1 .txtplan:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #999999;
+    width:270px;
+	height:35px;
+	font-size:12px;
+	font-weight:bold;
+	color: #282828;
+	text-align:center;
+}
+
+/*********************************************************************
+		Plan Target   -  재무목표달성
+**********************************************************************/
+.test_box1 .table_plan2 {
+	margin-left:380px;
+	text-align:center;
+}
+
+
+.test_box1 .targetplan_table {
+	
+}
+
+.test_box1 .targetplan_box {
+	width:420px;
+	background-color:#f3f3f3;
+	font-size:15px;
+	font-weight:bold;
+	color:#616161;
+	letter-spacing: -1px;
+	text-align:left;
+	padding-left:95px;
+}
+
+.test_box1 .targetplan_box input {
+	width:230px;
+	height: 34px;
+	border: 1px solid #dddddd;
+	font-size:12px;
+	font-weight:bold;
+	text-align:center;
+}
+
+.test_box1 .targetplan_box input::-webkit-input-placeholder {
+    color: #999999;
+    width:230px;
+	height: 34px;
+	border: 0px solid #dddddd;
+	font-size:12px;
+	font-weight:bold;
+	text-align:center;
+}
+.test_box1 .targetplan_box input:-moz-placeholder {
+    /* FF 4-18 */
+    color: #999999;
+    width:230px;
+	height: 34px;
+	border: 1px solid #dddddd;
+	font-size:12px;
+	font-weight:bold;
+	text-align:center;
+}
+.test_box1 .targetplan_box input::-moz-placeholder {
+    /* FF 19+ */
+    color: #999999;
+    width:230px;
+	height: 34px;
+	border: 1px solid #dddddd;
+	font-size:12px;
+	font-weight:bold;
+	text-align:center;
+}
+.test_box1 .targetplan_box input:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #999999;
+    width:230px;
+	height: 34px;
+	border: 1px solid #dddddd;
+	font-size:12px;
+	font-weight:bold;
+	text-align:center;
+}
+
+.test_box1 .targetplan_box .txtYear {
+	width:115px;
+}
+
+.test_box1 .targetplan_box .txtMonth {
+	width:116px;
+	margin-left:-3px;
+}
+
+.test_box1 .targetplan_box .txtYear:-ms-input-placeholder {
+	width:115px;
+}
+
+.test_box1 .targetplan_box .txtMonth:-ms-input-placeholder {
+	width:116px;
+	margin-left:-3px;
+}
+
+
+
+
+/*********************************************************************
+		포트폴리오 설계 결과 화면
+**********************************************************************/
+.result_box {
+	position:relative;
+    width:100%;
+	white-space: nowrap;
+}
+
+.result_box .box01 {
+	height:100%;
+	width:1200px;
+    background-color:#ffffff;
+	text-align:center;
+}
+
+
+.result_box .resultmain_table {
+	margin-left:85px;
+	width:1000px;
+}
+
+
+/* LEFT */
+.result_box .resultmain_table .resultmain_td1 {
+	width: 280px;
+	height: 740px;
+	letter-spacing: -1px;
+	background-color:#f3f3f3;
+	vertical-align:top;
+}
+
+.result_box .riskpoint {
+	width:220px;
+	height:110px;
+	border-bottom: 1px solid #ffffff;
+	margin-left:30px;
+	margin-top:15px;
+	font-size:15px;
+	color:#999999;
+}
+
+.result_box .riskpoint .pointnum {
+	font-family: "Roboto", sans-serif, Arial, Helvetica Neue, Helvetica;
+	font-weight:bold;
+	font-size:40px;
+	padding-top:15px;
+	padding-bottom:15px;
+	color:#282828;
+}
+
+.result_box .targetplan_box {
+	font-size:15px;
+	color:#999999;
+	letter-spacing: -1px;
+	text-align:left;
+	padding-left:20px;
+	padding-top:10px;
+}
+
+.result_box .targetplan_box input {
+	width:170px;
+	height: 34px;
+	border: 1px solid #dddddd;
+	font-size:12px;
+	font-weight:bold;
+	text-align:center;
+}
+
+.result_box .targetplan_box  img {
+	cursor:pointer;
+}
+
+.result_box .targetplan_box input::-webkit-input-placeholder {
+    color: #999999;
+}
+.result_box .targetplan_box input:-moz-placeholder {
+    /* FF 4-18 */
+    color: #999999;
+}
+.result_box .targetplan_box input::-moz-placeholder {
+    /* FF 19+ */
+    color: #999999;
+}
+.result_box .targetplan_box input:-ms-input-placeholder {
+    /* IE 10+ */
+    color: #999999;
+}
+
+.result_box .targetplan_box .txtYear {
+	width:85px;
+	margin-right:-1px;
+	position:absolute;
+}
+.result_box .targetplan_box .txtMonth {
+	width:85px;
+	margin-left:84px;
+}
+
+.result_box .btn_research {
+	position:relative;
+	display: inline-block;
+	width:240px;
+	height:45px;
+	font-size:19px;
+	padding-top:13px;
+	color:#FFFFFF;
+}
+
+.result_box .img_research {
+	margin-top:-6px;
+	padding-left:5px;
+}
+
+/* RIGHT */
+.result_box .resultmain_table .resultmain_td2 {
+	width:720px;
+	letter-spacing: -1px;
+	border-bottom: 1px solid #f3f3f3;
+	vertical-align:top;
+}
+
+.result_box .resultmain_table .resultmain_td2 .resultView1 {
+	position:fixed;
+}
+
+
+.result_box .resultmain_table .resultmain_td2 .resultTop1_A {
+	width: 226px;
+	height: 123px;
+	display:inline-block;
+	float: left;
+	background-color: #fcd50c;
+}
+
+.result_box .resultmain_table .resultmain_td2 .Head1 {
+	margin-left:30px;
+	text-align:center;
+	background-image:url(/finance/images/roboadvisor/ico_Top1.png);
+	background-repeat: no-repeat;
+}
+
+.result_box .resultmain_table .resultmain_td2 .Head2 {
+	margin-left:6px;
+	background-image:url(/finance/images/roboadvisor/ico_Top2.png);
+	background-repeat: no-repeat;
+}
+
+.result_box .resultmain_table .resultmain_td2 .Head3 {
+	margin-left:6px;
+	background-image:url(/finance/images/roboadvisor/ico_Top3.png);
+>>>>>>> branch 'master' of https://github.com/chaj00/finance.git
 	background-repeat: no-repeat;
 }
 
