@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="product.dto.ProductDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
@@ -164,7 +165,7 @@
 			strHtml +='				<li class ="bul">';
 			strHtml +='					<dl class="bold">';	
 			strHtml +='						<dt>총설정액</dt>';
- 			strHtml +='						<dd>'+prd[i].scale+'</dd>';
+ 			strHtml +='						<dd>'+prd[i].scale+'억원</dd>';
 			strHtml +='					</dl>';	
 			strHtml +='				</li>';
 			strHtml +='				<li>';
@@ -176,7 +177,7 @@
 			strHtml +='				<li class="bul">';
 			strHtml +='					<dl class="bold">';	
 			strHtml +='						<dt>총보수</dt>';
- 			strHtml +='						<dd>'+prd[i].charge+'</dd>';
+ 			strHtml +='						<dd>'+prd[i].charge+'%</dd>';
 			strHtml +='					</dl>';	
 			strHtml +='				</li>';	
 			strHtml +='				<li class="bul">';
@@ -579,12 +580,14 @@
     </thead>
 
     <tbody id="bodyMutuelList">
-    <%
+    <%	  
+    	  String pattern = "#.####";
+    	  DecimalFormat dfomat = new DecimalFormat(pattern);
           int prdeLen=prdlist.size();
           for(int i=0; i<prdeLen;i++){
-        	  ProductDTO prd = prdlist.get(i);
+      	  ProductDTO prd = prdlist.get(i);
                          
-          %> 
+    %> 
     <tr>
     	<td>
     		<div class = "checkbox">
@@ -600,7 +603,7 @@
    				<li> 
    					<dl>
    						<dt>설정일</dt>
-   						<dd><%=prd.getPrdate()%></dd>
+   						<dd><%=prd.getPrdate().substring(0,11)%></dd>
     					</dl>
 				</li>
 			 	<li>
@@ -612,7 +615,7 @@
 	 	 	 	<li class="bul">
 	 	 	 		<dl class="bold">
 		 	 	 		<dt>총설정액</dt>
-		 	 	 		<dd><%=prd.getScale()%>억원</dd>
+		 	 	 		<dd><%=Float.parseFloat(prd.getScale())%>억원</dd>
 		 	 	 	</dl>
  			 	</li>
 	 			 <li>
@@ -624,7 +627,7 @@
  			 	<li class="bul">
  			 	 	 <dl class="bold">
  			 	 	 	<dt>총보수</dt>
-		 	 	 		<dd><%=prd.getCharge()%>%</dd>
+		 	 	 		<dd><%=dfomat.format(Float.parseFloat(prd.getCharge())*100)%>%</dd>
 	 	 	 		</dl>
  	 	 		</li>
  	 	 		
@@ -637,19 +640,46 @@
  	 	 	
  			</ul>
 		</td>
-	
+		<%if(prd.getOneprofit()==null){ %>
       	<td class="prd">
-            <em class="up"><%=prd.getOneprofit()%>%</em>
+            <em class="up"><%=" - "%>%</em>
         </td>
+        <%}else{ %>
         <td class="prd">
-        	<em class="down"><%=prd.getThreeprofit()%>%</em>
+            <em class="up"><%=dfomat.format(Float.parseFloat(prd.getOneprofit())*100)%>%</em>
+        </td>
+        <%} %>
+        
+        <%if(prd.getThreeprofit()==null){ %>
+      	<td class="prd">
+            <em class="up"><%=" - "%>%</em>
+        </td>
+        <%}else{ %>
+        <td class="prd">
+        	<em class="down"><%=dfomat.format(Float.parseFloat(prd.getThreeprofit())*100)%>%</em>
        	</td>
+        <%} %>
+        
+        <%if(prd.getSixprofit()==null){ %>
+      	<td class="prd">
+            <em class="up"><%=" - "%>%</em>
+        </td>
+        <%}else{ %>
+        <td class="prd">
+        	<em class="up"><%=dfomat.format(Float.parseFloat(prd.getSixprofit())*100)%>%</em>
+       	</td>
+        <%} %>
+       	
+       	 <%if(prd.getTwelveprofit()==null){ %>
+      	<td class="prd">
+            <em class="up"><%=" - "%>%</em>
+        </td>
+        <%}else{ %>
        	<td class="prd">
-        	<em class="up"><%=prd.getSixprofit()%>%</em>
+        	<em class="down"><%=dfomat.format(Float.parseFloat(prd.getTwelveprofit())*100)%>%</em>
        	</td>
-       	<td class="prd">
-        	<em class="down"><%=prd.getTwelveprofit()%>%</em>
-       	</td>
+        <%} %>
+       
      </tr>
      <%} %>   
    </tbody>

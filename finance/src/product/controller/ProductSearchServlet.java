@@ -2,6 +2,7 @@ package product.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -21,6 +22,7 @@ import product.service.ProductServiceImpl;
 public class ProductSearchServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String pattern = "#.####";
 		request.setCharacterEncoding("euc-kr");
 		response.setContentType("application/json;charset=utf-8");
 		System.out.println("넘어오긴했냐?");
@@ -57,8 +59,17 @@ public class ProductSearchServlet extends HttpServlet {
 		JSONArray jArray = new JSONArray();
 		int length = prdlist.size();
 		JSONObject jObject = new JSONObject();
-		
-		
+		DecimalFormat dfomat = new DecimalFormat(pattern);
+		/*
+		 *classify = 펀드구분 class = chk1 name=ForgnSectCd 2개
+		 *type= 펀드유형  class = chk2 name="FundInvstTypeCd" 8개
+		 *prdate= 설정기간  class = chk3 name="SetPeriodMM" 6개
+		 *scale= 총설정액  class = chk4 name=kfrEstabAmUk 6개
+		 *profit = 수익률 class = chk5 name="Yield" 7개
+		 *charge = 총보수  class = chk6 name="TotRwrt" 4개
+		 *std= 위험등급   class = chk7 name="StdGrade" 6개
+		 *opname = 운용사    class = chk8 name="OperCoCdList" 38개
+		 */
 		
 		
 		for (int i = 0; i < length; i++) {
@@ -68,15 +79,42 @@ public class ProductSearchServlet extends HttpServlet {
 			jObject.put("title", prd2.getTitle());
 			jObject.put("classify", prd2.getClassify());
 			jObject.put("type", prd2.getType());
-			jObject.put("prdate", prd2.getPrdate().substring(1, 11));
-			jObject.put("scale", prd2.getScale());
-			jObject.put("oneprofit", prd2.getOneprofit());
-			jObject.put("threeprofit", prd2.getThreeprofit());
-			jObject.put("sixprofit", prd2.getSixprofit());
-			jObject.put("twelveprofit", prd2.getTwelveprofit());
-			jObject.put("charge", prd2.getCharge());
-			jObject.put("std", prd2.getStd());
-		
+			jObject.put("prdate", prd2.getPrdate().substring(0, 11));
+			jObject.put("scale", Float.parseFloat(prd2.getScale()));
+			
+			if(prd2.getOneprofit()==null){
+				jObject.put("oneprofit", " - ");
+			}else{
+				jObject.put("oneprofit", dfomat.format(Float.parseFloat(prd2.getOneprofit())*100));
+			}
+			if(prd2.getThreeprofit()==null){
+				jObject.put("threeprofit", " - ");
+			}else{
+				
+				jObject.put("threeprofit", dfomat.format(Float.parseFloat(prd2.getThreeprofit())*100));
+			}
+			System.out.println(prd2.getSixprofit());
+			if(prd2.getSixprofit()==null){
+				jObject.put("sixprofit", " - ");
+			}else{
+				jObject.put("sixprofit", dfomat.format(Float.parseFloat(prd2.getSixprofit())*100));
+			}
+			if(prd2.getTwelveprofit()==null){
+				jObject.put("twelveprofit", " - ");
+			}else{
+				jObject.put("twelveprofit", dfomat.format(Float.parseFloat(prd2.getTwelveprofit())*100));
+			}
+			if(prd2.getCharge()==null){
+				jObject.put("charge", " - ");
+			}else{
+				jObject.put("charge", dfomat.format(Float.parseFloat(prd2.getCharge())*100));
+			}
+			if(prd2.getStd()==null){
+				jObject.put("std", " - ");
+			}else{
+				jObject.put("std", Float.parseFloat(prd2.getStd()));
+			}
+					
 			jArray.add(i,jObject);
 			System.out.println(jArray.get(i).toString());
 			

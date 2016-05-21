@@ -2,6 +2,7 @@ package product.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -26,6 +27,7 @@ public class ProductSearchOpnameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String pattern = "#.####";
 		request.setCharacterEncoding("euc-kr");
 		response.setContentType("application/json;charset=utf-8");
 		String opname =request.getParameter("opname");
@@ -40,25 +42,54 @@ public class ProductSearchOpnameServlet extends HttpServlet {
 		JSONArray jArray =	 new JSONArray();
 		int length = prdlist.size();
 		JSONObject jObject = null;
+		DecimalFormat dfomat = new DecimalFormat(pattern);
 		
 		for (int i = 0; i < length; i++) {
-			ProductDTO prd =prdlist.get(i);
+			ProductDTO prd2 =prdlist.get(i);
 			jObject = new JSONObject();
-			jObject.put("opname", prd.getOpname());
-			jObject.put("title", prd.getTitle());
-			jObject.put("classify", prd.getClassify());
-			jObject.put("type", prd.getType());
-			jObject.put("prdate", prd.getPrdate());
-			jObject.put("scale", prd.getScale());
-			jObject.put("oneprofit", prd.getOneprofit());
-			jObject.put("threeprofit", prd.getThreeprofit());
-			jObject.put("sixprofit", prd.getSixprofit());
-			jObject.put("twelveprofit", prd.getTwelveprofit());
-			jObject.put("charge", prd.getCharge());
-			jObject.put("std", prd.getStd());
-		
+			jObject.put("opname", prd2.getOpname());
+			jObject.put("title", prd2.getTitle());
+			jObject.put("classify", prd2.getClassify());
+			jObject.put("type", prd2.getType());
+			jObject.put("prdate", prd2.getPrdate().substring(0, 11));
+			jObject.put("scale", Float.parseFloat(prd2.getScale()));
+			
+			if(prd2.getOneprofit()==null){
+				jObject.put("oneprofit", " - ");
+			}else{
+				jObject.put("oneprofit", dfomat.format(Float.parseFloat(prd2.getOneprofit())*100));
+			}
+			if(prd2.getThreeprofit()==null){
+				jObject.put("threeprofit", " - ");
+			}else{
+				
+				jObject.put("threeprofit", dfomat.format(Float.parseFloat(prd2.getThreeprofit())*100));
+			}
+			System.out.println(prd2.getSixprofit());
+			if(prd2.getSixprofit()==null){
+				jObject.put("sixprofit", " - ");
+			}else{
+				jObject.put("sixprofit", dfomat.format(Float.parseFloat(prd2.getSixprofit())*100));
+			}
+			if(prd2.getTwelveprofit()==null){
+				jObject.put("twelveprofit", " - ");
+			}else{
+				jObject.put("twelveprofit", dfomat.format(Float.parseFloat(prd2.getTwelveprofit())*100));
+			}
+			if(prd2.getCharge()==null){
+				jObject.put("charge", " - ");
+			}else{
+				jObject.put("charge", dfomat.format(Float.parseFloat(prd2.getCharge())*100));
+			}
+			if(prd2.getStd()==null){
+				jObject.put("std", " - ");
+			}else{
+				jObject.put("std", Float.parseFloat(prd2.getStd()));
+			}
+					
 			jArray.add(i,jObject);
 			System.out.println(jArray.get(i).toString());
+			
 			
 				
 		}

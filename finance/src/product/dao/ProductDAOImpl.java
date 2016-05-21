@@ -77,7 +77,8 @@ public class ProductDAOImpl implements ProductDAO{
 					 +"from PRODUCTS p, OPERATORS o "
 					 +"where o.OPCODE = p.OPCODE "
 					 +"and "
-					 +classify+" and "+type+" and "+scale+" and "+charge+" and "+profit+" and "+std+" and "+opname;
+					 +classify+" and "+type+" and "+scale+" and "+charge+" and "+profit+" and "+std+" and "+opname
+					 +"order by p.PRDATE desc";
 		
 		sql.append(query);
 		System.out.println(sql.toString());
@@ -91,17 +92,9 @@ public class ProductDAOImpl implements ProductDAO{
 				, rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11),rs.getString(12));
 			prdlist.add(product);
 		}
-		int length = prdlist.size();
-	/*	for(int i=0; i<length; i++){
-			ProductDTO prd2 = prdlist.get(i);
-			System.out.println(prd2.getOpname()+prd2.getTitle()+prd2.getPrdate()+prd2.getClassify()+prd2.getType()
-			+prd2.getScale()+prd2.getCharge()+prd2.getOneprofit()+prd2.getThreeprofit()+
-			prd2.getSixprofit()+prd2.getTwelveprofit()+prd2.getStd());
-		
-		}*/
-		
 		close(rs);
 		close(stmt);
+		
 		
 		return prdlist;
 	}
@@ -122,14 +115,21 @@ public class ProductDAOImpl implements ProductDAO{
 				, rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11),rs.getString(12));
 			prdlist.add(prd);
 		}
-		int length = prdlist.size();
+/*		int length = prdlist.size();
 		System.out.println(prdlist);
-		/*for(int i=0; i<length; i++){
+		for(int i=0; i<length; i++){
 			ProductDTO prd2 = prdlist.get(i);
-			System.out.println(prd2.getOpname()+prd2.getTitle()+prd2.getPrdate()+prd2.getClassify()+prd2.getType()
-			+prd2.getScale()+prd2.getCharge()+prd2.getOneprofit()+prd2.getThreeprofit()+
-			prd2.getSixprofit()+prd2.getTwelveprofit()+prd2.getStd());
-		
+			if(prd2.getOpname().equals("null")|prd2.getTitle().equals("null")|prd2.getPrdate().equals("null")|prd2.getClassify().equals("null")|prd2.getType().equals("null")|prd2.getScale().equals("null")|
+					prd2.getCharge().equals("null")|prd2.getOneprofit().equals("null")|prd2.getThreeprofit().equals("null")|prd2.getSixprofit().equals("null")|prd2.getTwelveprofit().equals("null")|prd2.getStd().equals("null")){
+				System.out.println("있다");
+			}else{
+				System.out.println("없네");
+			}
+			
+//			System.out.println(prd2.getOpname()+prd2.getTitle()+prd2.getPrdate()+prd2.getClassify()+prd2.getType()
+//			+prd2.getScale()+prd2.getCharge()+prd2.getOneprofit()+prd2.getThreeprofit()+
+//			prd2.getSixprofit()+prd2.getTwelveprofit()+prd2.getStd());
+//		
 
 		}*/
 		close(rs);
