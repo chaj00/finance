@@ -31,13 +31,13 @@
 </script> -->
 </head>
 <body>
-	<div style="width: 800px; margin-left: auto; margin-right: auto;">
+	<div style="width: 1900px; height: 150px; margin-left: auto; margin-right: auto; float:left; padding:5px;">
 		<div>
 			<jsp:include page="../top.jsp"></jsp:include>
 		</div>
 
 
-		<div style="width: 900px; margin-left: auto; margin-right: auto;">
+		<div style="width: 1900px; margin-left: auto; margin-right: auto;">
 			<jsp:include page="${pathurl}"></jsp:include>
 		</div>
 	

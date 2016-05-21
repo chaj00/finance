@@ -121,6 +121,7 @@ public class LOGICimpl implements LOGIC {
 			bpsEpsList.add(bpsEps);
 			
 		}
+		System.out.println("logic>>"+bpsEpsList);
 		return bpsEpsList;
 	}
 }

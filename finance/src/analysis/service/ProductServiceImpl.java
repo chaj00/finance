@@ -47,8 +47,8 @@ public class ProductServiceImpl implements ProductService{
 	public ArrayList<BpsepsDTO> bps(ArrayList<EnterpriseDTO> list) {
 		LOGIC logic = new LOGICimpl();
 		
-		ArrayList<BpsepsDTO> bpsEps = logic.bps(list);
-
-		return bpsEps;
+		ArrayList<BpsepsDTO> bpsEpsList = logic.bps(list);
+		System.out.println("service>>"+bpsEpsList);
+		return bpsEpsList;
 	}
 }

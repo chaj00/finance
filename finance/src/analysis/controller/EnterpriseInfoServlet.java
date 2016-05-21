@@ -21,23 +21,48 @@ import analysis.service.ProductServiceImpl;
 public class EnterpriseInfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String encode="005930";	
+		String page = req.getParameter("page");
+		String pathurl = req.getParameter("pathurl");
+		String forwardview = "";
+		
 		//비지니스 메소드 call
 		
 		ProductService service = new ProductServiceImpl();
 //		LOGIC logic = new LOGICimpl();
 		ArrayList<EnterpriseDTO> entlist = service.select_ent(encode);
-		ArrayList<BpsepsDTO> bpsEps = service.bps(entlist);
-		ArrayList<StockinfoDTO> stoinfo = service.select_sto(encode);
-		
+		ArrayList<BpsepsDTO> bpsEpsList = service.bps(entlist);
+		ArrayList<StockinfoDTO> stoinfo = service.select_sto(encode);	
+		System.out.println(bpsEpsList);
 		//데이터 공유(이름 잘 기억해둘 것) 공유와 꺼내쓰는 것 같도록 (list.jsp와 같도록)
 		req.setAttribute("entlist", entlist);
-		req.setAttribute("bpsEps", bpsEps);
+		req.setAttribute("bpsEps", bpsEpsList);
 		req.setAttribute("stoinfo", stoinfo);
 //		System.out.println(bpsEps.toString());
 		
+		req.setAttribute("pathurl", pathurl);
+		forwardview="/layout/mainLayout.jsp";
+		System.out.println(page);
+		
+		/*if(page.equals("analysis")){
+			req.setAttribute("pathurl", pathurl);
+			forwardview="/layout/mainLayout.jsp";
+		}else if(page.equals("samsung")){
+			req.setAttribute("pathurl", pathurl);
+			forwardview="/layout/mainLayout.jsp";
+		}else{
+			req.setAttribute("pathurl", pathurl);
+			forwardview="/layout/mainLayout.jsp";
+		}*/
+		
 		//요청 재지정- 응답화면을 분리하고 분리한 응답화면이 요청되도록 재지정(list.jsp)
-		RequestDispatcher rd = req.getRequestDispatcher("/analysis/Analysis_main.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher(forwardview);
 		rd.forward(req, res);
+		//
+
 	}	
 	
 }
+
+
+
+

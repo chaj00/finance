@@ -20,9 +20,4 @@ public interface ProductService {
 	//PER, PBR밴드에 필요한 값 계산
 	ArrayList<BpsepsDTO> bps(ArrayList<EnterpriseDTO> list);
 
-
-
-
-
-
 }
