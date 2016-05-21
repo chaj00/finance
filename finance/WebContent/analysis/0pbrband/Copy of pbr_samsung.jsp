@@ -1,7 +1,6 @@
-<%@page import="analysis.dto.EnterpriseDTO"%>
 <%@page import="analysis.dto.StockinfoDTO"%>
 <%@page import="analysis.dto.BpsepsDTO"%>
-<%@page import="analysis.dto.EnterpriseinfoDTO"%>
+<%@page import="analysis.dto.EnterpriseDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
@@ -69,7 +68,7 @@ div.section {
 	margin-top: 35px;
 }
 
-div.col-md-8{
+div.col-md-10{
 	margin-left: inherit;
 }
 div.PBR_Band{
@@ -83,16 +82,13 @@ table.table{
 	height: 400px;
 	white-space:nowrap;
 	overflow-x: scroll;
-	overflow-y: scroll;
-	
 }
 div.data{
 	border-style: groove;
-	width: 1030px;
-	height: 300px;
+	width: 1570px;
+	height: 450px;
 	white-space: nowrap;
 	overflow-x: scroll;
-	overflow-y: scroll;
 
 }
 
@@ -116,28 +112,17 @@ div.data{
 			<div class="col-md-12">
 
 				<ul class="list-group">
-		
-					<li> **PBR Band & 기업정보** </li>
-					<li class="list-group-item">
-					<%-- <script type="text/javascript">
-					<%
-			 		int size= entlist.size();
-			 		for (int i = 0; i< size-1;i++){ 
-					%>
-					</script> --%>
-					<a href="/finance/stocklist.do?page=analysis&pathurl=/analysis/0pbrband/pbr_samsung.jsp">삼성전자</a></li>
-					<li class="list-group-item"><a href="/finance/stocklist.do">아모레퍼시픽</a></li>
-					<li class="list-group-item"><a href="/finance/stocklist.do">포스코</a></li>
-					<li class="list-group-item"><a href="/finance/stocklist.do">네이버</a></li>
-					<li class="list-group-item"><a href="/finance/stocklist.do">한국전력</a></li>
-					<li class="list-group-item"><a href="/finance/stocklist.do">현대차</a></li>
-					<li class="list-group-item"><a href="/finance/stocklist.do">하이닉스</a></li>
-					
 
-					<!-- <li> **기업정보** </li>
+					<li> **PBR Band** </li>
+					<li class="list-group-item"><a
+						href="/finance/stocklist.do?page=analysis&pathurl=/analysis/0pbrband/pbr_samsung.jsp">삼성전자</a></li>
+					<li class="list-group-item"><a href="/finance/stocklist.do">현대차</a></li>
+					<li class="list-group-item"><a href="/finance/stocklist.do">아모레퍼시픽</a></li>
+
+					<li> **기업정보** </li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">삼성전자</a></li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">현대차</a></li>
-					<li class="list-group-item"><a href="/finance/stocklist.do">아모레퍼시픽</a></li> -->
+					<li class="list-group-item"><a href="/finance/stocklist.do">아모레퍼시픽</a></li>
 					<li><a href="./" class="current">시작 페이지로</a></li>
 				</ul>
 
@@ -148,19 +133,17 @@ div.data{
           </ul> -->
 			</div>
 		</div>
-		<div class="col-md-8">
+		<div class="col-md-10">
 			<div class="PBR_Band">
 				<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
 <%
-ArrayList<EnterpriseinfoDTO> entinfolist = (ArrayList<EnterpriseinfoDTO>)request.getAttribute("entinfolist");
+ArrayList<EnterpriseDTO> entlist = (ArrayList<EnterpriseDTO>)request.getAttribute("entlist");
 ArrayList<BpsepsDTO> bpsEpsList = (ArrayList<BpsepsDTO>)request.getAttribute("bpsEps");
 ArrayList<StockinfoDTO> stolist = (ArrayList<StockinfoDTO>)request.getAttribute("stoinfo");
-ArrayList<EnterpriseDTO> entlist = (ArrayList<EnterpriseDTO>)request.getAttribute("entlist");
 
 String b1="01", b2="02", b3="03", b4="04", b5="05", b6="06", b7="07", b8="08", b9="09", b10="10", b11="11", b12="12";
-String a1=".1Q", a2=".2Q", a3=".3Q", a4=".4Q";
-String c1="15", c2="14", c3="13", c4="12", c5="11", c6="10", c7="9", c8="8", c9="7", c10="6", c11="5";
+String c05="05", c06="06", c07="07", c08="08", c09="09", c10="10", c11="11", c12="12", c13="13", c14="14", c15="15";
 
 %>
 
@@ -241,7 +224,7 @@ String c1="15", c2="14", c3="13", c4="12", c5="11", c6="10", c7="9", c8="8", c9=
         
         ]);
         var options = {
-          /* title: 'PBR Band', */
+          title: 'PBR Band',
           hAxis: {showTextEvery: 6},
           vAxes: {0: {viewWindowMode:'explicit',
                       viewWindow:{
@@ -262,7 +245,7 @@ String c1="15", c2="14", c3="13", c4="12", c5="11", c6="10", c7="9", c8="8", c9=
           		6:{targetAxisIndex:0},
                   },
           colors: ["red", "green", "orange", "blue", "purple", "yellow"],
-          chartArea:{left:80,top:30, width:800, height:300},
+          chartArea:{left:70,top:30, width:1100, height:350},
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('chart_id'));
@@ -270,90 +253,117 @@ String c1="15", c2="14", c3="13", c4="12", c5="11", c6="10", c7="9", c8="8", c9=
       }
      
 </script>
-<!-- <div class="ZOOM" href="/finance/analysis/image/pbr_samsung.jsp">확대보기</div> -->
-PBR Band
-<div id="chart_id" style="width: 1000px; height: 400px;">
-</div>
+<div class="ZOOM" href="/finance/analysis/image/pbr_samsung.jsp">확대보기</div>
+<div id="chart_id" style="width: 1300px; height: 450px;">
 
-<script type="text/javascript">
-/* 달력 연도/월을 표기하고 달력이 들어갈 테이블을 작성합니다. */
-document.write("기업정보 (단위 : 원)");
-    //문자 결합 연산자를 사용해 요일이 나오는 행을 생성합니다.
-var calendar = "<div class='data'>";
-calendar += "<table class='table'>";
-calendar += "<thead>";
-	calendar += "<tr>";
-		
-        <% for (int i = 0; i< size-1;i++){ %>
-		calendar += "<th>구분</th>";
-		calendar += "<th><%= (i+5)+a1%></th>";
-		calendar += "<th><%= (i+5)+a2%></th>";
-		calendar += "<th><%= (i+5)+a3%></th>";
-		calendar += "<th><%= (i+5)+a4%></th>";
-	calendar += "</tr>";
-calendar += "</thead>";
-calendar += "<tbody>";
- 		    calendar += "<tr>";
- 		   	calendar += "<td>" + "자산" + "</td>";
- 		    calendar += "<td>" + <%= entinfolist.get(i).getFiasset()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getSeasset()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getThasset()%> + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFoasset()%> + "</td>";
-		   	calendar += "</tr>";
- 		    
-		   	calendar += "<tr>";
-		   	calendar += "<td>" + "부채" + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFidept()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getSedept()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getThdept()%> + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFodept()%> + "</td>";
-		   	calendar += "</tr>";
-		    
-		   	calendar += "<tr>";
-		   	calendar += "<td>" + "매출액" + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFiqsales()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getSeqsales()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getThqsales()%> + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFoqsales()%> + "</td>";
-		   	calendar += "</tr>";
-		    
-		   	calendar += "<tr>";
-		   	calendar += "<td>" + "영업이익" + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFiprofit()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getSeprofit()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getThprofit()%> + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFoprofit()%> + "</td>";
-		   	calendar += "</tr>";
-		    
-		   	calendar += "<tr>";
-		   	calendar += "<td>" + "당기순이익" + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFinetprofit()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getSenetprofit()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getThnetprofit()%> + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFonetprofit()%> + "</td>";
-		   	calendar += "</tr>";
-		    
-		   	calendar += "<tr>";
-		   	calendar += "<td>" + "주식총수" + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFicapitalstock()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getSecapitalstock()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getThcapitalstock()%> + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFocapitalstock()%> + "</td>";
-		   	calendar += "</tr>";
-		 
-	    calendar += "</tr>";
-	    calendar += "</tbody>";
-	    <%}%>
-	    calendar += "</table>";
-	    calendar += "</div>";
-	    
-	    
-document.write(calendar);
-</script>
+				</div>
+				<div class = "data">
+			<table class="table">
+			<script></script>
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>14(1분기)</th>
+						<th>14(2분기)</th>
+						<th>14(3분기)</th>
+						<th>14(4분기)</th>
+						
+						<th>13(1분기)</th>
+						<th>13(2분기)</th>
+						<th>13(3분기)</th>
+						<th>13(4분기)</th>
+						
+						<th>12(1분기)</th>
+						<th>12(2분기)</th>
+						<th>12(3분기)</th>
+						<th>12(4분기)</th>
+						
+						<th>11(1분기)</th>
+						<th>11(2분기)</th>
+						<th>11(3분기)</th>
+						<th>11(4분기)</th>
+						
+						<th>10(1분기)</th>
+						<th>10(2분기)</th>
+						<th>10(3분기)</th>
+						<th>10(4분기)</th>
+						
+						<th>09(1분기)</th>
+						<th>09(2분기)</th>
+						<th>09(3분기)</th>
+						<th>09(4분기)</th>
+						
+						<th>08(1분기)</th>
+						<th>08(2분기)</th>
+						<th>08(3분기)</th>
+						<th>08(4분기)</th>
+						
+						<th>07(1분기)</th>
+						<th>07(2분기)</th>
+						<th>07(3분기)</th>
+						<th>07(4분기)</th>
+						
+						<th>06(1분기)</th>
+						<th>06(2분기)</th>
+						<th>06(3분기)</th>
+						<th>06(4분기)</th>
+						
+						<th>05(1분기)</th>
+						<th>05(2분기)</th>
+						<th>05(3분기)</th>
+						<th>05(4분기)</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>자산</td>
+						<td>Mark</td>
+						<td>Otto</td>
+						<td>@mdo</td>
+						<td>@mdo</td>
+					</tr>
+					<tr>
+						<td>부채</td>
+						<td>Jacob</td>
+						<td>Thornton</td>
+						<td>@fat</td>
+						<td>@fat</td>
+					</tr>
+					<tr>
+						<td>매출액</td>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+						<td>@twitter</td>
+					</tr>
+					<tr>
+						<td>영업이익</td>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+						<td>@twitter</td>
+					</tr>
+					<tr>
+						<td>당기순이익</td>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+						<td>@twitter</td>
+					</tr>
+					<tr>
+						<td>주식총수</td>
+						<td>Larry</td>
+						<td>the Bird</td>
+						<td>@twitter</td>
+						<td>@twitter</td>
+					</tr>
+				</tbody>
+					</table>
+				</div>
 			</div>
 		</div> 
-		
 	</div>
-
+	</header>
+	<!--/header-->
 </body>
 </html>

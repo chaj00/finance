@@ -1,4 +1,3 @@
-<%@page import="analysis.dto.EnterpriseDTO"%>
 <%@page import="analysis.dto.StockinfoDTO"%>
 <%@page import="analysis.dto.BpsepsDTO"%>
 <%@page import="analysis.dto.EnterpriseinfoDTO"%>
@@ -116,15 +115,9 @@ div.data{
 			<div class="col-md-12">
 
 				<ul class="list-group">
-		
+
 					<li> **PBR Band & 기업정보** </li>
 					<li class="list-group-item">
-					<%-- <script type="text/javascript">
-					<%
-			 		int size= entlist.size();
-			 		for (int i = 0; i< size-1;i++){ 
-					%>
-					</script> --%>
 					<a href="/finance/stocklist.do?page=analysis&pathurl=/analysis/0pbrband/pbr_samsung.jsp">삼성전자</a></li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">아모레퍼시픽</a></li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">포스코</a></li>
@@ -156,7 +149,6 @@ div.data{
 ArrayList<EnterpriseinfoDTO> entinfolist = (ArrayList<EnterpriseinfoDTO>)request.getAttribute("entinfolist");
 ArrayList<BpsepsDTO> bpsEpsList = (ArrayList<BpsepsDTO>)request.getAttribute("bpsEps");
 ArrayList<StockinfoDTO> stolist = (ArrayList<StockinfoDTO>)request.getAttribute("stoinfo");
-ArrayList<EnterpriseDTO> entlist = (ArrayList<EnterpriseDTO>)request.getAttribute("entlist");
 
 String b1="01", b2="02", b3="03", b4="04", b5="05", b6="06", b7="07", b8="08", b9="09", b10="10", b11="11", b12="12";
 String a1=".1Q", a2=".2Q", a3=".3Q", a4=".4Q";

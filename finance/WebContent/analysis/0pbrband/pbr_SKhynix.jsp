@@ -1,4 +1,3 @@
-<%@page import="analysis.dto.EnterpriseDTO"%>
 <%@page import="analysis.dto.StockinfoDTO"%>
 <%@page import="analysis.dto.BpsepsDTO"%>
 <%@page import="analysis.dto.EnterpriseinfoDTO"%>
@@ -116,15 +115,9 @@ div.data{
 			<div class="col-md-12">
 
 				<ul class="list-group">
-		
+
 					<li> **PBR Band & 기업정보** </li>
 					<li class="list-group-item">
-					<%-- <script type="text/javascript">
-					<%
-			 		int size= entlist.size();
-			 		for (int i = 0; i< size-1;i++){ 
-					%>
-					</script> --%>
 					<a href="/finance/stocklist.do?page=analysis&pathurl=/analysis/0pbrband/pbr_samsung.jsp">삼성전자</a></li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">아모레퍼시픽</a></li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">포스코</a></li>
@@ -156,7 +149,6 @@ div.data{
 ArrayList<EnterpriseinfoDTO> entinfolist = (ArrayList<EnterpriseinfoDTO>)request.getAttribute("entinfolist");
 ArrayList<BpsepsDTO> bpsEpsList = (ArrayList<BpsepsDTO>)request.getAttribute("bpsEps");
 ArrayList<StockinfoDTO> stolist = (ArrayList<StockinfoDTO>)request.getAttribute("stoinfo");
-ArrayList<EnterpriseDTO> entlist = (ArrayList<EnterpriseDTO>)request.getAttribute("entlist");
 
 String b1="01", b2="02", b3="03", b4="04", b5="05", b6="06", b7="07", b8="08", b9="09", b10="10", b11="11", b12="12";
 String a1=".1Q", a2=".2Q", a3=".3Q", a4=".4Q";
@@ -279,76 +271,76 @@ PBR Band
 /* 달력 연도/월을 표기하고 달력이 들어갈 테이블을 작성합니다. */
 document.write("기업정보 (단위 : 원)");
     //문자 결합 연산자를 사용해 요일이 나오는 행을 생성합니다.
-var calendar = "<div class='data'>";
-calendar += "<table class='table'>";
-calendar += "<thead>";
-	calendar += "<tr>";
+var entData = "<div class='data'>";
+entData += "<table class='table'>";
+entData += "<thead>";
+	entData += "<tr>";
 		
         <% for (int i = 0; i< size-1;i++){ %>
-		calendar += "<th>구분</th>";
-		calendar += "<th><%= (i+5)+a1%></th>";
-		calendar += "<th><%= (i+5)+a2%></th>";
-		calendar += "<th><%= (i+5)+a3%></th>";
-		calendar += "<th><%= (i+5)+a4%></th>";
-	calendar += "</tr>";
-calendar += "</thead>";
-calendar += "<tbody>";
- 		    calendar += "<tr>";
- 		   	calendar += "<td>" + "자산" + "</td>";
- 		    calendar += "<td>" + <%= entinfolist.get(i).getFiasset()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getSeasset()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getThasset()%> + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFoasset()%> + "</td>";
-		   	calendar += "</tr>";
+		entData += "<th>구분</th>";
+		entData += "<th><%= (i+5)+a1%></th>";
+		entData += "<th><%= (i+5)+a2%></th>";
+		entData += "<th><%= (i+5)+a3%></th>";
+		entData += "<th><%= (i+5)+a4%></th>";
+	entData += "</tr>";
+entData += "</thead>";
+entData += "<tbody>";
+ 		    entData += "<tr>";
+ 		   	entData += "<td>" + "자산" + "</td>";
+ 		    entData += "<td>" + <%= entinfolist.get(i).getFiasset()%> + "</td>";
+ 		   	entData += "<td>" + <%= entinfolist.get(i).getSeasset()%> + "</td>";
+ 		   	entData += "<td>" + <%= entinfolist.get(i).getThasset()%> + "</td>";
+		   	entData += "<td>" + <%= entinfolist.get(i).getFoasset()%> + "</td>";
+		   	entData += "</tr>";
  		    
-		   	calendar += "<tr>";
-		   	calendar += "<td>" + "부채" + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFidept()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getSedept()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getThdept()%> + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFodept()%> + "</td>";
-		   	calendar += "</tr>";
+		   	entData += "<tr>";
+		   	entData += "<td>" + "부채" + "</td>";
+		   	entData += "<td>" + <%= entinfolist.get(i).getFidept()%> + "</td>";
+ 		   	entData += "<td>" + <%= entinfolist.get(i).getSedept()%> + "</td>";
+ 		   	entData += "<td>" + <%= entinfolist.get(i).getThdept()%> + "</td>";
+		   	entData += "<td>" + <%= entinfolist.get(i).getFodept()%> + "</td>";
+		   	entData += "</tr>";
 		    
-		   	calendar += "<tr>";
-		   	calendar += "<td>" + "매출액" + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFiqsales()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getSeqsales()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getThqsales()%> + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFoqsales()%> + "</td>";
-		   	calendar += "</tr>";
+		   	entData += "<tr>";
+		   	entData += "<td>" + "매출액" + "</td>";
+		   	entData += "<td>" + <%= entinfolist.get(i).getFiqsales()%> + "</td>";
+ 		   	entData += "<td>" + <%= entinfolist.get(i).getSeqsales()%> + "</td>";
+ 		   	entData += "<td>" + <%= entinfolist.get(i).getThqsales()%> + "</td>";
+		   	entData += "<td>" + <%= entinfolist.get(i).getFoqsales()%> + "</td>";
+		   	entData += "</tr>";
 		    
-		   	calendar += "<tr>";
-		   	calendar += "<td>" + "영업이익" + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFiprofit()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getSeprofit()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getThprofit()%> + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFoprofit()%> + "</td>";
-		   	calendar += "</tr>";
+		   	entData += "<tr>";
+		   	entData += "<td>" + "영업이익" + "</td>";
+		   	entData += "<td>" + <%= entinfolist.get(i).getFiprofit()%> + "</td>";
+ 		   	entData += "<td>" + <%= entinfolist.get(i).getSeprofit()%> + "</td>";
+ 		   	entData += "<td>" + <%= entinfolist.get(i).getThprofit()%> + "</td>";
+		   	entData += "<td>" + <%= entinfolist.get(i).getFoprofit()%> + "</td>";
+		   	entData += "</tr>";
 		    
-		   	calendar += "<tr>";
-		   	calendar += "<td>" + "당기순이익" + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFinetprofit()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getSenetprofit()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getThnetprofit()%> + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFonetprofit()%> + "</td>";
-		   	calendar += "</tr>";
+		   	entData += "<tr>";
+		   	entData += "<td>" + "당기순이익" + "</td>";
+		   	entData += "<td>" + <%= entinfolist.get(i).getFinetprofit()%> + "</td>";
+ 		   	entData += "<td>" + <%= entinfolist.get(i).getSenetprofit()%> + "</td>";
+ 		   	entData += "<td>" + <%= entinfolist.get(i).getThnetprofit()%> + "</td>";
+		   	entData += "<td>" + <%= entinfolist.get(i).getFonetprofit()%> + "</td>";
+		   	entData += "</tr>";
 		    
-		   	calendar += "<tr>";
-		   	calendar += "<td>" + "주식총수" + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFicapitalstock()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getSecapitalstock()%> + "</td>";
- 		   	calendar += "<td>" + <%= entinfolist.get(i).getThcapitalstock()%> + "</td>";
-		   	calendar += "<td>" + <%= entinfolist.get(i).getFocapitalstock()%> + "</td>";
-		   	calendar += "</tr>";
+		   	entData += "<tr>";
+		   	entData += "<td>" + "주식총수" + "</td>";
+		   	entData += "<td>" + <%= entinfolist.get(i).getFicapitalstock()%> + "</td>";
+ 		   	entData += "<td>" + <%= entinfolist.get(i).getSecapitalstock()%> + "</td>";
+ 		   	entData += "<td>" + <%= entinfolist.get(i).getThcapitalstock()%> + "</td>";
+		   	entData += "<td>" + <%= entinfolist.get(i).getFocapitalstock()%> + "</td>";
+		   	entData += "</tr>";
 		 
-	    calendar += "</tr>";
-	    calendar += "</tbody>";
+	    entData += "</tr>";
+	    entData += "</tbody>";
 	    <%}%>
-	    calendar += "</table>";
-	    calendar += "</div>";
+	    entData += "</table>";
+	    entData += "</div>";
 	    
 	    
-document.write(calendar);
+document.write(entData);
 </script>
 			</div>
 		</div> 

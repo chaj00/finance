@@ -1,3 +1,7 @@
+<%@page import="analysis.dto.EnterpriseinfoDTO"%>
+<%@page import="analysis.dto.StockinfoDTO"%>
+<%@page import="analysis.dto.BpsepsDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -73,6 +77,14 @@ div.col-md-10{
 <!-- analysis layout -->
 </head>
 <body >
+<script type="text/javascript">
+<%
+ArrayList<EnterpriseinfoDTO> entinfolist = (ArrayList<EnterpriseinfoDTO>)request.getAttribute("entinfolist");
+ArrayList<BpsepsDTO> bpsEpsList = (ArrayList<BpsepsDTO>)request.getAttribute("bpsEps");
+ArrayList<StockinfoDTO> stolist = (ArrayList<StockinfoDTO>)request.getAttribute("stoinfo");
+
+%>
+</script>
 	<!--/.container--> 
 	<div class="row">
 		<div class="col-md-2">
@@ -80,16 +92,21 @@ div.col-md-10{
 
 				<ul class="list-group">
 
-					<li> **PBR Band** </li>
+					<li> **PBR Band & 기업정보** </li>
 					<li class="list-group-item">
 					<a href="/finance/stocklist.do?page=analysis&pathurl=/analysis/0pbrband/pbr_samsung.jsp">삼성전자</a></li>
-					<li class="list-group-item"><a href="/finance/stocklist.do">현대차</a></li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">아모레퍼시픽</a></li>
+					<li class="list-group-item"><a href="/finance/stocklist.do">포스코</a></li>
+					<li class="list-group-item"><a href="/finance/stocklist.do">네이버</a></li>
+					<li class="list-group-item"><a href="/finance/stocklist.do">한국전력</a></li>
+					<li class="list-group-item"><a href="/finance/stocklist.do">현대차</a></li>
+					<li class="list-group-item"><a href="/finance/stocklist.do">하이닉스</a></li>
+					
 
-					<li> **기업정보** </li>
+					<!-- <li> **기업정보** </li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">삼성전자</a></li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">현대차</a></li>
-					<li class="list-group-item"><a href="/finance/stocklist.do">아모레퍼시픽</a></li>
+					<li class="list-group-item"><a href="/finance/stocklist.do">아모레퍼시픽</a></li> -->
 					<li><a href="./" class="current">시작 페이지로</a></li>
 				</ul>
 

@@ -6,18 +6,21 @@ import java.util.ArrayList;
 
 import analysis.dto.BpsepsDTO;
 import analysis.dto.EnterpriseDTO;
+import analysis.dto.EnterpriseinfoDTO;
 import analysis.dto.StockinfoDTO;
 
 
 public interface ProductService {
 	
+	ArrayList<EnterpriseDTO> select_ent1(String encode);
+	
 	// 기업 정보 조회하기
-	ArrayList<EnterpriseDTO> select_ent(String encode);
+	ArrayList<EnterpriseinfoDTO> select_ent(String encode);
 	
 	// 주가 정보 조회하기
 	ArrayList<StockinfoDTO> select_sto(String encode);
 	
 	//PER, PBR밴드에 필요한 값 계산
-	ArrayList<BpsepsDTO> bps(ArrayList<EnterpriseDTO> list);
+	ArrayList<BpsepsDTO> bps(ArrayList<EnterpriseinfoDTO> list);
 
 }

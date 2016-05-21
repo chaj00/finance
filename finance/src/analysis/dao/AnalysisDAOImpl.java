@@ -2,6 +2,7 @@ package analysis.dao;
 
 import static fw.Query.*;
 import static fw.JdbcTemplate.*;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,19 +10,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import analysis.dto.EnterpriseDTO;
+import analysis.dto.EnterpriseinfoDTO;
 import analysis.dto.StockinfoDTO;
 
 public class AnalysisDAOImpl implements AnalysisDAO{
 	@Override
-	public ArrayList<EnterpriseDTO> select_ent(Connection con, String encode) throws SQLException {
-		EnterpriseDTO stoinfo = null; // 항상 객체로 넘겨
+	public ArrayList<EnterpriseinfoDTO> select_ent(Connection con, String encode) throws SQLException {
+		EnterpriseinfoDTO stoinfo = null; // 항상 객체로 넘겨
 		PreparedStatement ptmt = con.prepareStatement(ENTERPRISEINFO);
 		ptmt.setString(1, encode);
 		ResultSet rs = ptmt.executeQuery();
-		ArrayList<EnterpriseDTO> dlist = new ArrayList<EnterpriseDTO>();
+		ArrayList<EnterpriseinfoDTO> dlist = new ArrayList<EnterpriseinfoDTO>();
 		
 		while (rs.next()) {
-			stoinfo = new EnterpriseDTO (rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),			
+			stoinfo = new EnterpriseinfoDTO (rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),			
 														rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10),
 															rs.getInt(11), rs.getInt(12), rs.getInt(13), rs.getInt(14), rs.getInt(15),
 																rs.getInt(16), rs.getInt(17), rs.getInt(18), rs.getInt(18) ,rs.getInt(20),
@@ -53,5 +55,24 @@ public class AnalysisDAOImpl implements AnalysisDAO{
 		close(rs);
 		close(ptmt);
 		return dlist;
+	}
+
+	@Override
+	public ArrayList<EnterpriseDTO> select_ent1(Connection con, String encode) throws SQLException{
+	EnterpriseDTO stoinfo = null; // 항상 객체로 넘겨
+	PreparedStatement ptmt = con.prepareStatement(ENTERPRISE);
+	ptmt.setString(1, encode);
+	ResultSet rs = ptmt.executeQuery();
+	ArrayList<EnterpriseDTO> dlist = new ArrayList<EnterpriseDTO>();
+	
+	while (rs.next()) {
+		stoinfo = new EnterpriseDTO (rs.getString(1), rs.getString(2));
+//			System.out.println(stoinfo);												
+		dlist.add(stoinfo);
+	}
+	
+	close(rs);
+	close(ptmt);
+	return dlist;
 	}
 }
