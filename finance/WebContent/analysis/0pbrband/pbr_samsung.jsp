@@ -238,7 +238,7 @@ String b1="01", b2="02", b3="03", b4="04", b5="05", b6="06", b7="07", b8="08", b
 </script>
 <div id="chart_id" style="width: 800px; height: 450px;"></div>
 			</div>
-		</div>
+		</div> 
 	</div>
 	</header>
 	<!--/header-->
