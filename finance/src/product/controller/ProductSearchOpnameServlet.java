@@ -17,60 +17,32 @@ import org.json.simple.JSONObject;
 import product.dto.ProductDTO;
 import product.service.ProductService;
 import product.service.ProductServiceImpl;
+import sun.tools.jar.resources.jar;
 
-@WebServlet(name = "search", urlPatterns = { "/searchPrd2.do" })
-public class ProductSearchServlet extends HttpServlet {
-	
+/**
+ * Servlet implementation class ProductSearchOpnameServlet
+ */
+@WebServlet(name = "searchopname", urlPatterns = { "/ProductSearchOpnameServlet.do" })
+public class ProductSearchOpnameServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pattern = "#.####";
 		request.setCharacterEncoding("euc-kr");
 		response.setContentType("application/json;charset=utf-8");
-		//System.out.println("넘어오긴했냐?");
-		ArrayList<ProductDTO> prdlist =null;
-		ProductDTO prd = new ProductDTO();
+		String opname =request.getParameter("opname");
+		//System.out.println("넘어옴:===>"+opname);
+
+		ArrayList<ProductDTO> prdlist = null;
+		
 		ProductService service = new ProductServiceImpl();
 		
-		prd.setClassify(request.getParameter("classify"));
-		prd.setType(request.getParameter("type"));
-		prd.setPrdate(request.getParameter("prdate"));
-		prd.setScale(request.getParameter("scale"));
-		prd.setProfit(request.getParameter("profit"));
-		prd.setCharge(request.getParameter("charge"));
-		prd.setStd(request.getParameter("std"));
-		prd.setOpname(request.getParameter("opname"));
-		
-		
-		//System.out.println("컨트롤러 통과");
-		prdlist = service.search(prd);
-		/*System.out.println("dds");
-		int length = opNamelist.size();
-		for(int i=0; i<length; i++){
-			System.out.println(opNamelist.get(i).toString());
-		}
+		prdlist = service.searchOpname(opname);
+	
+		JSONArray jArray =	 new JSONArray();
 		int length = prdlist.size();
-		for(int i=0; i<length; i++){
-			ProductDTO prd2 = prdlist.get(i);
-			System.out.println(prd2.getOpname()+prd2.getTitle()+prd2.getPrdate()+prd2.getClassify()+prd2.getType()
-			+prd2.getScale()+prd2.getCharge()+prd2.getOneprofit()+prd2.getThreeprofit()+
-			prd2.getSixprofit()+prd2.getTwelveprofit()+prd2.getStd());
-
-			
-		}*/
-		JSONArray jArray = new JSONArray();
-		int length = prdlist.size();
-		JSONObject jObject = new JSONObject();
+		JSONObject jObject = null;
 		DecimalFormat dfomat = new DecimalFormat(pattern);
-		/*
-		 *classify = 펀드구분 class = chk1 name=ForgnSectCd 2개
-		 *type= 펀드유형  class = chk2 name="FundInvstTypeCd" 8개
-		 *prdate= 설정기간  class = chk3 name="SetPeriodMM" 6개
-		 *scale= 총설정액  class = chk4 name=kfrEstabAmUk 6개
-		 *profit = 수익률 class = chk5 name="Yield" 7개
-		 *charge = 총보수  class = chk6 name="TotRwrt" 4개
-		 *std= 위험등급   class = chk7 name="StdGrade" 6개
-		 *opname = 운용사    class = chk8 name="OperCoCdList" 38개
-		 */
-		
 		
 		for (int i = 0; i < length; i++) {
 			ProductDTO prd2 =prdlist.get(i);
@@ -119,13 +91,15 @@ public class ProductSearchServlet extends HttpServlet {
 			//System.out.println(jArray.get(i).toString());
 			
 			
+				
 		}
 		//System.out.println(jArray.toJSONString());
 		PrintWriter pw = response.getWriter();
 		pw.print(jArray.toJSONString());
 		
 		
-		
 	}
+
+	
 
 }

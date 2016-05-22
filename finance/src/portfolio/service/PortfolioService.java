@@ -1,5 +1,9 @@
 package portfolio.service;
 
-public interface PortfolioService {
+import java.util.ArrayList;
 
+import product.dto.ProductDTO;
+
+public interface PortfolioService {
+	
 }

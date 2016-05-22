@@ -18,7 +18,9 @@
     <script src="js/respond.min.js"></script>
     <![endif]-->       
     
+
 </head>
+
 <body class="homepage">
 
     <header id="header">
@@ -38,10 +40,12 @@
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         
-                        <li class="active"><a href="/finance/portfolio/">포트폴리오</a></li>          
+                        <li><a href="/finance/portfolio/">포트폴리오</a></li>          
                         <li><a href="/finance/analysis/analysis_main.html">투자분석</a></li>
-                        <li><a href="/finance/product/product_main.html">금융상품</a></li>
+                        <li><a href="/finance/loadPrd.do">금융상품</a></li>
                         <li><a href="/finance/marketindex.do">시장지표</a></li>
+
+
                      	
                     </ul>
                 </div>
