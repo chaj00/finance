@@ -33,7 +33,7 @@
 <link rel="apple-touch-icon-precomposed"
 	href="/finance/images/ico/apple-touch-icon-57-precomposed.png">
 
-<script type="text/javascript"
+<!-- <script type="text/javascript"
 	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script type="text/javascript"
 	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -42,7 +42,7 @@
 	rel="stylesheet" type="text/css">
 <link
 	href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
-	rel="stylesheet" type="text/css">
+	rel="stylesheet" type="text/css"> -->
 
 <style type="text/css">
 ol.groove {
