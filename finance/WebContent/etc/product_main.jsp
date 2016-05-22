@@ -285,14 +285,6 @@
 
             <h1>Web based advisor</h1>
 
-            <ul class="tab-type">
-                <li id="tab_li1"><a href="#" id="tab_header1" onclick="showTab(1);">펀드</a></li>
-                <li id="tab_li2"><a href="#" id="tab_header2" onclick="showTab(2);">ELS/DLS</a></li>
-                <li id="tab_li3"><a href="#" id="tab_header3" onclick="showTab(3);">채권</a></li>
-                <li id="tab_li4"><a href="#" id="tab_header4" onclick="showTab(4);">삼성POP골든랩</a></li>
-            </ul>
-
-
             <div id="tab_content1">
 
 
@@ -401,7 +393,7 @@
                  
                  <td>
                      <ul id ="Std" >
-                    	 <li><input type="checkbox" class="chk7" name="StdGradeAll" id="fund6All" value=""> 전체</li>    
+                    	 <li><input type="checkbox" class="chk7" name="StdGradeAll" id="fund7All" value=""> 전체</li>    
                          <li><input type="checkbox" class="chk7" name="StdGrade" id="fund7-1" value="0.5-">매우 낮은 위험</li><!--0.5% 이하일 때 6등급(매우 낮은 위험)-->
                          <li><input type="checkbox" class="chk7" name="StdGrade" id="fund7-2" value="0.5-5">낮은 위험</li><!-- 0.5~5%일 때 5등급(낮은 위험)-->
                          <li><input type="checkbox" class="chk7" name="StdGrade" id="fund7-3" value="5-10">보통 위험</li> <!--  5~10%일 때 4등급(보통 위험 -->

@@ -1,0 +1,3553 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>스마트검색</title>
+
+<link rel="shortcut icon" type="image/ico" href="/images/common/logo.ico" />
+
+
+<script src="/ux/js/secure/config.js"></script>
+<script>var _CACHE_BUSTER="R_5.7549929778172165E7";</script>
+<script>var _MEDIA_CODE="KF";</script>
+<script>var _IS_WTS="N";</script>
+<script>var _DICTION_SHOW=true;</script>
+<script>var _SOLUTION_UNET=typeof secure.installCheck.trustNet == "undefined" ? "Y" :  secure.installCheck.trustNet;</script>
+<script>var _SOLUTION_NPROTECT=typeof secure.installCheck.nProtect == "undefined" ? "Y" :  secure.installCheck.nProtect;</script>
+<script>var _SOLUTION_KINGS=typeof secure.installCheck.kings == "undefined" ? "Y" :  secure.installCheck.kings;</script>
+<script>var _SOLUTION_SIGN=typeof secure.installCheck.sign == "undefined" ? "Y" :  secure.installCheck.sign;</script>
+<script>var _SOLUTION_AOS=typeof secure.installCheck.aos == "undefined" ? "Y" :  secure.installCheck.aos;</script>
+<script>
+	var _CLIENT_IP="182.227.211.252";
+
+</script>
+<script src="/js/lib/jquery-1.10.2.min.js"></script>
+<script>
+
+var ismobile;
+/**
+ * isMobile 체크 시 필수 추가 체크 함수. 예외처리들 추가. secure.jsp와 같이 처리해야 함.
+ */
+
+function extraMobileCheck(){
+	var ua = navigator.userAgent;
+	//LG노트북의경우 userAgent에 LG라는 문자열을 포함하여 모바일로 인식. 추후 동일건 발견 시 or조건으로 추가  st.kang
+	if(ua.match(/MALGJS/) != null || ua.match(/LG_UA/) != null){
+		window.gIsMobile=ismobile=false;
+	}
+};
+
+	(function(){
+		var aimports=new Array();
+		var bimports=new Array();
+
+		
+		var ua=navigator.userAgent;
+		var version='';
+
+		if(String(ua).toLowerCase().indexOf('msie')!=-1){
+			var trident=ua.match(/Trident\/(\d.\d)/i);
+
+			if(trident!=null){
+				switch(trident[1]){
+					case '3.0': version='7'; break;
+					case '4.0': version='8'; break;
+					case '5.0': version='9'; break;
+					case '6.0': version='10'; break;
+					case '7.0': version='11'; break;
+				};
+			}else{
+				var reg=new RegExp('MSIE ([0-9]{1,}[\.0-9]{0,})');
+				if(reg.exec(ua)!=null) version=parseFloat(RegExp.$1);
+			};
+		};
+
+		
+		var pf=String(navigator.platform).toLowerCase();
+		var iswindow;
+
+		if(pf.indexOf('macintel')!=-1){
+			window.gPlatformType='mac'; iswindow=false;
+		}else if(pf.indexOf('linux i686')!=-1 || pf.indexOf('linux armv7l')!=-1 || pf.indexOf('linux')!=-1){
+			window.gPlatformType='linux'; iswindow=false;
+		}else{
+			window.gPlatformType=''; iswindow=true;
+		};
+
+		
+
+		if(
+			ua.match(/iPhone|iPod|iPad|Android|Windows CE|BlackBerry|Symbian|Windows Phone|webOS|Opera Mini|Opera Mobi|POLARIS|IEMobile|lgtelecom|nokia|SonyEricsson/i)!=null ||
+			ua.match(/LG|SAMSUNG|Samsung/)!=null
+		){
+			window.gIsMobile=ismobile=true;
+			//userAgent로 모바일 필수 추가 체크
+			window.extraMobileCheck();
+		}else{
+			window.gIsMobile=ismobile=false;
+		};
+
+		
+		if(version!='' && Number(version)<9){
+			//aimports.push({'url':'/css/mediaQuery.css', 'cashbuster':true});
+			aimports.push({'url':'/css/ie7.css', 'cashbuster':true});
+			aimports.push({'url':'/css/common.css', 'cashbuster':true});
+			aimports.push({'url':'/css/header.css', 'cashbuster':true});
+			aimports.push({'url':'/css/main.css', 'cashbuster':true});
+			//aimports.push({'url':'/css/finance_els.css', 'cashbuster':true});
+			aimports.push({'url':'/css/homepage.css', 'cashbuster':true});
+			aimports.push({'url':'/css/etc.css', 'cashbuster':true});
+
+			//bimports.push({'url':'/js/lib/selectivizr.js', 'cashbuster':false});
+			//bimports.push({'url':'/js/lib/respond.js', 'cashbuster':false});
+		}else{
+			aimports.push({'url':'/css/common.css', 'cashbuster':true});
+			aimports.push({'url':'/css/header.css', 'cashbuster':true});
+			aimports.push({'url':'/css/main.css', 'cashbuster':true});
+			//aimports.push({'url':'/css/finance_els.css', 'cashbuster':true});
+			aimports.push({'url':'/css/homepage.css', 'cashbuster':true});
+			aimports.push({'url':'/css/etc.css', 'cashbuster':true});
+			aimports.push({'url':'/css/ie7.css', 'cashbuster':true});
+			//aimports.push({'url':'/css/mediaQuery.css', 'cashbuster':true});
+		};
+
+		
+		if (typeof isCommonLoaded == "undefined" || !isCommonLoaded) {
+			bimports.push({'url':'/ux/js/common/common.js', 'cashbuster':true});
+		}
+		
+		bimports.push({'url':'/sscommon/js/wlog/wlo.js', 'cashbuster':false});
+		
+		if(
+			iswindow && !ismobile &&
+			(typeof(window._NO_PROTECT)=='undefined' || String(window._NO_PROTECT).toUpperCase()!='Y')
+		){ 
+			bimports.push({'url':'/sscommon/js/unetPKIScript.js', 'cashbuster':true});
+			bimports.push({'url':'/sscommon/js/kdfense_object.js', 'cashbuster':true});
+		}else{
+			bimports.push({'url':'/sscommon/js/unetPKIScript_dummy.js', 'cashbuster':true});
+			bimports.push({'url':'/sscommon/js/kdfense_object_dummy.js', 'cashbuster':true});
+		};
+		
+		//안랩 (시큐어브라우져), 개인방화벽
+		bimports.push({'url':'/sscommon/js/aosmgr_common.js', 'cashbuster':true});
+		//방화벽 문제로인한 임시 주석처리 
+		
+		if(_SOLUTION_NPROTECT == 'Y'){
+			
+			bimports.push({'url':'/sscommon/js/netizen55_multi_new.js', 'cashbuster':true});
+		}
+		
+		
+		
+		for(var a=0, atotal=aimports.length; a<atotal; a++){
+			document.write('<link rel="stylesheet" media="all" href="'+aimports[a].url+((aimports[a].cashbuster)?'?cb='+_CACHE_BUSTER:'')+'">');
+		};
+
+		
+		for(var b=0, btotal=bimports.length; b<btotal; b++){
+			document.write('<script src="'+bimports[b].url+((bimports[b].cashbuster)?'?cb='+_CACHE_BUSTER:'')+'" charset="utf-8"></'+'script>');
+		};
+		
+
+	})();
+
+
+$(document).ready(function (){
+	$("#wrap").addClass("sampop");
+	$("#header").show();
+});
+</script>
+
+<script>
+	
+</script>
+
+<script>
+	
+</script>
+
+
+<script>
+	$(document).ready (function () {
+		if (top.opener) {
+			$('p.skipNav > span').has('a[href="#nav"]').remove ();
+			$('p.skipNav > span').has('a[href="#contents"]').remove ();/*팝업에서 본문바로기는 삭제 안되고 있어서 추가함 1211 최웅 추가*/
+		}	
+	});
+</script>
+<script>
+function idPlaceHoder(){
+	$("#idPlaceHoder").hide();
+	document.getElementById("textPlaceHoder").focus();
+}
+
+function outPlaceHoder(){
+	if($("#textPlaceHoder").val().trim() == ''){
+		$("#idPlaceHoder").show();
+	}
+}
+</script>
+<script type="text/javascript">
+<!--
+    function initPage() {
+        
+        showTab(1);
+    }
+    
+    
+    function showTab(tabIndex) {
+        for(var i = 1; i <= 4; i++) {
+            if(tabIndex == i) {
+                $('#tab_li'      + i).addClass('on');
+                $('#tab_header'  + i).attr('title','현재페이지');
+                $('#tab_content' + i).show();
+            }
+            else {
+                $('#tab_li'      + i).removeClass('on');
+                $('#tab_header'  + i).attr('title','');
+                $('#tab_content' + i).hide();
+            }
+        }
+        
+        
+        if(tabIndex == 1) {
+            
+            initFundCondition();
+            
+            
+            initFundList();
+        }
+        
+        
+        if(tabIndex == 2) {
+            openMenu('M1400066332648');
+        }
+        
+        
+        if(tabIndex == 3) {
+            openMenu('M1394871269662');
+        }
+        
+        
+        if(tabIndex == 4) {
+            openMenu('M1397461282990');
+        }
+    }
+//-->
+</script>
+</head>
+<body>
+<div id="wrap">
+    <!-- Header -->
+    
+<link rel="stylesheet" media="all" href="/ux/css/ux_header.css">
+<link rel="stylesheet" media="all" href="/ux/css/cm.sspop.css">
+<link rel="stylesheet" media="all" href="/css/common.css">
+<script src="/published/main/popularInfo.js"></script>
+
+<div class="top_notice" data-role="common-ui-notice-top">
+</div>
+
+<p class="skipNav">
+	<span><a href="#contents">본문바로가기</a></span>
+	<span><a href="#nav">주메뉴바로가기</a></span>
+	
+</p>
+
+<div id="header" data-role="common-ui-header" style="display: none;">
+	<div class="top_line"></div>
+	<div class="section">
+
+		<div class="header_top">
+			<h1><a href="javascript:window.openHome();"><img src="/ux/images/common/header/new_samsungpop.gif" alt="samsungpop.com"></a></h1>
+			<!-- ul class="family">
+				<li><a href="#" title="Smart Advisor(열기)" onclick="top.location.href='/SmartAdvisor/'" class="family2" style="font-size:">Smart Advisor</a></li>
+				<li class="banking"><a href="#" title="트레이딩(전체메뉴 레이어팝업열기)" class="family3" id="megamenu_M1231748559312">트레이딩</a></li>
+				<li class="banking"><a href="#" title="투자정보(전체메뉴 레이어팝업열기)" class="family4" id="megamenu_M1231748571265">투자정보</a></li>
+				<li><a href="#" title="금융상품(전체메뉴 레이어팝업열기)" class="family2" id="megamenu_M1231748547656">금융상품</a></li>
+				<li><a href="#" title="인터넷뱅킹(전체메뉴 레이어팝업열기)" class="family1" id="megamenu_M1231748520578">인터넷뱅킹</a></li>
+				<li><a href="#" title="고객센터(전체메뉴 레이어팝업열기)" class="family6" id="megamenu_M1231748587187">고객센터</a></li>
+				<li><a href="#" title="퇴직연금(전체메뉴 레이어팝업열기)" class="family7" id="megamenu_M1264676757625">퇴직연금</a></li>
+			</ul -->
+			<!-- <ul class="family">
+				<li><a href="javascript:window.openMenu('M1231757624328', '/customer/guide/download/home_trading_tab4.pop');" title="POP DTS 다운로드"><img src="/images/common/header/popdts.png" alt="POP DTS"></a></li>
+				<li><a href="javascript:window.openMenu('M1231757624328');" title="POP HTS 다운로드"><img src="/images/common/header/pophts.png" alt="POP HTS"></a></li>
+				<li><a href="javascript:window.openMenu('M1231757630656', '/customer/guide/download/tab_webTrading2.pop');" title="POP HTS web 다운로드"><img src="/images/common/header/pophtsweb.png" alt="POP HTS web"></a></li>
+				<li><a href="javascript:window.openMenu('M1398336557772');" title="mPOP 다운로드"><img src="/images/common/header/mpop.png" alt="mPOP"></a></li>
+			</ul> -->
+			<!-- <div class="util" data-role="common-ui-header-util"> -->
+			<div class="utilArea" data-role="common-ui-header-util"></div>
+			
+			<fieldset class="searchArea" data-role="common-ui-header-search">
+			<legend></legend>
+				<label id="idPlaceHoder" style="position:absolute; left:10px; top:5px; cursor:text; font-size:13px; vertical-align:middle; color:#767676;" onclick="idPlaceHoder()">검색어를 입력하세요.</label>
+				<input type="text" id="textPlaceHoder" name="" value="" title="검색어 입력" data-role="common-ui-header-search-input" style="ime-mode:active" onfocus="idPlaceHoder()" onblur="outPlaceHoder()" >
+
+				
+				<div class="details" style="display:none;" data-role="common-ui-header-search-container">
+					<iframe src="about:blank" id="" name="" title="통합검색 결과" class="iframe" frameborder="0" height="345"></iframe>
+				</div>
+				<a href="#" class="btn" id="btnTotalSearch" data-role="common-ui-header-search-btn">검색</a>
+			</fieldset>
+			
+		</div>
+
+		<span class="blind">주메뉴</span>
+		<div id="nav">
+			<div class="inner">
+				<div class="myAsset">
+					<a href="javascript:openMenu('M1454301976873')" class="toggle" title="MY 자산 열기">MY 자산</a>
+				</div>
+				<div class="familyArea" data-role="common-ui-header-gnb">
+					<ul data-role="common-ui-header-gnb-open">
+						<li class=""><a href="#" title="금융상품(레이어팝업열기)">금융상품</a>
+							<div class="gnb_container2" data-role="common-ui-header-gnb-container" style="display:none;">
+								<div class="inner">
+									<div class="row">
+										<dl>
+											<dt>
+												<a href="#" class="depth">금융상품</a>
+											</dt>
+											<dd class="sub">
+												<a href="#" class="depth">추천상품 <span class="dn">하위메뉴</span></a>
+											</dd>
+											<dd class="sub">
+												<a href="#" class="depth">펀드 <span>하위메뉴</span></a>
+											</dd>
+											<dd class="sub">
+												<a href="#" class="depth">ELS/DLS <span>하위메뉴</span></a>
+											</dd>
+											<dd class="sub">
+												<a href="#" class="depth">채권/RP <em>로그인</em> <span>하위메뉴</span></a>
+												<ul>
+													<li><a href="#"><small class="arrow">채권스마트검색</small></a></li>
+													<li><a href="#" class="depth"><small class="arrow">채권상품안내 <em>로그인</em></small></a></li>
+													<li><a href="#"><small class="arrow">채권비교</small></a></li>
+													<li><a href="#"><small class="arrow">관심채권</small></a></li>
+													<li><a href="#"><small class="arrow">장외채권매매</small></a></li>
+													<li><a href="#" class="depth"><small class="arrow">RP 매매 <span class="dn">하위메뉴</span></small></a>
+														<ul>
+															<li><a href="#"><small class="arrow">매수</small></a></li>
+															<li><a href="#"><small class="arrow">매도 <em>로그인</em></small></a></li>
+															<li><a href="#"><small class="arrow">취소</small></a></li>
+															<li><a href="#"><small class="arrow">PR 유가증권보유현황</small></a></li>
+															<li><a href="#"><small class="arrow">외화 RP 유가증권 보유현황</small></a></li>
+														</ul>
+													</li>
+												</ul>
+											</dd>
+									   </dl>
+									   <dl>
+											<dt>
+												<a href="#">자산관리</a>
+											</dt>
+											<dd class="sub">
+												<a href="#">Smart Advisor</a>
+											</dd>
+									   </dl>
+									   <dl>
+											<dt>
+												<a href="#">트레이딩</a>
+											</dt>
+											<dd class="sub">
+												<a href="#">주식시세</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">주식주문</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">시장/투자정보</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">차트</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">ETF/ELW</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">삼성 ETN</a>
+											</dd>
+									   </dl>
+									   <dl>
+											<dt>
+												<a href="#">퇴직연금</a>
+											</dt>
+											<dd class="sub">
+												<a href="#">퇴직연금로그인</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">퇴직연금알아보기</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">퇴직연금투자가이드</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">퇴직연금상품</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">퇴직연금가입자교육</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">퇴직연금센터</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">나의퇴직연금 (개인고객)</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">나의퇴직연금 (기업고객)</a>
+											</dd>
+									   </dl>
+									</div>
+									<div class="row">
+									   <dl>
+											<dt>
+												<a href="#">투자정보</a>
+											</dt>
+											<dd class="sub">
+												<a href="#">투자전략</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">POP TV</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">종목/기업 분석</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">분석리포트</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">종목발굴서비스</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">AIC 투자자클럽</a>
+											</dd>
+									   </dl>
+									   <dl>
+											<dt>
+												<a href="#">고객센터</a>
+											</dt>
+											<dd class="sub">
+												<a href="#">상담센터안내</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">처음 오셨나요?</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">온라인/지점/은행계좌개설</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">ID 등록/찾기</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">공인인증/OTP</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">모바일/홈트레이딩안내</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">업무/상품안내</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">고객정보관리</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">온라인업무/보안서비스</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">POP Express 알림서비스</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">고객서비스프로그램</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">소비자보호광장</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">공지/이벤트</a>
+											</dd>
+									   </dl>
+									   <dl>
+											<dt>
+												<a href="#">인터넷뱅킹</a>
+											</dt>
+											<dd class="sub">
+												<a href="#">잔고/거래내역</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">이체</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">공과금납부</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">신용/대출</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">대차</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">청약</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">기업뱅킹센터</a>
+											</dd>
+									   </dl>
+									   <dl>
+											<dt>
+												<a href="#">수요예측</a>
+											</dt>
+											<dd class="sub">
+												<a href="#">수요예측 안내</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">수요예측 참가</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">수요예측 참가 신청 내역</a>
+											</dd>
+											<dd class="sub">
+												<a href="#">수요예측 배정결과</a>
+											</dd>
+									   </dl>
+									</div>
+								</div><!--// .inner -->
+								<div class="quick_menu">
+									<dl>
+										<dt>바로가기</dt>
+										<dd>
+											<ul>
+												<li><a href="javascript:openMenu('M1303804003625');">펀드스마트검색</a></li>
+												<li><a href="javascript:openMenu('M1389772449736');">추천상품</a></li>
+												<li><a href="javascript:openMenu('M1231753078265');">펀드매매</a></li>
+												<li><a href="javascript:openMenu('M1231752685765');">판매중인 ELS/DLS</a></li>
+												<li><a href="javascript:openMenu('M1270956000374');">RP 매매</a></li>
+												<li><a href="javascript:openMenu('M1303804212328');">펀드보유현황</a></li>
+											</ul>
+										</dd>
+										<dd class="cs_cnter">
+											<span>금융상품 상담</span>
+											<strong>1544-1544</strong>
+										</dd>
+									</dl>
+								</div><!--// .quick_menu -->
+								<div class="btn_area">
+									<div class="inner">
+										<a href="#" class="view_scrap" data-role="common-ui-header-megamenu-bookmark"><b>즐겨찾기 전체보기</b></a>
+										<a href="#" class="close6" data-role="common-ui-header-megamenu-close">레이어닫기</a>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<a href="#" title="자산관리(레이어팝업열기)">자산관리</a>
+							<div class="gnb_container2" data-role="common-ui-header-gnb-container" style="display:none;">
+								<div class="inner">
+
+								</div><!--// .inner -->
+								<div class="quick_menu">
+									<dl>
+										<dt>바로가기</dt>
+										<dd>
+											<ul>
+												<li><a href="javascript:openMenu('M1454292928760');">Smart Advisor 안내</a></li>
+												<li><a href="javascript:openMenu('M1455622145311');">전문가운용 서비스설계</a></li>
+												<li><a href="javascript:openMenu('M1455622163690');">나만의 포트폴리오설계</a></li>
+											</ul>
+										</dd>
+										<dd class="cs_cnter">
+											<span>Family Center</span>
+											<strong>1588-2323/1544-1544</strong>
+										</dd>
+									</dl>
+								</div><!--// .quick_menu -->
+								<div class="btn_area">
+									<div class="inner">
+										<a href="#" class="view_scrap" data-role="common-ui-header-megamenu-bookmark"><b>즐겨찾기 전체보기</b></a>
+										<a href="#" class="close6" data-role="common-ui-header-megamenu-close">레이어닫기</a>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<a href="#" title="트레이딩(레이어팝업열기)">트레이딩</a>
+							<div class="gnb_container2" data-role="common-ui-header-gnb-container" style="display:none;">
+								<div class="inner">
+
+								</div><!--// .inner -->
+								<div class="quick_menu">
+									<dl>
+										<dt>바로가기</dt>
+										<dd>
+											<ul>
+												<li><a href="javascript:openWTS('0000');">주식종합</a></li>
+												<li><a href="javascript:openWTS('0517');">관심종목</a></li>
+												<li><a href="javascript:openWTS('2100');">주식주문</a></li>
+												<li><a href="javascript:openWTS('1401');">종합차트</a></li>
+												<li><a href="javascript:openMenu('M1253594030375');">해외주식시장안내</a></li>
+												<li><a href="javascript:openWTS('3421');">해외주식매매</a></li>
+											</ul>
+										</dd>
+										<dd class="cs_cnter">
+											<span>주식 상담</span>
+											<strong>1577-4100</strong>
+										</dd>
+									</dl>
+								</div><!--// .quick_menu -->
+								<div class="btn_area">
+									<div class="inner">
+										<a href="#" class="view_scrap" data-role="common-ui-header-megamenu-bookmark"><b>즐겨찾기 전체보기</b></a>
+										<a href="#" class="close6" data-role="common-ui-header-megamenu-close">레이어닫기</a>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<a href="#" title="퇴직연금(레이어팝업열기)">퇴직연금</a>
+							<div class="gnb_container2" data-role="common-ui-header-gnb-container" style="display:none;">
+								<div class="inner">
+
+								</div><!--// .inner -->
+								<div class="quick_menu">
+									<dl>
+										<dt>바로가기</dt>
+										<dd>
+											<ul>
+												<li><a href="javascript:openMenu('M1267408688312');">퇴직연금제도안내</a></li>
+												<li><a href="javascript:openMenu('M1397461774634');">개인고객(DC/IRP)상품안내</a></li>
+												<li><a href="javascript:openMenu('M1397461854091');">기업고객(DB)상품안내</a></li>
+												<li><a href="javascript:openMenu('M1287651158562');">퇴직연금 로그인</a></li>
+											</ul>
+										</dd>
+										<dd class="cs_cnter">
+											<span>퇴직연금 상담센터</span>
+											<strong>1644-5500</strong>
+										</dd>
+									</dl>
+								</div><!--// .quick_menu -->
+								<div class="btn_area">
+									<div class="inner">
+										<a href="#" class="view_scrap" data-role="common-ui-header-megamenu-bookmark"><b>즐겨찾기 전체보기</b></a>
+										<a href="#" class="close6" data-role="common-ui-header-megamenu-close">레이어닫기</a>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<a href="#" title="투자정보(레이어팝업열기)">투자정보</a>
+							<div class="gnb_container2" data-role="common-ui-header-gnb-container" style="display:none;">
+								<div class="inner">
+
+								</div><!--// .inner -->
+								<div class="quick_menu">
+									<dl>
+										<dt>바로가기</dt>
+										<dd>
+											<ul>
+												<li><a href="javascript:openMenu('M1231754118515');">삼성데일리</a></li>
+												<li><a href="javascript:openMenu('M1290413733315');">KOREA 30</a></li>
+												<li><a href="javascript:openMenu('M1231753819203');">One Stop 종목종합분석</a></li>
+												<li><a href="javascript:openMenu('M1402550866368');">POP TV</a></li>
+												<li><a href="javascript:openMenu('M1311665653078');">이메일투자정보</a></li>
+											</ul>
+										</dd>
+										<dd class="cs_cnter">
+											<span>Family Center</span>
+											<strong>1588-2323/1544-1544</strong>
+										</dd>
+									</dl>
+								</div><!--// .quick_menu -->
+								<div class="btn_area">
+									<div class="inner">
+										<a href="#" class="view_scrap" data-role="common-ui-header-megamenu-bookmark"><b>즐겨찾기 전체보기</b></a>
+										<a href="#" class="close6" data-role="common-ui-header-megamenu-close">레이어닫기</a>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<a href="#" title="인터넷뱅킹(레이어팝업열기)">인터넷뱅킹</a>
+							<div class="gnb_container2" data-role="common-ui-header-gnb-container" style="display:none;">
+								<div class="inner">
+
+								</div><!--// .inner -->
+								<div class="quick_menu">
+									<dl>
+										<dt>바로가기</dt>
+										<dd>
+											<ul>
+												<li><a href="javascript:openMenu('M1231748994140');">종합잔고평가</a></li>
+												<li><a href="javascript:openMenu('M1231749068453');">계좌잔고</a></li>
+												<li><a href="javascript:openMenu('M1231749225468');">즉시이체</a></li>
+												<li><a href="javascript:openMenu('M1231749031609');">거래내역</a></li>
+												<li><a href="javascript:openMenu('M1238748625343');">투자자정보확인서</a></li>
+												<li><a href="javascript:openMenu('M1231752084265');">고객정보관리</a></li>
+											</ul>
+										</dd>
+										<dd class="cs_cnter">
+											<span>Family Center</span>
+											<strong>1588-2323/1544-1544</strong>
+										</dd>
+									</dl>
+								</div><!--// .quick_menu -->
+								<div class="btn_area">
+									<div class="inner">
+										<a href="#" class="view_scrap" data-role="common-ui-header-megamenu-bookmark"><b>즐겨찾기 전체보기</b></a>
+										<a href="#" class="close6" data-role="common-ui-header-megamenu-close">레이어닫기</a>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<a href="#" title="고객센터(레이어팝업열기)">고객센터</a>
+							<div class="gnb_container2" data-role="common-ui-header-gnb-container" style="display:none;">
+								<div class="inner">
+
+								</div><!--// .inner -->
+								<div class="quick_menu">
+									<dl>
+										<dt>바로가기</dt>
+										<dd>
+											<ul>
+												<li><a href="javascript:openMenu('M1454049358088');">온라인계좌개설</a></li>
+												<li><a href="javascript:openMenu('M1454052579079');">ID 등록/찾기</a></li>
+												<li><a href="javascript:openMenu('M1231757404906');">공인인증 발급/재발급</a></li>
+												<li><a href="javascript:openMenu('M1454058674687');">모바일트레이딩안내</a></li>
+												<li><a href="javascript:openMenu('M1454053749140');">HTS/DTS 다운로드</a></li>
+												<!-- <li><a href="javascript:openMenu('M1231757527296');">지점/ARS 안내</a></li -->
+											</ul>
+										</dd>
+										<dd class="cs_cnter">
+											<span>Family Center</span>
+											<strong>1588-2323/1544-1544</strong>
+										</dd>
+									</dl>
+								</div><!--// .quick_menu -->
+								<div class="btn_area">
+									<div class="inner">
+										<a href="#" class="view_scrap" data-role="common-ui-header-megamenu-bookmark"><b>즐겨찾기 전체보기</b></a>
+										<a href="#" class="close6" data-role="common-ui-header-megamenu-close">레이어닫기</a>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<div class="gnbArea" data-role="common-ui-header-megamenu">
+					
+					<a href="#" class="toggle" data-role="common-ui-header-megamenu-open"  title="전체메뉴(레이어) 열기">전체메뉴</a>
+
+					<a href="#" class="toggle changed" data-role="common-ui-header-megamenu-close" style="display:none;" title="전체메뉴(레이어) 닫기">닫기</a>
+					
+				</div>
+				<!-- TOP3 :2016-04-05 add -->
+				<div class="interestGroup" data-role="common-ui-header-top3">
+					<ul>
+						<!-- <li><a href="#"><var>1</var>온라인계좌개설</a></li>
+						<li><a href="#"><var>2</var>신탁&frasl;방카슈랑스거</a></li>
+						<li><a href="#"><var>3</var>추천종목</a></li> -->
+					</ul>
+					<button type="button" name="" id="" title="인기메뉴 TOP3, 인기검색어 TOP3 레이어열림" class="igOpen">레이어 열림</button>
+					<div class="groupWrap">
+						<dl>
+							<dt>인기메뉴 <strong>TOP 3</strong></dt>
+							<!-- <dd><a href="#"><var>1</var>온라인계좌개설</a></dd>
+							<dd><a href="#"><var>2</var>신탁&frasl;방카슈랑스거말줄임</a></dd>
+							<dd><a href="#"><var>3</var>추천종목</a></dd> -->
+						</dl>
+						<dl>
+							<dt>인기검색어 <strong>TOP 3</strong></dt>
+							<!-- <dd><a href="#"><var>1</var>온라인계좌개설</a></dd>
+							<dd><a href="#"><var>2</var>신탁&frasl;방카슈랑스거말줄임</a></dd>
+							<dd><a href="#"><var>3</var>추천종목</a></dd> -->
+						</dl>
+						<button type="button" name="" id="" title="인기메뉴 TOP3, 인기검색어 TOP3 레이어닫힘" class="igClose">레이어 닫힘</button>
+					</div>
+				</div>
+				<!-- //TOP3 :2016-04-05 add  -->
+			</div>
+
+			
+			<div class="gnb_container" data-role="common-ui-header-megamenu-container" style="display:none;">
+				<div class="inner">
+					<div class="row">
+						<dl>
+	                    	<dt>
+								<a href="#">추천상품</a>
+							</dt>
+	                      	<dd class="sub">
+						  		<a href="#">추천상품</a>
+						  	</dd>
+	                      	<dd class="sub">
+						  		<a href="#">매트릭스</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">스탬프</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">쿠폰 서비스</a>
+						  	</dd>
+					   </dl>
+					   <dl>
+	                    	<dt>
+								<a href="#">펀드</a>
+							</dt>
+	                      	<dd class="sub">
+						  		<a href="#">펀드스마트검색</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#" class="depth">펀드상품안내 <em>로그인</em> <span>하위메뉴</span></a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">펀드비교</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">관심펀드</a>
+						  	</dd>
+							<dd class="sub">
+								<a href="#" class="depth">펀드매매 <em>로그인</em> <span>하위메뉴</span></a>
+								<ul>
+									<li><a href="#"><small class="arrow">펀드신규매수</small></a></li>
+									<li><a href="#" class="depth"><small class="arrow">추가매수 <em>로그인</em> <span>하위메뉴</span></small></a></li>
+									<li><a href="#"><small class="arrow">매도/해지</small></a></li>
+									<li><a href="#"><small class="arrow">매매신청현황/취소</small></a></li>
+								</ul>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">MY펀드</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">펀드정보</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">펀드레인보우</a>
+						  	</dd>
+					   </dl>
+					   <dl>
+	                    	<dt>
+								<a href="#">ELS/DLS</a>
+							</dt>
+	                      	<dd class="sub">
+						  		<a href="#">ELS/DLS 스마트 검색</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">판매상품</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">청약/환매</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">MY ELS/DLS</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">ELS/DLS 소개</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">공지사항</a>
+						  	</dd>
+					   </dl>
+					   <dl>
+	                    	<dt>
+								<a href="#">채권/RP</a>
+							</dt>
+							<dd class="sub">
+						  		<a href="#">채권스마트검색</a>
+						  	</dd>
+	                      	<dd class="sub">
+						  		<a href="#">채권상품안내</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">채권비교</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">관심채권</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">장외채권매매</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">장내채권매매</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">전자단기사채매매</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">My 채권</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">RP 상품안내</a>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#" class="depth">RP 매매 <span class="dn">하위메뉴</span></a>
+								<ul>
+									<li><a href="#"><small class="arrow">매수</small></a></li>
+									<li><a href="#"><small class="arrow">매도 <em>로그인</em></small></a></li>
+									<li><a href="#"><small class="arrow">취소</small></a></li>
+									<li><a href="#"><small class="arrow">PR 유가증권보유현황</small></a></li>
+									<li><a href="#"><small class="arrow">외화 RP 유가증권 보유현황</small></a></li>
+								</ul>
+						  	</dd>
+							<dd class="sub">
+						  		<a href="#">채권/RP 정보</a>
+						  	</dd>
+					   </dl>
+					   <dl>
+	                    	<dt>
+								<a href="#">펀드</a>
+							</dt>
+	                      	<dd class="sub">
+						  		<a href="#">종합자산관리 POP UMA </a>
+						  	</dd>
+					   </dl>
+					</div>
+					<div class="row">
+					   <dl>
+	                    	<dt>
+								<a href="#">랩/미러링</a>
+							</dt>
+	                      	<dd class="sub">
+						  		<a href="#">종합자산관리 POP UMA </a>
+						  	</dd>
+					   </dl>
+					   <dl>
+	                    	<dt>
+								<a href="#">보험/신탁</a>
+							</dt>
+	                      	<dd class="sub">
+						  		<a href="#">종합자산관리 POP UMA </a>
+						  	</dd>
+					   </dl>
+					   <dl>
+	                    	<dt>
+								<a href="#">CMA</a>
+							</dt>
+	                      	<dd class="sub">
+						  		<a href="#">종합자산관리 POP UMA </a>
+						  	</dd>
+					   </dl>
+					   <dl>
+	                    	<dt>
+								<a href="#">정기/월적립</a>
+							</dt>
+	                      	<dd class="sub">
+						  		<a href="#">종합자산관리 POP UMA </a>
+						  	</dd>
+					   </dl>
+					   <dl>
+	                    	<dt>
+								<a href="#">정기/월지급</a>
+							</dt>
+	                      	<dd class="sub">
+						  		<a href="#">종합자산관리 POP UMA </a>
+						  	</dd>
+					   </dl>
+					</div>
+					<div class="row">
+					   <dl>
+	                    	<dt>
+								<a href="#">개인연금</a>
+							</dt>
+	                      	<dd class="sub">
+						  		<a href="#">종합자산관리 POP UMA </a>
+						  	</dd>
+					   </dl>
+					   <dl>
+	                    	<dt>
+								<a href="#">골든에그 은퇴자산계좌</a>
+							</dt>
+	                      	<dd class="sub">
+						  		<a href="#">종합자산관리 POP UMA </a>
+						  	</dd>
+					   </dl>
+					   <dl>
+	                    	<dt>
+								<a href="#">은퇴설계</a>
+							</dt>
+	                      	<dd class="sub">
+						  		<a href="#">종합자산관리 POP UMA </a>
+						  	</dd>
+					   </dl>
+					   <dl>
+	                    	<dt>
+
+							</dt>
+	                      	<dd class="sub">
+
+						  	</dd>
+					   </dl>
+					   <dl>
+	                    	<dt>
+
+							</dt>
+	                      	<dd class="sub">
+
+						  	</dd>
+					   </dl>
+					</div><!--// .row -->
+				</div><!--// .inner -->
+				<div class="search_menu">
+					<dl>
+						<dt>
+						너무 많은 메뉴 일일이 찾아 들어가기 어려우시죠?<br>
+						이젠 간단히 검색해서 바로 찾아 가세요.
+						</dt>
+						<dd>
+							<fieldset class="searchBox">
+								<legend></legend>
+								<label id="menuPlaceHoler" style="position:absolute; left:15px; top:10px; cursor:text; font-size:18px !important; vertical-align:middle; color:#777777;" onclick="inMenuHoler()">메뉴명 검색</label>
+								<form id="frmMenuSearch" name="frmMenuSearch" method="get">
+								<input type="text" id="inpMenuSearch" name="query" value="" title="검색어 입력"  onkeyup="getMenuData();"  onfocus="inMenuHoler()" onblur="outMenuHoler()" autocomplete="off">
+								</form>
+								<a id="btnMenuSearch" href="#" class="btn_search">검색</a>
+							</fieldset>
+						</dd>
+					</dl>
+				</div><!--// .search_menu -->
+				<!-- 검색 결과 리스트 -->
+				<div class="search_result">
+					<dl>
+						<dt>
+							<strong>0개</strong>의 메뉴가 있습니다 <a href="javascript:goMenuSearch();" class="btnMid gray">결과더보기</a>
+						</dt>
+						<dd>
+							<ul>
+								<!-- <li><a href="#">HOME > 인터넷뱅킹 > 부가서비스 > 증명서 > 잔고증명서발급 > <mark>잔고</mark>증명서발급</a></li>
+								<li><a href="#">HOME > 퇴직연금 > 상품/투자 가이드 > 순위로 보는 펀드 > 연령대별 <mark>잔고</mark> 상위 펀드</a></li>
+								<li><a href="#">HOME > 인터넷뱅킹 > 잔고/거래내역 > 월말<mark>잔고</mark>현황</a></li>
+								<li><a href="#">HOME > 트레이딩 > 주식주문 > 잔고 > 주식<mark>잔고</mark></a></li> -->
+								<li>메뉴가 없습니다.</li>
+							</ul>
+						</dd>
+					</dl>
+				</div><!--// .search_result -->	
+				<div class="btn_area">
+					<div class="inner">
+						<a href="javascript:window.openMenu('M1232546899156')" class="btn_site"><b>사이트맵</b></a>
+				</div>
+			</div>
+		</div>
+
+			
+			<div class="gnb-scrap" data-role="common-ui-header-bookmark" style="display:none;">
+				<div style="height:319px;" data-role="common-ui-header-bookmark-container">
+					
+				</div>
+				<div class="btn_area">
+					<span class="fl scrap">즐겨찾기 메뉴 <em data-role="common-ui-header-bookmark-count"></em></span>
+					<a href="#" class="btn3 prev" style="display:none;" data-role="common-ui-header-bookmark-prev">이전</a>
+					<a href="#" class="btn3 next" style="display:none;" data-role="common-ui-header-bookmark-next">다음</a>
+				</div>
+				<div class="btn_area2">
+					<a href="#" class="view-menu" data-role="common-ui-header-megamenu-open"><b>메뉴전체보기</b></a>
+					<a href="#" class="close6" data-role="common-ui-header-bookmark-close">레이어닫기</a>
+				</div>
+			</div>
+			
+		</div>
+
+		<div class="location">
+			<div class="inner">
+				<ul data-role="common-ui-header-location">
+					<li class="home"><a href="javascript:openHome();">HOME</a></li>
+				</ul>
+				<p data-role="common-ui-header-share">
+					<a href="#" class="scrap">즐겨찾기</a>
+					<a href="javascript:window.zoomIn();" class="zmin">글씨크기 작게 보기</a>
+					<a href="javascript:window.zoomOut();" class="zmout">글씨크기 크게 보기</a>
+				</p>
+			</div>
+		</div>
+
+		<div class="btn-common"  id="searchDictionary" data-role="common-ui-footer-dictionary" style="display:none">
+			<a href="javascript:$.util.searchDictionaryPopup();" class="dic" title="팝업띄움">용어사전</a>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+var goMenuSearch = function () {
+	openMenu("M1231762629937", "/sscommon/jsp/search_ux/search.jsp?collection=menu&query=" + $("#inpMenuSearch").val());
+};
+function idPlaceHoder(){
+	$("#idPlaceHoder").hide();
+	document.getElementById("textPlaceHoder").focus();
+}
+
+function outPlaceHoder(){
+	if($("#textPlaceHoder").val().trim() == ''){
+		$("#idPlaceHoder").show();
+	}
+}
+function inMenuHoler(){
+	$("#menuPlaceHoler").hide();
+	document.getElementById("inpMenuSearch").focus();
+}
+
+function outMenuHoler(){
+	if($("#inpMenuSearch").val().trim() == ''){
+		$("#menuPlaceHoler").show();
+	}
+}
+
+// 메뉴검색시
+function getMenuData(){
+	var myAsset = ["my", "자산", "my자산", "my 자산"];
+	var myFlag = false;
+	$('.search_result').find('dd').html('');
+//as-is : /hfn-web/src/main/webapp/sscommon/jsp/search/header_result/menu.jsp
+	var $frmMenuSearch = $.form('frmMenuSearch');
+	$.cs.ajax({
+		async : false,
+		type : 'post',
+		url : '/sscommon/jsp/search_ux/header_result/searchMenu.jsp',
+		dataType : 'json',
+		data : $frmMenuSearch.toParameterString('', false),
+		success : function(data) {
+			var list = data.result;
+			var $resultList = $('<ul/>');
+
+			// my 자산이 검색어에 포함되어 있을 경우
+			for(var i = 0; i < myAsset.length ; i++){
+				if($('#inpMenuSearch').val().toLowerCase() == myAsset[i]){
+					myFlag = true;
+				}
+			}
+			// 결과화면에 같이 뿌려준다.
+			if (list.length > 0 || myFlag){
+				//my자산 관련 키워드가 있는 경우
+				if(myFlag){
+					var $li = $('<li/>');
+					var txt = ($('#inpMenuSearch').val().length <= 3 ? '<strong>MY</strong> 자산' : '<strong>MY 자산</strong>');
+					$li.append("<a href=\"javascript:openMenu('M1454301976873');\">HOME > 기타메뉴 > "+txt+"</a>");
+					$resultList.append($li);
+					data.total ++;
+				}
+				//검색결과 화면에 그림
+				for(var i =0 ; i < list.length ; i++){
+					var $li = $('<li/>');
+					//$li.append(data.result[i].frontMenuName +"<a href='javascript:openMenu('"+data.result[i].MENU_CODE+"');'>"+data.result[i].menuName+"</a>");
+					$li.append("<a href=\"javascript:openMenu(\'"+data.result[i].MENU_CODE+"\');\">"+data.result[i].frontMenuName + data.result[i].menuName+"</a>");
+					//$li.append(data.result[i].frontMenuName+data.result[i].menuName);
+					$resultList.append($li);
+				}
+				$('.search_result').find('strong').html(data.total+'개');
+			}else{
+				$resultList.append("<li>메뉴가 없습니다.</li>");
+				$('.search_result').find('strong').html('0개');
+			}
+			var $result = $('.search_result').find('dd');
+			$result.append($resultList);
+		},
+		loadingStart : false,
+		loadingEnd : false
+	});
+}
+</script>
+    <!-- // Header -->
+    <!-- Container -->
+    <div id="container">
+        <!-- Contents -->
+        <div id="contents" class="finance">
+            <span class="blind">본문</span>
+            
+            <h1>스마트검색</h1>
+
+            <ul class="tab-type">
+                <li id="tab_li1"><a href="#" id="tab_header1" onclick="showTab(1);">펀드</a></li>
+                <li id="tab_li2"><a href="#" id="tab_header2" onclick="showTab(2);">ELS/DLS</a></li>
+                <li id="tab_li3"><a href="#" id="tab_header3" onclick="showTab(3);">채권</a></li>
+                <li id="tab_li4"><a href="#" id="tab_header4" onclick="showTab(4);">삼성POP골든랩</a></li>
+            </ul>
+            
+            
+            <div id="tab_content1">
+            
+                
+<script src="/js/finance/fund/search.js"></script>
+<script type="text/javascript">
+<!--
+    
+    function initFundCondition() {
+        
+        
+        loadThemeKeyword();
+        
+        
+        initGridBar();        
+    }
+    
+    
+    function initGridBar() {
+        $('ul[data-role=search-grid-bar]').each(function(a){
+            if(ValidationUtil.is_null($(this).data('isapply'))){
+                $(this).data('manager', new GridBarSearch($(this)));
+            };
+        });
+    }
+    
+    
+    
+    function setParamGridBar() {
+        var $f = $.form('frm');        
+        $('ul[data-role=search-grid-bar]').each(function(a){
+            if(!ValidationUtil.is_null($(this).data('manager'))){
+            	
+            	var l = $(this).find('>li.check:first').data('n');
+            	var fdNm = $(this).attr('name');
+            	
+            	$(this).find('>li.check').each(function(a){            		
+            		var n = $(this).data('n');                	
+                	if(n==l){
+                		$f.val(fdNm, n);	
+                	}else{
+                		$f.val(fdNm, $f.val(fdNm)+"@"+n);
+                	}	
+            	});            	
+            };
+        });
+    }
+    
+//    function setParamGridBar() {
+//        var $f = $.form('frm');
+//        $('ul[data-role=search-grid-bar]').each(function(a){
+//            if(!ValidationUtil.is_null($(this).data('manager'))){
+//                var bar = $(this).data('manager').get_params();
+//                if(bar.min == 0 && bar.max == 4) {
+//                	$f.val($(this).attr('name') + 'From', "");
+//                    $f.val($(this).attr('name') + 'To', "");
+//                    
+//                }else{
+//                	$f.val($(this).attr('name') + 'From', $(this).find('li a').eq(bar.min).attr('min'));
+//                    $f.val($(this).attr('name') + 'To', $(this).find('li a').eq(bar.max).attr('max'));
+//                    
+//                }
+//            };
+//        });
+//    }
+    
+    
+    function loadThemeKeyword() {
+        var $f = $.form('frm');
+        
+        $('#dlKeyword dd').remove();
+        
+        $.cs.ajax({
+            async: true,
+            url      : '/finance/fund/smart_search.do',
+            data     : $f.toParameterString('keyword', false),
+            success  : function(data) {
+                if(data.errMsg != '') {
+                    alert(data.errMsg);
+                    return;
+                }
+                var strHtml = '';
+                if(typeof(data.list) != 'undefined' && data.list.length > 0) {
+                    strHtml += '<dt>테마키워드</dt>';
+                    strHtml += '<dd><ul>';
+                    for(var i = 0; i < data.list.length; i++) {
+                        strHtml += '<li><a href="javascript:loadThemeKeywordList(' + $.util.trim(data.list[i].REGTNO) + ' , \''+ $.util.trim(data.list[i].KEYWORD) +'\' )">' + $.util.trim(data.list[i].KEYWORD) + '</a></li>';
+                    }
+                    strHtml += '</ul></dd>';
+                }
+                $('#dlKeyword').html(strHtml);
+            }
+        });
+        
+        
+        var srchText = "";
+        var keywordSeq = "";
+        
+        if(srchText != "" ){
+        	var $f = $.form("frm");
+        	$f.val("SearchText", srchText);
+        }
+       
+        if(keywordSeq != ""){
+        	loadThemeKeywordList(keywordSeq);
+        }
+    }
+    
+    
+    function loadThemeKeywordList(seq) {
+    	
+    	
+        clearSearch();
+        var $f = $.form('frm');
+        $f.val('NtcObjSeqNo', seq);
+        $f.val("currentPage","1");
+        
+        loadList(true);
+    }
+    
+    
+    function clearSearch() {
+        
+        var $f = $.form('frm');
+        $f.val("SearchText","");
+        $f.val("sortColumn","Yield3M");
+        $f.val("sortType","DESC");
+        $f.val("NtcObjSeqNo", "");
+        
+        $('div.search').find('input:checkbox').each(function(idx) {
+            var id = $(this).attr('id');
+            if(($(this).val() == '') && (id != 'fund3-2')){
+                $(this).prop('checked', true);
+                $(this).prop('disabled', true);
+            } else {
+                $(this).prop('checked', false);
+                $(this).prop('disabled', false);
+            }
+        });
+        
+        
+        $("[data-role='search-grid-bar'] li").addClass("check");
+        _common.reinit_ui();
+        
+    }
+    
+        
+    function toggleSearchDetail() {
+        var $btn = $('#btnSearchDetail');
+        if($btn.html() == '상세검색 닫기') {
+                
+            closeSearchDetail();
+        } else {
+             
+            openSearchDetail();
+        }
+    }
+    
+        
+    function closeSearchDetail() {
+        var $f = $.form('frm');
+        var $btn = $('#btnSearchDetail');
+        var $tab = $('[name=searchDetailTable]');
+        $f.val('searchDetailYn', '');
+        $btn.removeClass('hide').addClass('show').html('상세검색 열기');
+        $tab.hide();
+    }
+    
+        
+    function openSearchDetail() {
+        var $f = $.form('frm');
+        var $btn = $('#btnSearchDetail');
+        var $tab = $('[name=searchDetailTable]');
+        $f.val('searchDetailYn', 'Y');
+        $btn.removeClass('show').addClass('hide').html('상세검색 닫기');
+        $tab.show();
+        $("#fund9-2").focus();
+    }
+    
+    function doSmartSearchList(tmp){
+    	if($('#fund3-11').is(":checked")){
+    		goMutuelListCnt();
+    	}else{
+    		if(tmp == "1"){
+    			doList(true,true);
+    		}else{
+    			doSelctedList(true,true);    			
+    		}
+    	}
+    }
+    
+    function clearSmartSearch(){
+    	
+    	if(!$('#fund3-11').is(":checked")){
+    		clearSearch();	
+    	}
+    	
+    }
+    
+//-->
+</script>
+
+ <form name="frm" id="frm" method="post" onsubmit="return false;">
+ <div class="search fund chking">
+     <fieldset>
+     <legend>펀드검색</legend>
+         <input type="text" name="SearchText" id="SearchText"  value="" title="펀드명">
+         <input type="hidden" name="YieldMM" id="YieldMM"  value="3" title="펀드명">
+         <a href="javascript:doSmartSearchList('1');" class="btn">펀드검색</a>
+         <dl id="dlKeyword">
+         </dl>
+     </fieldset>
+     <hr>
+     <table class="tbl-type">
+     <caption><strong>펀드 검색 조건 설정</strong></caption>
+         <thead>
+             <tr>
+                 <th scope="col">펀드구분</th>
+                 <th scope="col">펀드유형</th>
+                 <th scope="col">투자지역</th>
+                 <th scope="col">설정기간</th>
+                 <th scope="col">총설정액</th>
+                 <th scope="col">수익률(3개월)</th>
+                 <th scope="col">총보수</th>
+                 <th scope="col">운용사</th>
+                 
+             </tr>
+         </thead>
+         <tbody>
+             <tr>
+                           
+                 <td>
+                     <ul>
+                         <li><input type="checkbox" name="ForgnSectCd" id="fund1-1" value="" checked disabled> <label for="fund1-1">전체</label></li>
+                         <li><input type="checkbox" name="ForgnSectCd" id="fund1-2" value="1"> <label for="fund1-2">국내</label></li>
+                         <li><input type="checkbox" name="ForgnSectCd" id="fund1-3" value="2" > <label for="fund1-3">해외</label></li>
+                     </ul>
+                 </td>
+                           
+                 <td>
+                     <ul>
+                         <li><input type="checkbox" name="FundInvstTypeCd" id="fund2-1" value="" checked disabled> <label for="fund2-1">전체</label></li>
+                         <li><input type="checkbox" name="FundInvstTypeCd" id="fund2-2" value="04|41" > <label for="fund2-2">주식형</label></li>
+                         <li><input type="checkbox" name="FundInvstTypeCd" id="fund2-3" value="03|32" > <label for="fund2-3">주식혼합형</label></li>
+                         <li><input type="checkbox" name="FundInvstTypeCd" id="fund2-4" value="03|31" > <label for="fund2-4">채권혼합형</label></li>
+                         <li><input type="checkbox" name="FundInvstTypeCd" id="fund2-5" value="02|"   > <label for="fund2-5">채권형</label></li>
+                         <li><input type="checkbox" name="FundInvstTypeCd" id="fund2-6" value="04|42" > <label for="fund2-6">인덱스형</label></li>
+                         <li><input type="checkbox" name="FundInvstTypeCd" id="fund2-7" value="01|"   > <label for="fund2-7">MMF</label></li>
+                         <li><input type="checkbox" name="FundInvstTypeCd" id="fund2-8" value="05|"   > <label for="fund2-8">파생상품</label></li>
+                         <li><input type="checkbox" name="FundInvstTypeCd" id="fund2-9" value="9999"  > <label for="fund2-9">기타</label></li>
+                     </ul>
+                 </td>
+                           
+                 <td>
+                     <ul class="scroll">
+                         <li><input type="checkbox" name="frgnInvtClsnCode" id="fund3-1"  value="" checked disabled> <label for="fund3-1">전체</label></li>
+                         <li><input type="checkbox" name="frgnInvtClsnCode" id="fund3-2"  value="00" > <label for="fund3-2">한국</label></li>
+                         <li><input type="checkbox" name="frgnInvtClsnCode" id="fund3-3"  value="01" > <label for="fund3-3">글로벌</label></li>
+                         <li><input type="checkbox" name="frgnInvtClsnCode" id="fund3-4"  value="02" > <label for="fund3-4">이머징</label></li>
+                         <li><input type="checkbox" name="frgnInvtClsnCode" id="fund3-5"  value="03" > <label for="fund3-5">미국</label></li>
+                         <li><input type="checkbox" name="frgnInvtClsnCode" id="fund3-6"  value="04" > <label for="fund3-6">유럽</label></li>
+                         <li><input type="checkbox" name="frgnInvtClsnCode" id="fund3-7"  value="05" > <label for="fund3-7">중국</label></li>
+                         <li><input type="checkbox" name="frgnInvtClsnCode" id="fund3-8"  value="06" > <label for="fund3-8">일본</label></li>
+                         <li><input type="checkbox" name="frgnInvtClsnCode" id="fund3-9"  value="07" > <label for="fund3-9">섹터</label></li>
+                         <li><input type="checkbox" name="frgnInvtClsnCode" id="fund3-10" value="08" > <label for="fund3-10">대안투자</label></li>
+                         <li><input type="checkbox" name="frgnInvtClsnCode" id="fund3-11" value="99"> <label for="fund3-11">해외뮤추얼</label></li>
+                     </ul>
+                 </td>
+                           
+                 <td>
+                     <ul>
+                         <li><input type="checkbox" name="SetPeriodMM" id="fund4-1" value=""  checked disabled> <label for="fund4-1">전체</label></li>
+                         <li><input type="checkbox" name="SetPeriodMM" id="fund4-2" value="|1"      > <label for="fund4-2">1개월 미만</label></li>
+                         <li><input type="checkbox" name="SetPeriodMM" id="fund4-3" value="1|3"      > <label for="fund4-3">1~3개월</label></li>
+                         <li><input type="checkbox" name="SetPeriodMM" id="fund4-4" value="3|6"      > <label for="fund4-4">3~6개월</label></li>
+                         <li><input type="checkbox" name="SetPeriodMM" id="fund4-5" value="6|12"     > <label for="fund4-5">6개월~1년</label></li>
+                         <li><input type="checkbox" name="SetPeriodMM" id="fund4-6" value="12|24"    > <label for="fund4-6">1~2년</label></li>
+                         <li><input type="checkbox" name="SetPeriodMM" id="fund4-7" value="24|" > <label for="fund4-7">2년 초과</label></li>
+                     </ul>
+                 </td>
+                           
+                 <td>
+                     <ul>
+                         <li><input type="checkbox" name="kfrEstabAmUk" id="fund5-1" value="" checked disabled> <label for="fund5-1">전체</label></li>
+                         <li><input type="checkbox" name="kfrEstabAmUk" id="fund5-2" value="|1000000000"       > <label for="fund5-2">10억 미만</label></li>
+                         <li><input type="checkbox" name="kfrEstabAmUk" id="fund5-3" value="1000000000|3000000000"      > <label for="fund5-3">10~30억</label></li>
+                         <li><input type="checkbox" name="kfrEstabAmUk" id="fund5-4" value="3000000000|5000000000"      > <label for="fund5-4">30~50억</label></li>
+                         <li><input type="checkbox" name="kfrEstabAmUk" id="fund5-5" value="5000000000|10000000000"     > <label for="fund5-5">50~100억</label></li>
+                         <li><input type="checkbox" name="kfrEstabAmUk" id="fund5-6" value="10000000000|50000000000"    > <label for="fund5-6">100~500억</label></li>
+                         <li><input type="checkbox" name="kfrEstabAmUk" id="fund5-7" value="50000000000|" > <label for="fund5-7">500억 초과</label></li>
+                     </ul>
+                 </td>
+                           
+                 <td>
+                     <ul>
+                         <li><input type="checkbox" name="Yield" id="fund6-1" value="" checked disabled> <label for="fund6-1">전체</label></li>
+                         <li><input type="checkbox" name="Yield" id="fund6-2" value="|0"> <label for="fund6-2">0% 미만</label></li>
+                         <li><input type="checkbox" name="Yield" id="fund6-3" value="0|10"> <label for="fund6-3">0~10%</label></li>
+                         <li><input type="checkbox" name="Yield" id="fund6-4" value="10|20"> <label for="fund6-4">10~20%</label></li>
+                         <li><input type="checkbox" name="Yield" id="fund6-5" value="20|30"> <label for="fund6-5">20~30%</label></li>
+                         <li><input type="checkbox" name="Yield" id="fund6-6" value="30|40"> <label for="fund6-6">30~40%</label></li>
+                         <li><input type="checkbox" name="Yield" id="fund6-7" value="40|50"> <label for="fund6-7">40~50%</label></li>
+                         <li><input type="checkbox" name="Yield" id="fund6-8" value="50|"> <label for="fund6-8">50% 초과</label></li>
+                     </ul>
+                 </td>
+                           
+                 <td>
+                     <ul>
+                         <li><input type="checkbox" name="TotRwrt" id="fund7-1" value="" checked disabled> <label for="fund7-1">전체</label></li>
+                         <li><input type="checkbox" name="TotRwrt" id="fund7-2" value="|1"> <label for="fund7-2">1% 미만</label></li>
+                         <li><input type="checkbox" name="TotRwrt" id="fund7-3" value="1|2"> <label for="fund7-3">1~2%</label></li>
+                         <li><input type="checkbox" name="TotRwrt" id="fund7-4" value="2|3"> <label for="fund7-4">2~3%</label></li>
+                         <li><input type="checkbox" name="TotRwrt" id="fund7-5" value="3|"> <label for="fund7-5">3% 초과</label></li>
+                     </ul>
+                 </td>
+                           
+                 <td>
+                     <ul class="scroll" id="getOperCoListUl">
+                     </ul>
+                 </td>
+             </tr>
+         </tbody>
+     </table>
+     <table class="tbl-type2" name="searchDetailTable" style="display:none;">
+     <caption><strong>펀드 상세검색 조건 설정</strong></caption>
+     <colgroup>
+         <col style="width:108px">
+         <col>
+         <col style="width:12%">
+         <col style="width:37%">
+     </colgroup>
+         <tr>
+             <th scope="row">펀드속성</th>
+             <td colspan="3">
+                 <ul>
+                     <li><input type="checkbox" name="fund9Nm" id="fund9-1" value="" checked disabled> <label for="fund9-1"> 전체</label></li>
+                     <li><input type="checkbox" name="OnlineYN" id="fund9-2" value="Y"> <label for="fund9-2"> 온라인전용</label></li>
+                     <li><input type="checkbox" name="FundContCmmdCd" id="fund9-4" value="36"> <label for="fund9-4"> 연금펀드</label></li>
+                     <li style="width:140px;"><input type="checkbox" name="FundContCmmdCd" id="fund9-5" value="62"> <label for="fund9-5"> 소득공제장기펀드</label></li>
+                     <li><input type="checkbox" name="FundContCmmdCd" id="fund9-3" value="54"> <label for="fund9-3"> 재형저축</label></li>
+                 </ul>
+             </td>
+         </tr>
+         <tr>
+             <th scope="row">투자유형</th>
+             <td colspan="3">
+                 <ul>
+                     <li><input type="checkbox" name="fund10Nm" id="fund10-1" value="" checked disabled> <label for="fund10-1"> 전체</label></li>
+                     <li><input type="checkbox" name="dscyAlwdYn"     id="fund10-2" value="Y"> <label for="fund10-2"> 임의식</label></li>
+                     <li><input type="checkbox" name="dfrtTypeAlwdYn" id="fund10-3" value="Y"> <label for="fund10-3"> 거치식</label></li>
+                     <li><input type="checkbox" name="reserveYn"      id="fund10-4" value="Y"> <label for="fund10-4"> 적립식</label></li>
+                 </ul>
+             </td>
+         </tr>
+         <tr>
+             <th scope="row">위험등급</th>
+             <td colspan="3">
+                 <ul>
+                     <li><input type="checkbox" name="rtngAgnyRtngValu" id="fund11-1" value="" checked disabled> <label for="fund11-1"> 전체</label></li>
+                     <li><input type="checkbox" name="rtngAgnyRtngValu" id="fund11-2" value="5"> <label for="fund11-2"> 초고위험</label></li>
+                     <li><input type="checkbox" name="rtngAgnyRtngValu" id="fund11-3" value="4"> <label for="fund11-3"> 고위험</label></li>
+                     <li style="width:140px;"><input type="checkbox" name="rtngAgnyRtngValu" id="fund11-4" value="3"> <label for="fund11-4"> 중위험</label></li>
+                     <li><input type="checkbox" name="rtngAgnyRtngValu" id="fund11-5" value="2"> <label for="fund11-5"> 저위험</label></li>
+                     <li><input type="checkbox" name="rtngAgnyRtngValu" id="fund11-6" value="1"> <label for="fund11-6"> 초저위험</label></li>
+                 </ul>
+             </td>
+         </tr>
+         <tr>
+             <th scope="row">펀드등급</th>
+             <td colspan="3">
+                 <ul>
+                     <li><input type="checkbox" name="starRating" id="fund12-1" value="" checked disabled> <label for="fund12-1"> 전체</label></li>
+                     <li><input type="checkbox" name="starRating" id="fund12-2" value="15"> <label for="fund12-2" class="grade5"> 별5점</label></li>
+                     <li><input type="checkbox" name="starRating" id="fund12-3" value="14"> <label for="fund12-3" class="grade4"> 별4점</label></li>
+                     <li style="width:140px;"><input type="checkbox" name="starRating" id="fund12-4" value="13"> <label for="fund12-4" class="grade3"> 별3점</label></li>
+                     <li><input type="checkbox" name="starRating" id="fund12-5" value="12"> <label for="fund12-5" class="grade2"> 별2점</label></li>
+                     <li><input type="checkbox" name="starRating" id="fund12-6" value="11"> <label for="fund12-6" class="grade1"> 별1점</label></li>
+                 </ul>
+             </td>
+         </tr>
+         <tr>
+             <th scope="row">선취수수료</th>
+             <td>
+                 <ul>
+                     <li><input type="checkbox" name="fundFeeSectCodeYn" id="fund13-1" value="" checked disabled> <label for="fund13-1"> 전체</label></li>
+                     <li><input type="checkbox" name="fundFeeSectCodeYn" id="fund13-2" value="Y"> <label for="fund13-2"> 있음</label></li>
+                     <li><input type="checkbox" name="fundFeeSectCodeYn" id="fund13-3" value="N"> <label for="fund13-3"> 없음</label></li>
+                 </ul>
+             </td>
+             <th scope="row">후취수수료</th>
+             <td>
+                 <ul>
+                     <li><input type="checkbox" name="fundFeeSectCodeYn2" id="fund14-1" value="" checked disabled> <label for="fund14-1"> 전체</label></li>
+                     <li><input type="checkbox" name="fundFeeSectCodeYn2" id="fund14-2" value="Y"> <label for="fund14-2"> 있음</label></li>
+                     <li><input type="checkbox" name="fundFeeSectCodeYn2" id="fund14-3" value="N"> <label for="fund14-3"> 없음</label></li>
+                 </ul>
+             </td>
+         </tr>
+     </table>
+     <table class="tbl-type2" name="searchDetailTable" style="display:none;">
+     <caption><strong>펀드 위험도 조건 설정</strong></caption>
+     <colgroup>
+         <col style="width:108px">
+         <col span="5">
+     </colgroup>
+         <tr>
+             <th scope="row">표준편차</th>
+             <td>
+                 <ul class="check type1" name="Stand" data-role="search-grid-bar">
+                     <li class="check"><a href="#" min=""   max="5"  title="5이하 선택">5이하</a></li>
+                     <li class="check"><a href="#" min="5"  max="10" title="5~10 선택">5~10</a></li>
+                     <li class="check"><a href="#" min="10" max="15" title="10~15 선택">10~15</a></li>
+                     <li class="check"><a href="#" min="15" max="20" title="15~20 선택">15~20</a></li>
+                     <li class="check"><a href="#" min="20" max=""   title="20이상 선택">20이상</a></li>
+                 </ul>
+             </td>
+             <th scope="row">샤프 (%순위)</th>
+             <td>
+                 <ul class="check type2" name="Sharp" data-role="search-grid-bar">
+                     <li class="check"><a href="#" min="0"  max="20"  title="0~20 선택">0~20</a></li>
+                     <li class="check"><a href="#" min="20" max="40"  title="20~40 선택">20~40</a></li>
+                     <li class="check"><a href="#" min="40" max="60"  title="40~60 선택">40~60</a></li>
+                     <li class="check"><a href="#" min="60" max="80"  title="60~80 선택">60~80</a></li>
+                     <li class="check"><a href="#" min="80" max="100" title="80~100 선택">80~100</a></li>
+                 </ul>
+             </td>
+             <th scope="row">베타</th>
+             <td>
+                 <ul class="check type3" name="Beta" data-role="search-grid-bar">
+                     <li class="check"><a href="#" min=""    max="0.7" title="0.7이하 선택">0.7이하</a></li>
+                     <li class="check"><a href="#" min="0.7" max="0.9" title="0.7~0.9 선택">0.7~0.9</a></li>
+                     <li class="check"><a href="#" min="0.9" max="1.1" title="0.9~1.1 선택">0.9~1.1</a></li>
+                     <li class="check"><a href="#" min="1.1" max="1.3" title="1.1~1.3 선택">1.1~1.3</a></li>
+                     <li class="check"><a href="#" min="1.3" max=""    title="1.3이상 선택">1.3이상</a></li>
+                 </ul>
+             </td>
+         </tr>
+     </table>
+     <!-- 2014.12.02 bluewebd HTS 61275 : 해외뮤추얼 선택시만 하단 코멘트 출력 -->
+     <p class="tbl-comment" style="display:none">'해외뮤추얼'은 다른조건과 함께 검색할 수 없습니다. 다른 조건으로 검색을 원하실 경우 '해외뮤추얼' 조건을 해제해주세요.</p>
+     
+     <div class="btn-area">
+         <a href="javascript:doSmartSearchList('2');" class="btn big">선택 조건으로 검색</a>
+         <a href="javascript:clearSmartSearch();" class="btn3 big refresh">조건 초기화</a>
+         <span class="fr">
+             <a href="javascript:toggleSearchDetail();" id="btnSearchDetail" class="btn4 big show">상세검색 열기</a>
+             <!-- <a href="#" class="btn4 big hide">상세검색 닫기</a>-->
+         </span>
+     </div>
+ </div>
+ 
+ <input type="hidden" name="RpayDisDtYn" value="N">
+ 
+ </form>
+                <div id="fundListDiv">
+                    
+<!-- 2014.10.28 코드 인스펙션 수정 -->
+<script type="text/javascript">document.write('<script src="/sscommon/js/highcharts/js/highcharts.js?cb='+_CACHE_BUSTER+'" charset="utf-8"></'+'script>');</script>
+<script type="text/javascript">document.write('<script src="/sscommon/js/highcharts/js/modules/exporting.src.js?cb='+_CACHE_BUSTER+'" charset="utf-8"></'+'script>');</script>
+<script type="text/javascript">document.write('<script src="/sscommon/js/highcharts/js/modules/no-data-to-display.src.js?cb='+_CACHE_BUSTER+'" charset="utf-8"></'+'script>');</script>
+<script type="text/javascript">document.write('<script src="/js/finance/fund/search.js?cb='+_CACHE_BUSTER+'" charset="utf-8"></'+'script>');</script>
+<script type="text/javascript">document.write('<script src="/js/finance/bond/bond.utils.js?cb='+_CACHE_BUSTER+'" charset="utf-8"></'+'script>');</script>
+<!-- // 2014.10.28 코드 인스펙션 수정 -->
+<script type="text/javascript">
+<!--
+    
+    var listType = 'smart';
+    
+    var listDetailYn = "";
+    
+    function doList(isKeyWord,isInit){
+    	n_click_logging('/finance/fund/smart_search.do?MENU_ID='+getMenuCode()+'&ACTION_ID=SR01&ITEM_CD=&WRAP_SVC_CD=&START_DATE=&END_DATE=&KEYWORD=&CAMPAIGN_ID=&CAMPAIGN_ACT_ID=&CAMPAIGN_LINKUSR_ID=');
+    	var $f = $.form('frm');
+    	$f.val("currentPage","1");
+    	if(isInit){//테마키워드 초기화
+    		$f.val('NtcObjSeqNo',"");
+    	}
+    	loadList(isKeyWord);    	
+    }
+    
+    function doSelctedList(isKeyWord,isInit){
+    	n_click_logging('/finance/fund/smart_search.do?MENU_ID=M1439180969116&ACTION_ID=SR01&ITEM_CD=&WRAP_SVC_CD=&START_DATE=&END_DATE=&KEYWORD=&CAMPAIGN_ID=&CAMPAIGN_ACT_ID=&CAMPAIGN_LINKUSR_ID=');
+    	var $f = $.form('frm');
+    	$f.val("currentPage","1");
+    	if(isInit){//테마키워드 초기화
+    		$f.val('NtcObjSeqNo',"");
+    	}
+    	loadList(isKeyWord);    	
+    }
+    
+    function initFundList() {
+        
+        var $f = $.form('frm');
+        
+        
+        if ($('#SearchText').length > 0){
+            $('#SearchText').keyup(function(e){
+                if(e.keyCode == 13){
+                    if($("[name='frgnInvtClsnCode']:checked").val() == "99"){
+                        loadMutuelList(true);
+                    }else{
+                    	doList(true,true);
+                    }
+                }
+            });
+        }
+        
+        
+        if(listType == 'smart'){
+            
+            $.cs.event.sortEvent('#fundListDiv thead.sort tr th a,#fundListDiv ul.sorting li a', 'sortList');
+            
+            $.cs.event.sortEvent('#mutuelListDiv thead.sort tr th a,#mutuelListDiv ul.sorting li a', 'sortMutuelList');
+        }else{
+            $.cs.event.sortEvent('thead.sort tr th a, ul.sorting li a', 'sortList');
+            
+            $.util.inquiryGoods();
+        }
+        
+        initCondition();
+        
+        
+        $('ul.sorting2 li a').click(function(){
+            $('ul.sorting2 li').removeClass('on');
+            $(this).parent().addClass('on');
+            if($(this).text() == '간략보기') {
+                listDetailYn = "";
+                $('[name=detailDiv]').hide();
+            } else {
+                listDetailYn = "Y";
+                $('[name=detailDiv]').show();
+            }
+        });
+        
+        
+        initCompare();
+        
+        
+        getOperCoList();
+        
+        
+        initCheckbox();
+        
+        
+        initSelectbox();
+        
+        
+        var openMenuUrl = decodeURIComponent('');
+        
+        if(openMenuUrl != '') {
+            
+            
+            $('form input:checkbox').each(function(idx) {
+                setChecked($(this), false);
+            });
+
+            
+            $f.setParam(openMenuUrl);
+                        
+            
+            if(($f.val('OnlineRefrYN') != '') || ($f.val('FundContCmmdCd') != '')) {
+                setChecked($('#fund9-1'),false);
+                setDisabled($('#fund9-1'),false);
+            }
+            
+            
+            if(($f.val('dscyAlwdYn') != '') || ($f.val('dfrtTypeAlwdYn') != '') || ($f.val('reserveYn') != '')) {
+                setChecked($('#fund10-1'),false);
+                setDisabled($('#fund10-1'),false);
+            }
+            
+            
+            if($f.val('Stand') != undefined || $f.val('Stand') != '') {
+                $('ul[name=Stand] li').removeClass('check');
+                var chkStands =  $f.val('Stand').split("@"); 
+                
+                for(var i = 0; i <= chkStands.length; i++) {
+                    $('ul[name=Stand] li').eq(parseInt(chkStands[i],10)).addClass('check');
+                }
+            }
+            
+            
+            if($f.val('Sharp') != undefined || $f.val('Sharp') != '') {
+                $('ul[name=Sharp] li').removeClass('check');
+                var chkSharps =  $f.val('Sharp').split("@"); 
+                
+                for(var i = 0; i <= chkSharps.length; i++) {
+                    $('ul[name=Sharp] li').eq(parseInt(chkSharps[i],10)).addClass('check');
+                }
+            }
+            
+            
+            if($f.val('Beta') != undefined || $f.val('Beta') != '') {
+                $('ul[name=Beta] li').removeClass('check');
+                var chkBetas =  $f.val('Beta').split("@"); 
+                
+                for(var i = 0; i <= chkBetas.length; i++) {
+                    $('ul[name=Beta] li').eq(parseInt(chkBetas[i],10)).addClass('check');
+                }
+            }            
+            
+            
+            $('form input:checkbox').each(function(idx) {
+                dispCheckbox($(this), true , true);
+            });
+            
+             
+            if(listDetailYn == 'Y') {
+                $('ul.sorting2').attr('list_type', '자세히보기');
+            } else {
+                $('ul.sorting2').attr('list_type', '간략보기');
+            }
+            
+            if(!$('form input:checkbox[id=fund3-11]').is(":checked")){		//해외뮤추얼 펀드의 경우 dispCheckbox에서 조회처리를 함
+                loadList(true);            	
+            }
+            
+            try{
+                 
+                if($f.val('searchDetailYn') == 'Y') {
+                     
+                    openSearchDetail();
+                } else {
+                        
+                    closeSearchDetail();
+                }
+                
+            }catch(e){
+                
+            }finally{            	
+            	
+            }
+        }else{
+        	
+            $('a[column=Yield3M]').trigger('click');	
+        }
+    }
+    
+    
+    function getParam() {
+        var $f = $.form('frm');
+        var oParam = {};
+        if(listType == 'smart') {
+            oParam.openMenuCode = 'M1303804003625';
+            oParam.openMenuName = '스마트검색';
+            oParam.openMenuUrl = '/finance/fund/search_cached.pop';
+        }
+        if(listType == 'inter') {
+            oParam.openMenuCode = 'M1397118087470';
+            oParam.openMenuName = '국내펀드';
+            oParam.openMenuUrl = '/finance/fund/goods/list.pop';
+        }
+        if(listType == 'abroad') {
+            oParam.openMenuCode = 'M1397118137044';
+            oParam.openMenuName = '해외펀드';
+            oParam.openMenuUrl = '/finance/fund/goods/list_abroad.pop';
+        }
+        if(listType == 'online') {
+            oParam.openMenuCode = 'M1231752365531';
+            oParam.openMenuName = '온라인전용펀드';
+            oParam.openMenuUrl = '/finance/fund/goods/list_online.pop';
+        }
+        if(listType == 'index') {
+            oParam.openMenuCode = 'M1397118324976';
+            oParam.openMenuName = '인덱스펀드';
+            oParam.openMenuUrl = '/finance/fund/goods/list_index.pop';
+        }
+        if(listType == 'theme') {
+            oParam.openMenuCode = 'M1397118430844';
+            oParam.openMenuName = '테마펀드';
+            oParam.openMenuUrl = '/finance/fund/goods/list_theme.pop';
+        }
+        if(listType == 'saving') {
+            oParam.openMenuCode = 'M1294123975703';
+            oParam.openMenuName = '적립식펀드상품안내';
+            oParam.openMenuUrl = '/finance/saving/fundSavingList.do';
+        }
+        if(listType == 'provision') {
+            oParam.openMenuCode = 'M1397463283159';
+            oParam.openMenuName = '정기지급상품안내';
+            oParam.openMenuUrl = '/finance/payment/provision.pop';
+        }
+        
+        if(listType == 'deduction') {
+            oParam.openMenuCode = 'M1398762924143';
+            oParam.openMenuName = '소득공제장기펀드안내';
+            oParam.openMenuUrl = '/finance/fund/goods/list_deduction.pop';
+        }
+        
+        if(listType == 'nestegg') {
+            oParam.openMenuCode = 'M1398762963258';
+            oParam.openMenuName = '재형저축펀드안내';
+            oParam.openMenuUrl = '/finance/fund/goods/list_nestegg.pop';
+        }
+        if(listType == 'market') {
+            oParam.openMenuCode = 'M1401526644205';
+            oParam.openMenuName = '삼성증권 3325';
+            oParam.openMenuUrl = '/finance/fund/market.do?cmd=market';
+        }
+        if(listType == 'pension') {
+//             oParam.openMenuCode = 'M1397463317102';
+//             oParam.openMenuName = '은퇴자산관리';
+            oParam.openMenuCode = 'M1382935674722';
+            oParam.openMenuName = '연금저축상품안내';
+            oParam.openMenuUrl = '/finance/pension.do?cmd=view';
+        }
+        
+        var param = $f.toParameterString();
+        param = $.util.replaceAll(param, '�', '');
+        
+        oParam.openMenuUrl += '?openMenuUrl=' + encodeURIComponent(encodeURIComponent(param));
+        
+        return oParam;
+    }
+    
+    
+    function goDetail(fundCode) {
+        var oParam = getParam();
+        var param = '?FUND_CODE='    + fundCode
+                  + '&openMenuCode=' + oParam.openMenuCode
+                  + '&openMenuName=' + oParam.openMenuName
+                  + '&openMenuUrl='  + encodeURIComponent(encodeURIComponent(oParam.openMenuUrl));
+
+        n_click_logging('/finance/fund/fund_detail.do?MENU_ID='+getMenuCode()+'&ACTION_ID=IN02&ITEM_CD='+fundCode+'&WRAP_SVC_CD=&START_DATE=&END_DATE=&KEYWORD=&CAMPAIGN_ID=&CAMPAIGN_ACT_ID=&CAMPAIGN_LINKUSR_ID=');
+
+        openMenu(oParam.openMenuCode, '/finance/fund/fund_detail.do' + param, "펀드상세");
+    }
+    
+    
+    function initCondition(){
+    	 
+        
+        if((listType == 'inter') || (listType == 'abroad') || (listType == 'index')) {
+            setChecked($('#fund0-1'), true);
+        }else{
+        	setChecked($('#fund0-1'), false);
+        }
+        
+        
+        if((listType == 'theme')) {
+            $('#fund0-1').parent().parent().hide();
+        }
+    }
+    
+    
+    function initList() {
+        initCondition();
+        hideOperLay();
+        var operObj = $("#fund20-1");
+        
+        if(operObj.size() > 0){
+        	if(!operObj.is(":checked")){
+        		operObj.click();
+        	}
+        }
+        
+        $("#fundAttr").val("").change();
+        $("#listRow").val("10").change();
+        $('ul.sorting2 li a:eq(0)').click();
+        
+        var sortColumn = $("#sortColumn").val();
+        var sortType = $("#sortType").val();
+        
+        if(sortColumn == "Yield3M" && sortType == "DESC"){
+        	doList();		
+        }else{
+        	$('a[column=Yield3M]').trigger('click');
+        }
+    }
+    
+    
+    function sortList(sortColumn, sortType) {
+        var $f = $.form('frm');
+        $f.val('sortColumn', sortColumn);
+        $f.val('sortType', sortType);
+        $f.val('currentPage', "1");
+        
+        loadList();
+    }
+    
+    
+    function goListCnt() {
+        var $f = $.form('frm');
+        $f.val('rowsPerPage', $("#listRow>option:selected").val());
+    	$f.val("currentPage","1");
+    	
+        loadList();
+        try{
+        	hideOperLay();
+        }catch(e){
+        	
+        }
+    }
+    
+    
+    function loadList(isKeyword) {
+ 
+  		 
+    	if(listType == "smart"){
+             $('#mutuelListDiv').hide();
+             $('#fundListDiv').show();
+    	}
+    	
+        var $f = $.form('frm');
+        var $list = $("#bodyList").empty();
+        $(".total").empty();
+        $('div.pagingNav').empty();
+        $f.val('rowsPerPage', $("#listRow>option:selected").val());
+        $("#maxTrdDtSpan").html('기준일자 : ');
+        
+        
+        if ($('ul[data-role=search-grid-bar]').length > 0) setParamGridBar();
+        
+        
+        $f.val('fundGrop', ($('#fund0-1').is(":checked") ? 'Y' : ''));
+        
+        
+        $.cs.ajax({
+            async: true,
+            url: '/finance/fund/smart_search.do',
+            data: $f.toParameterString('search_data_cached', false),
+            loadingStart: true,
+            loadingEnd: true,
+            success: function(data){
+                if(typeof data.errorMsg != 'undefined') {
+                    alert(data.errorMsg);
+                    return;
+                }
+                
+                $list.empty();
+                var currentPage = $f.val('currentPage');
+                var rowsPerPage = $f.val('rowsPerPage');
+                var totalCount = 0;
+                if(typeof data.list == 'undefined') {
+                    $list.html($.util.noTableData(8, $.msg.NO_SEARCH_RESULT, '', $f.val('SearchText')));
+                } else {
+                    totalCount = data.totalCount;
+                    var sortColumn = $f.val('sortColumn');
+                    for(var i = 0; i < data.list.length; i++){
+                        var strHtml = '';
+                        strHtml += '<tr>';
+                        strHtml += '    <td><input type="checkbox" name="compareChk" id="compareChk" value="' + data.list[i].FundCd + '" title="' + data.list[i].FundKrNm + ' 선택"></td>';
+                        strHtml += '    <td class="l">';
+                        strHtml += '        <ul class="icon-list">';
+                        
+                        if(data.list[i].recomYn  == 'Y') strHtml += '            <li id="recom"  class="recom"  >추천</li>';
+                        if(data.list[i].bestYn   == 'Y') strHtml += '            <li id="best"   class="best"   >판매베스트</li>';
+                        if(data.list[i].newYn    == 'Y') strHtml += '            <li id="new"    class="new"    >신규</li>';
+                        if(data.list[i].rankYn   == 'Y') strHtml += '            <li id="rank"   class="ranking">랭킹</li>';
+                        if(data.list[i].themeYn  == 'Y') strHtml += '            <li id="theme"  class="theme"  >테마</li>';
+                        if(data.list[i].OnlineYN == 'Y') strHtml += '            <li id="online" class="online" >온라인</li>';
+                        
+                        if(data.list[i].fundClasCnt > 1) {
+                            strHtml += '            <li class="pop">';
+                            strHtml += '            <div class="lay-view">';
+                            strHtml += '                <a href="javascript:loadClassFund(\'' + data.list[i].FundCd + '\',\'' + data.list[i].TrdDt + '\');" title="레이어열림">클래스펀드(<em>' + data.list[i].fundClasCnt + '</em>)</a>';
+                            strHtml += '                <div id="classFundDiv_' + data.list[i].FundCd + '">';
+                            strHtml += '                </div>';
+                            strHtml += '            </div>';
+                            strHtml += '            </li>';
+                        }
+                        
+                        strHtml += '        </ul>';
+                        strHtml += '        <p class="title"><a href="javascript:goDetail(\'' + data.list[i].FundCd + '\')">' + data.list[i].FundKrNm + (data.list[i].OnlineYN == 'Y' ? '(온라인)' : '') + '</a></p>' + '<!--' + data.list[i].FundCd + ' / ' + data.list[i].prdtId + '-->';
+                        strHtml += '        <ul class="fund-details">';
+                        strHtml += '            <li ' + (sortColumn == 'FstSetDt' ? 'class="bul"' : '') + '>';
+                        strHtml += '                <dl>';
+                        strHtml += '                    <dt>설정일</dt>';
+                        strHtml += '                    <dd>' + data.list[i].FstSetDt + '</dd>';
+                        strHtml += '                </dl>';
+                        strHtml += '            </li>';
+                        strHtml += '            <li>';
+                        strHtml += '                <dl>';
+                        strHtml += '                    <dt>유형</dt>';
+                        if(data.list[i].TypeCd1 == '1') { 
+	                        strHtml += '                    <dd>' + data.list[i].TypeNm1 + (data.list[i].TypeNm2 != '' ? '>' + data.list[i].TypeNm2 : '') + '</dd>';
+	                    } else {
+	                        strHtml += '                    <dd>' + data.list[i].TypeNm1 + (data.list[i].TypeNm2 != '' ? '>' + data.list[i].TypeNm2 : '') + '</dd>';
+	                    }
+                        strHtml += '                </dl>';
+                        strHtml += '            </li>';
+                        strHtml += '            <li ' + (sortColumn == 'fundClasSum' ? 'class="bul"' : '') + '>';
+                        strHtml += '                <dl class="bold">';
+                        strHtml += '                    <dt>총설정액</dt>';
+                        if(data.list[i].fundClasSum != null && data.list[i].fundClasSum == 0){
+                        	strHtml += '                    <dd>0.00억원</dd>';	
+                        }else{
+                        	strHtml += '                    <dd>' + BondUtil.to_percent(data.list[i].fundClasSum / 100000000, 2) + '억원</dd>' + '<!--' + BondUtil.to_percent(data.list[i].kfrEstabAm / 100000000, 2) + ' / ' + BondUtil.to_percent(data.list[i].fundClasSum / 100000000, 2) + '-->';	
+                        }
+                        strHtml += '                </dl>';
+                        strHtml += '            </li>';
+                        strHtml += '            <li>';
+                        strHtml += '                <dl>';
+                        strHtml += '                    <dt>운용사</dt>';
+                        strHtml += '                    <dd>' + data.list[i].OperCoNm + '</dd>';
+                        strHtml += '                </dl>';
+                        strHtml += '            </li>';
+                        strHtml += '            <li>';
+                        strHtml += '                <dl>';
+                        strHtml += '                    <dt>선취수수료</dt>';
+                        strHtml += '                    <dd>' + (data.list[i].fundFeeSectCodeYn == 'Y' ? (BondUtil.to_percent(data.list[i].saleFeeRate,2) + (data.list[i].cltnStnrCode == '1' ? '원' : '%')) : '없음') + '</dd>';
+                        strHtml += '                </dl>';
+                        strHtml += '            </li>';
+                        strHtml += '            <li ' + (sortColumn == 'TotRwrt' ? 'class="bul"' : '') + '>';
+                        strHtml += '                <dl class="bold">';
+                        strHtml += '                    <dt>총보수</dt>';
+                        strHtml += '                    <dd>' + BondUtil.to_percent(data.list[i].TotRwrt,4) + '%</dd>';
+                        strHtml += '                </dl>';
+                        strHtml += '            </li>';
+                        //strHtml += '            <div name="detailDiv" ' + (($('ul.sorting2').attr('list_type') == '간략보기') ? 'style="display: none;"' : '')  + '>';
+                        strHtml += '            <div name="detailDiv" ' +  (listDetailYn == "" ? 'style="display: none;"' : '')  + '>';
+                        strHtml += '            <li>';
+                        strHtml += '                <dl>';
+                        strHtml += '                    <dt>후취수수료</dt>';
+                        strHtml += '                    <dd>' + (data.list[i].fundFeeSectCodeYn2 == 'Y' ? '적용' : '없음') + '</dd>';
+                        strHtml += '                </dl>';
+                        strHtml += '            </li>';
+                        strHtml += '            <li>';
+                        strHtml += '                <dl>';
+                        strHtml += '                    <dt>표준편차</dt>';
+                        if(data.list[i].kfrW13FundSd == ""){
+                        	strHtml += '                    <dd>-</dd>';
+                        }else{
+                        	strHtml += '                    <dd>' +  BondUtil.to_percent(data.list[i].kfrW13FundSd,2) + '</dd>';	
+                        }
+                        strHtml += '                </dl>';
+                        strHtml += '            </li>';
+                        strHtml += '            <li>';
+                        strHtml += '                <dl>';
+                        strHtml += '                    <dt>샤프</dt>';
+                        if(data.list[i].kfrW13FundSharp == ""){
+                        	strHtml += '                    <dd>-</dd>';
+                        }else{
+                        	strHtml += '                    <dd>' + BondUtil.to_percent(data.list[i].kfrW13FundSharp,2) + '</dd>';
+                        }
+                        strHtml += '                </dl>';
+                        strHtml += '            </li>';
+                        strHtml += '            <li>';
+                        strHtml += '                <dl>';
+                        strHtml += '                    <dt>베타</dt>';
+                        if(data.list[i].kfrW13FundBeta == ""){
+                        	strHtml += '                    <dd>-</dd>';
+                        }else{
+                        	strHtml += '                    <dd>' + BondUtil.to_percent(data.list[i].kfrW13FundBeta,2) + '</dd>';	
+                        }
+                        strHtml += '                </dl>';
+                        strHtml += '            </li>';
+                        strHtml += '            </div>';
+                        strHtml += '        </ul>';
+                        strHtml += '    </td>';
+                        
+                        var yield1M = data.list[i].Yield1M;
+                        var yield3M = data.list[i].Yield3M;
+                        var yield6M = data.list[i].Yield6M;
+                        var annYield = data.list[i].AnnYield;
+                        
+                        if(yield1M == "") {
+                        	strHtml += '    <td class="r">-</td>';                        	
+                        }else if(yield1M > 0) {
+                            strHtml += '    <td class="r"><em class="up">' + BondUtil.to_percent(yield1M,2) + '%</em></td>';
+                        }else if(yield1M < 0){
+                            strHtml += '    <td class="r"><em class="down">' + BondUtil.to_percent(yield1M,2) + '%</em></td>';
+                        }else if(yield1M == 0){
+                        	strHtml += '    <td class="r">0.00%</td>';
+                        } 
+                        
+                        if(yield3M == "") {
+                        	
+                        	strHtml += '    <td class="r">-</td>';
+                        }else if(yield3M > 0) {
+                            strHtml += '    <td class="r"><em class="up">' + BondUtil.to_percent(yield3M,2) + '%</em></td>';
+                        }else if(yield3M < 0) {
+                            strHtml += '    <td class="r"><em class="down">' + BondUtil.to_percent(yield3M,2) + '%</em></td>';
+                        }else if(yield3M == 0){
+                        	strHtml += '    <td class="r">0.00%</td>';
+                        }
+                        
+                        if(yield6M == "") {
+                        	strHtml += '    <td class="r">-</td>';
+                        }else if(yield6M > 0) {
+                            strHtml += '    <td class="r"><em class="up">' + BondUtil.to_percent(yield6M,2) + '%</em></td>';
+                        }else if(yield6M < 0) {
+                            strHtml += '    <td class="r"><em class="down">' + BondUtil.to_percent(yield6M,2) + '%</em></td>';
+                        }else if(yield6M == 0) {
+                        	strHtml += '    <td class="r">0.00%</td>';
+                        }
+                        
+                        if(annYield == "") {
+                        	strHtml += '    <td class="r">-</td>';
+                        }else if(annYield > 0) {
+                            strHtml += '    <td class="r"><em class="up">' + BondUtil.to_percent(annYield,2) + '%</em></td>';
+                        }else if(annYield < 0) {
+                            strHtml += '    <td class="r"><em class="down">' + BondUtil.to_percent(annYield,2) + '%</em></td>';
+                        }else if(annYield == 0) {
+                        	strHtml += '    <td class="r">0.00%</td>';
+                        }
+                        
+                        strHtml += '    <td style="padding-left: 2px; padding-right: 2px;"><div id="fund3MEstabDiv' + i + '" style="min-width: 150px; height: 130px; margin: 0 auto"></div>';                        
+                        strHtml += '    <div class="blind"><table><caption>설정액과 날짜를 확인할 수 있는 데이터 표</caption><thead><th scope="col">날짜</th><th scope="col">설정액(억원)</th></thead><tbody id="fund3MEstabDiv_blind' + i + '"></tbody></table></div>';
+                        strHtml += '    </td>';
+                        strHtml += '    <td>';
+                        strHtml += '        <ul class="btn-list type2">';
+                        
+                        if('Y' == data.list[i].HTSBuyPossYN && 'Y' == data.list[i].NewPossYN) {
+                            strHtml += '            <li><a href="javascript:buyFund(\'' + data.list[i].FundCd + '\');" class="btn2">매수</a></li>';
+                        } else  if('N' == data.list[i].HTSBuyPossYN && 'Y' == data.list[i].NewPossYN) {
+                            strHtml += '            <li><a href="javascript:openMenu(\'M1231757535406\');" class="btn3 branch">지점가입</a></li>';
+                        } else {
+                            strHtml += '            <li><a class="btn3 cancel default">가입불가</a></li>';
+                        }
+                        strHtml += '            <li><a href="javascript:interFund(\'' + data.list[i].FundCd + '\');" title="새창 열림" class="btn3 wish">관심</a></li>';
+                        
+                        strHtml += '        </ul>';
+                        strHtml += '    </td>';
+                        strHtml += '</tr>';
+                        $list.append(strHtml);
+                    }//end for
+                    
+                    var fundCds = '';
+                    for(var i = 0; i < data.list.length; i++) {                    	
+                    	if(i>0){
+                    		fundCds += ",";
+                    	}
+                    	fundCds += data.list[i].FundCd;
+                    }
+                    
+                    callFund3MEstab(0, data.list.length, fundCds); 
+                }
+                
+                $("#maxTrdDtSpan").html('기준일자 : ' + $.util.dateFormat(data.maxTrdDt, 'yyyy-MM-dd'));
+                
+                if(isSearchContion() && $.trim($f.val('SearchText')) == ""){
+                	$(".total").html('검색결과 (총 <em>' + totalCount + '</em>건)' + '<small><em>' + currentPage + '</em>/' + (totalCount == 0 ? '1' : Math.ceil(totalCount / rowsPerPage)) + ' 페이지' + '</small>');
+                }else{
+                    $(".total").html($.util.getTotal(totalCount, rowsPerPage, currentPage, $.trim($f.val('SearchText'))));
+                }
+                _common.reinit_ui();
+                
+                
+                _common.build_paging_ui($('div.pagingNav:eq(0)'), totalCount, rowsPerPage, currentPage, function(n) {
+                	goPage(n);
+                });
+                
+                if(isKeyword){
+                     $(".board-paging").attr("id","board-paging");
+                     location.href = "#board-paging";
+                }
+            }
+        });
+    }
+    
+    
+    function isSearchContion(){
+    	
+    	if($("#NtcObjSeqNo").size() > 0 && $.trim($("#NtcObjSeqNo").val() ) != ""){
+    		return true;
+    	}else if($("[name='ForgnSectCd']").size() > 0 && $.trim($("[name='ForgnSectCd']:checked").val()) != ""){     	
+    		return true;
+    	}else if($("[name='FundInvstTypeCd']").size() > 0 && $.trim($("[name='FundInvstTypeCd']:checked").val()) != ""){
+    		return true;
+    	}else if($("[name='frgnInvtClsnCode']").size() > 0 && $.trim($("[name='frgnInvtClsnCode']:checked").val()) != ""){
+    		return true;
+    	}else if($("[name='SetPeriodMM']").size() > 0 && $.trim($("[name='SetPeriodMM']:checked").val()) != ""){
+    		return true;
+    	}else if($("[name='kfrEstabAmUk']").size() > 0 && $.trim($("[name='kfrEstabAmUk']:checked").val()) != ""){
+    		return true;
+    	}else if($("[name='Yield']").size() > 0 && $.trim($("[name='Yield']:checked").val()) != ""){
+    		return true;
+    	}else if($("[name='TotRwrt']").size() > 0 && $.trim($("[name='TotRwrt']:checked").val()) != ""){
+    		return true;
+    	}else if($("[name='OperCoCdList']").size() > 0 && $.trim($("[name='OperCoCdList']:checked").val()) != ""){
+    		return true;
+    	}else if($("[name='fund9Nm']").size() > 0 && !$("[name='fund9Nm']").is(":checked")){
+    		return true;
+    	}else if($("[name='fund10Nm']").size() > 0 && !$("[name='fund10Nm']").is(":checked")){
+    		return true;
+    	}else if($("[name='rtngAgnyRtngValu']").size() > 0 && $.trim($("[name='rtngAgnyRtngValu']:checked").val()) != ""){
+    		return true;
+    	}else if($("[name='starRating']").size() > 0 && $.trim($("[name='starRating']:checked").val()) != ""){
+    		return true;
+    	}else if($("[name='fundFeeSectCodeYn']").size() > 0 && $.trim($("[name='fundFeeSectCodeYn']:checked").val()) != ""){
+    		return true;
+    	}else if($("[name='fundFeeSectCodeYn2']").size() > 0 && $.trim($("[name='fundFeeSectCodeYn2']:checked").val()) != ""){
+    		return true;
+    	}else if(($("[name='StandFrom']").size() > 0 && $.trim($("[name='StandFrom']").val()) != "")
+    			&& ($("[name='StandTo']").size() > 0 && $.trim($("[name='StandTo']").val()) != "") ){
+    		return true;
+    	}else if(($("[name='SharpFrom']").size() > 0 && $.trim($("[name='SharpFrom']").val()) != "") 
+    			&& ($("[name='SharpTo']").size() > 0 && $.trim($("[name='SharpTo']").val()) != "")){
+    		return true;
+    	}else if(($("[name='BetaFrom']").size() > 0 && $.trim($("[name='BetaFrom']").val()) != "") 
+    			&& ($("[name='BetaTo']").size() > 0 && $.trim($("[name='BetaTo']").val()) != "")){
+    		return true;
+    	}else{
+    		return false;	
+    	}
+    	return false;
+    }
+    
+    
+    function goRowsPerPage() {
+        var $f = $.form('frm');
+        $f.val('currentPage', '1');
+        $f.val('rowsPerPage', $("#listRow>option:selected").val());
+        loadList();
+    }
+    
+    
+    function goPage(page) {
+        var $f = $.form('frm');
+        $f.val('currentPage', page);
+        loadList();
+    }
+    
+    
+    function afterGetIncClassFundDetail() {
+        if($('#divIncClassFundList').css('display') == 'none') {
+            $('#divIncClassFundList').show();
+        } else {
+            $('#divIncClassFundList').hide();
+        }
+        _common.reinit_ui();
+    }
+    
+    
+    function loadClassFund(FundCd, TrdDt) {
+        var oParam = getParam();
+        var param = '?FUND_CODE='    + FundCd
+                  + '&openMenuCode=' + oParam.openMenuCode
+                  + '&openMenuName=' + encodeURIComponent(oParam.openMenuName)
+                  + '&openMenuUrl='  + encodeURIComponent(encodeURIComponent(oParam.openMenuUrl));
+
+        if($('ul.icon-list').length > 0) $('ul.icon-list').attr('z-index','100');
+        $('[id^=classFundDiv]').empty();
+        $('#classFundDiv_' + FundCd).load('/finance/fund/goods/inc_class_fund_list2.pop' + param, function() {
+            
+            getIncClassFundDetailForList(FundCd, TrdDt);
+            $('#divIncClassFundListForList').show();
+        });
+    }
+    
+    
+    function interFund(FundCd) {
+        $.util.addInterFundPopup(FundCd);
+    }
+    
+    
+    function getOperCoList() {
+        var $f = $.form('frm');
+        
+        if($('#getOperCoListUl').length == 0 && $('form[name=frm]').length == 1) {
+            $('form[name=frm]').append('<ul class="scroll" id="getOperCoListUl" style="display: none;"></ul>');
+        }
+        
+        var $ul = $('#getOperCoListUl').empty();
+        var $ul2 = $('#getOperCoListUl2').empty();
+        $.cs.ajax({
+            async : false,
+            url   : '/finance/fund/smart_search.do',
+            data  : $f.toParameterString('getOperCoList', false),
+            success  : function(data) {
+                if(data.errMsg != '') {
+                    alert(data.errMsg);
+                    return;
+                }
+                
+                if(typeof(data.list) != 'undefined' && data.list.length > 0) {
+                    
+                    $ul.append('<li><input type="checkbox" name="OperCoCdList" id="fund8-1" value="" checked="checked" disabled="disabled"> <label for="fund8-1">전체</label></li>');
+                    for(var i = 0; i < data.list.length; i++) {
+                        $ul.append('<li><input type="checkbox" name="OperCoCdList" id="fund8-' + (i + 2) + '" value="' + $.util.trim(data.list[i].OperCoCd) + '"> <label for="fund8-' + (i + 2) + '">' + $.util.trim(data.list[i].OperCoNm) + '</label></li>');
+                    }
+                    
+                    $ul2.append('<li><label><input type="checkbox" name="OperCoCdList2" id="fund20-1" value="" checked="checked" disabled="disabled">전체</label></li>');
+                    for(var i = 0; i < data.list.length; i++) {
+                        $ul2.append('<li><label><input type="checkbox" name="OperCoCdList2" id="fund20-' + (i + 2) + '" value="' + $.util.trim(data.list[i].OperCoCd) + '"> ' + $.util.trim(data.list[i].OperCoNm) + '</label></li>');
+                    }
+                    
+                    _common.reinit_ui();
+                }
+            }
+        });
+    }
+    
+    
+    function setDisabled($this, isDisabled) {
+        $this.prop('disabled', isDisabled);
+        
+        if(listType == 'online' || listType == 'saving') {
+            if(isDisabled){
+                $this.parent().parent().addClass('off-contents');
+            }else{
+                $this.parent().parent().removeClass('off-contents');
+            }        
+        }
+    }
+    
+    
+    function setChecked($this, isChecked) {
+        $this.prop('checked', isChecked);
+        
+        if(listType == 'online' || listType == 'saving') {
+            if(isChecked){
+                $this.parent().parent().addClass('on');
+            }else{
+                $this.parent().parent().removeClass('on');
+            }        
+        }
+    }
+    
+    
+    function initCheckbox() {
+        
+        
+        $('form input:checkbox').click(function(){
+            
+            
+            dispCheckbox($(this), false);
+        });
+        
+        
+        $("#fund0-1").click(function(){
+        	doList();
+        });
+        
+        $("[name='OperCoCdList2']").click(function(){
+        	 var id = $(this).attr('id');
+        	 var ids = id.split('-');
+        	 dispCheckbox1($(this), true);
+        	 
+        	 $('input:checkbox[id="' + $.util.replaceAll(id,'fund20','fund8') + '"]').trigger("click");        	 
+        });
+    }
+
+    
+    function dispCheckbox1($input, isInit) {    	
+    	
+    	var id = $input.attr('id');
+        var ids = id.split('-');
+        
+        if(ids.length < 2) return true; 
+        var name = $input.attr('name');
+        var index = $('input:checkbox[id^="' + ids[0] + '-"]').index($input);
+        var isCheck = $input.is(":checked");
+        
+        if(id == "fund0-1"){	//대표펀드보기는 스킵
+        	return;
+        }        
+        
+        
+        if(index == 0) {
+            if(isCheck) {
+                
+                $('input:checkbox[id^="' + ids[0] + '-"]').each(function(idx) {
+                    if(idx == 0) {
+                        setDisabled($(this), isCheck);
+                    } else {
+                        setChecked($(this), !isCheck);
+                    }
+                });
+            }
+            
+        
+        } else {
+            
+			var firstCheckObj = $('input:checkbox[id^="' + ids[0] + '-"]').eq(0);            
+            if(isCheck) {
+                   setChecked(firstCheckObj, false);
+                   setDisabled(firstCheckObj,false);
+            }else{
+            	            	
+            	var unCheckedSize = $('input:checkbox[id^="' + ids[0] + '-"]:checked').size();
+            	if(unCheckedSize == 0){
+            		setChecked(firstCheckObj, true);
+                    setDisabled(firstCheckObj,true);
+            	}
+            }
+        }    	
+    }
+    
+    
+    function dispCheckbox($input, isInit ,openMenuYn) {
+        
+        var id = $input.attr('id');
+        var ids = id.split('-');
+        if(ids.length < 2) return true; 
+        var name = $input.attr('name');
+        var index = $('form input:checkbox[id^="' + ids[0] + '-"]').index($input);
+        var isCheck = $input.is(":checked");        
+        openMenuYn = $.util.isEmpty(openMenuYn)?false:openMenuYn;        
+        
+        if(id == "fund0-1"){	//대표펀드보기는 스킵
+        	return;
+        }        
+        
+        
+        if(index == 0) {
+            if(isCheck) {
+                
+                $('form input:checkbox[id^="' + ids[0] + '-"]').each(function(idx) {
+                    if(idx == 0) {
+                        setDisabled($(this), isCheck);
+                    } else {
+                        setChecked($(this), !isCheck);
+                    }
+                });
+                
+                
+                if(name == 'ForgnSectCd' && isCheck) {
+                    $('form input:checkbox[id^="fund3-"]').each(function(idx) {
+                        if(idx == 0) {
+                            setDisabled($(this), $('#fund3-1').is(':checked'));
+                        } else {
+                            setDisabled($(this), false);
+                        }
+                    });
+                }
+            }
+            
+        
+        } else {
+            
+			var firstCheckObj = $('form input:checkbox[id^="' + ids[0] + '-"]').eq(0);            
+            if(isCheck) {
+                   setChecked(firstCheckObj, false);
+                   setDisabled(firstCheckObj,false);
+            }else{
+            	            	
+            	var unCheckedSize = $('input:checkbox[id^="' + ids[0] + '-"]:checked').size();
+            	if(unCheckedSize == 0){
+            		setChecked(firstCheckObj, true);
+                    setDisabled(firstCheckObj,true);
+            	}
+            }
+            
+            
+            if(name == 'ForgnSectCd') {
+                var isLocal = $('#fund1-2').is(':checked');
+                var isGlobal = $('#fund1-3').is(':checked');
+                var isCheckSizeFund3 = $('form input:checkbox[id^="fund3-"]:checked').size();
+                
+                
+                if((isLocal && isGlobal) || (!isLocal && !isGlobal)) {
+                	
+                	$('form input:checkbox[id^="fund3-"]').each(function(idx) {
+                        if(idx == 0 && (isCheckSizeFund3==0 || $('form input:checkbox[id="fund3-1"]').is(":checked"))){
+                        	setChecked($(this), true);
+                        	setDisabled($(this), true);
+                        }else{
+                    		setDisabled($(this), false);                        	
+                        }
+                    });
+                }
+                
+                
+                if(isLocal && !isGlobal) {
+                    $('form input:checkbox[id^="fund3-"]').each(function(idx) {
+                        
+                        if(idx == 0) {	//전체 
+                        	setChecked($(this), false);
+                        	setDisabled($(this), false);    
+                        }else if(idx == 1) {
+                            setChecked($(this), true);
+                            setDisabled($(this), false);                            
+                        } else {
+                            setChecked($(this), false);
+                            setDisabled($(this), true);
+                        }
+                    });
+                }
+                
+                
+                if(!isLocal && isGlobal) {
+                    $('form input:checkbox[id^="fund3-"]').each(function(idx) {
+                        
+                        
+                        if(idx == 0 && (isCheckSizeFund3==0 || $('form input:checkbox[id="fund3-1"]').is(":checked"))){
+                        	setChecked($(this), true);
+                        	setDisabled($(this), true);
+                        }else if(idx == 1) {
+                        	if(isCheckSizeFund3==1 || $('form input:checkbox[id="fund3-2"]').is(":checked")){
+		                    	setChecked($('form input:checkbox[id="fund3-1"]'), true);
+		                    	setDisabled($('form input:checkbox[id="fund3-1"]'), true);
+                            }
+                        	setChecked($(this), false);
+                            setDisabled($(this), true);                            
+                        } else {
+                            setDisabled($(this), false);
+                        }
+                    });
+                }
+            }
+            
+           
+            
+            
+            if(id == 'fund3-11') {
+                var openMenuUrl = decodeURIComponent('');
+                 
+                if(isCheck) {
+                    
+                	if(!openMenuYn){                	
+	                	if(!confirm("‘해외뮤추얼’은 다른 조건과 함께 검색할 수 없습니다. \n‘해외뮤추얼’로만 검색하시겠습니까?")) {
+	                        setChecked($('#fund3-11'), false);
+	                        return false;
+	                    }                    
+                    }                    
+
+                	$("div.search.fund p.tbl-comment").show();
+                	
+                    
+                    $('div.search').find('input:checkbox').each(function(idx) {
+                        if($(this).attr('id') != 'fund3-11') {
+                            setChecked($(this), false);
+                            setDisabled($(this), true);
+                        }
+                    });
+                    
+                    
+                    $('#fundListDiv').hide();
+                    
+                    
+                    $('#mutuelListDiv').show();
+                    
+                                        
+                    $('#mutuelListDiv a[column=AnnYieldOrd]').trigger('click');
+                
+                } else {
+                	
+                	$("div.search.fund p.tbl-comment").hide();
+                	
+                    
+                    if(!isInit) clearSearch();
+                    
+                   
+                    
+                    $('#mutuelListDiv').hide();
+                    
+                    
+                    $('#fundListDiv').show();
+                    
+                    
+                    if(!isInit) doList();
+                }
+            }
+        }
+        
+        
+        if(ids[0] == "fund9"){
+        	var isPensionChk = $("#fund9-4").is(":checked");            	
+       		if(isPensionChk){
+       			$('form input:checkbox[id^="fund10-"]').each(function(idx) {
+	                    if(idx == 0) {
+	                        setChecked($(this), true);
+	                        setDisabled($(this), true);
+	                    } else {
+	                    	setChecked($(this), false);
+	                        setDisabled($(this), true);	
+	                    }
+	                });
+       		}else{
+       			$('form input:checkbox[id^="fund10-"]').each(function(idx) {
+	                    if(idx == 0) {
+	                        setChecked($(this), true);
+	                        setDisabled($(this), true);
+	                    } else {
+	                    	setChecked($(this), false);
+	                        setDisabled($(this), false);	
+	                    }
+	                });
+       		}
+        }
+        
+//        setChecked($input,isCheck);
+        
+        if((!isInit) && ((listType == 'inter') || (listType == 'abroad') || (listType == 'online') || (listType == 'index') || (listType == 'theme') || (listType == 'saving') )) {
+          
+            
+            if(name != 'OperCoCdList2' && name != 'OperCoCdList') {
+                
+                
+                doList(true);
+            }
+        }
+        
+       
+    }
+    
+    
+    function initSelectbox() {
+        $('select').change(function(){
+            var id = $(this).attr('id');
+            var val = $(this).find('option:selected').val();
+            var $f = $.form('frm');
+            
+            
+            if(id == 'fundAttr') {
+            	$(this).find('option').each(function(idx) {
+        			$("#"+$(this).val()).remove();	
+        		});
+            	
+            	if(val != ""){
+            		$f.val(val, 'Y');
+            	}  
+            }
+            
+            
+            if(id == 'listRow') {
+                $f.val('rowsPerPage', $("#listRow>option:selected").val());
+            }
+            
+            _common.reinit_ui();
+        });
+    }
+    
+    
+    function callFund3MEstab(start, cnt, fundCds) {
+        var $f = $.form('frm');
+        $f.val('fundCds', fundCds);
+        $.cs.ajax({
+            async: true,
+            url      : '/finance/fund/smart_search.do',
+            data     : $f.toParameterString('fund3MEstab', false),
+            loadingStart : false,
+            loadingEnd   : false,
+            success  : function(data) {
+        
+                if(typeof data.errorMsg  != 'undefined') {
+                    alert(data.errorMsg);
+                    return;
+                }
+                
+                if(typeof data.chartMap != 'undefined' && typeof data.chartMap.outRec1 != 'undefined') {
+                    var list = data.chartMap.outRec1;
+                    for(var i = 0; i < cnt ; i++) {
+                        
+                        
+                        drawFund3MEstab(start, i, list);
+                    }
+                }
+            }
+        });
+    }
+    
+    
+    function drawFund3MEstab(start, rowId, list) {
+        var totKfrEstabAm = [];
+        var trdgDate = [];
+        var isZero = true;
+        var tbHTML = new Array(); 
+        
+        for(var i = 0; i < list.length; i++) {
+            var price = eval('list[i].A_PRFT_RANK' + (parseInt(rowId) + 1));            
+           
+            price = parseFloat(($.util.trim(price) / 100000000).toFixed(2));            
+            totKfrEstabAm.push(price);
+            
+            if(isZero && price != '0.00') isZero = false;
+            if(i == 10 || i == (list.length - 10)) {
+//                trdgDate.push($.util.dateFormat($.util.trim(list[i].ZRN_DT), 'yyyy.MM'));
+                trdgDate.push('');
+            } else { 
+                trdgDate.push('');
+            }
+            
+            tbHTML.push("<tr>");
+            tbHTML.push("<td>"+$.util.dateFormat($.util.trim(list[i].ZRN_DT), 'yyyy-MM-dd')+"</td>");
+            tbHTML.push("<td>"+BondUtil.to_percent(price,2)+"</td>");
+            tbHTML.push("</tr>");
+        }
+        if(isZero) {
+            totKfrEstabAm = [];
+            trdgDate = [];
+        }else{
+        	$('#fund3MEstabDiv_blind' + (parseInt(start) + parseInt(rowId))).append(tbHTML.join(""));	//장차법관련 hidden table
+        }
+        
+        options = {
+                chart: {
+                    renderTo: 'fund3MEstabDiv' + (parseInt(start) + parseInt(rowId))
+                },
+                title: {
+                    text: ''
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: [{
+                    categories: trdgDate,
+                    labels: {
+                        style: {
+                            width: '90px',
+                            fontSize: '10px'
+                        },
+                        enabled: false
+                    },
+                    lineColor: 'white',
+                    tickWidth: 0,
+                    minorTickWidth: 0
+                }],
+                yAxis: {
+                    labels: {
+                        formatter: function() {
+                            return BondUtil.to_percent(this.value,2);
+                        },
+                        style: {
+                            fontSize: '10px'
+                        }
+                    },
+                    title: {
+                        text: ''
+                    },
+                    opposite: true,
+                    gridLineWidth: 0,
+                    minorGridLineWidth: 0
+        
+                },
+                exporting: { 
+                    enabled: false
+                }, 
+                credits: {
+                    enabled: false
+                },
+                legend: {
+                    enabled: false
+                },
+                tooltip: {
+                    formatter: function() {
+                        return this.series.name + ' : ' + BondUtil.to_percent(this.y,2) + ' 억원';
+                    }
+                },
+                plotOptions: {
+                    spline: {
+                        lineWidth: 1.5,
+                        point: {
+                            events: {
+    	                    	legendItemClick: function () {
+    		                     return false; 
+    		                    }
+                        	}
+                        }
+                    },
+                    area: {
+                        lineWidth: 1,
+                        fillColor: '#2768C3',
+                        marker: {
+                            enabled: false
+                        },
+                        shadow: false,
+                        states: {
+                            hover: {
+                                lineWidth: 1
+                            }
+                        },
+                        threshold: null
+                    }
+                },
+                lang: {
+                    noData: $.msg.NO_DATA_RESULT
+                },
+                noData: {
+                    style: $.util.noChartData()
+                },
+                series: [{
+                    name: '설정액',
+                    type: 'area',
+                    color: '#e3ecf7',
+                    data: totKfrEstabAm
+                }]
+            };                    
+                
+        chart = new Highcharts.Chart(options);
+        
+        
+        
+        
+        totKfrEstabAm = [];
+        trdgDate = [];
+    }
+    
+    
+    function initCompare() {
+        
+        $('#compareAllChk').click(function(){
+            setChecked($('[name=compareChk]'), $(this).is(':checked'));
+        });
+        
+        
+        $('a[name=compareBtn]').click(function(){
+            
+        	$.util.compareFundPopup("",$('[name=compareChk]:checked'));
+        	
+        	
+//            
+//            $.cs.ajax({
+//                async: false,
+//                url: '/finance/fund/compare.do?cmd=compareCnt',
+//                loadingStart: false,
+//                loadingEnd: false,
+//                success: function(data){
+//                    if(typeof data.errorMsg != 'undefined') {
+//                        alert(data.errorMsg);
+//                        return false;
+//                    }
+//                    
+//                    var fundCnt = data.fundCnt; 
+//                    var loginYn = data.loginYn;
+//                    var $chk = $('[name=compareChk]:checked');
+//                    var chkCnt = $chk.size();
+//                    var fundCds = '';
+//                    
+//                    if(loginYn == "Y"){                    	
+//                    	if(chkCnt == 0){
+//                    		alert('비교상품을 선택해주세요.\n저장된 상품과의 비교는 1개 이상부터 가능합니다.');
+//                    		return false;
+//                    	}else if((chkCnt + fundCnt) < 2) {
+//                    		if(fundCnt == 0){
+//                    			alert('비교 상품을 선택해주세요.\n비교는 2개 이상부터 가능합니다.');		
+//                    		}else{
+//                    			alert('비교상품을 선택해주세요.\n저장된 상품과의 비교는 1개 이상부터 가능합니다.');
+//                    		}
+//                            return false;
+//                    	}
+//                    }else{
+//                    	if((chkCnt) < 2) {
+//                    		alert('비교 상품을 선택해주세요.\n비교는 2개 이상부터 가능합니다.');
+//                            return false;
+//                    	}
+//                    }
+//
+//                    if(chkCnt > 4) {
+//                        alert('비교는 최대 4개까지 가능합니다.');
+//                        return false;
+//                    }
+//                    
+//                    $chk.each(function(idx) {
+//                    	fundCds += (idx == 0 ? '' : ',') + $(this).val();
+//                    });
+//                    
+//                    
+//                    $.util.compareFundPopup(fundCds);
+//                }
+//            });
+        });
+    }
+    
+    
+    function buyFund(FundCd){
+        $.util.buyFund(FundCd);
+    }
+    
+    
+    function hideOperLay(){
+        $('#operLayDiv').hide();
+    }
+    
+    
+    function showOperLay(){
+        $('#operLayDiv').show();
+    }
+    
+    
+    function toggleOperLay(){
+        if($('#operLayDiv').css('display') == 'none') {
+            showOperLay();
+        } else {
+            hideOperLay();
+        }
+    }
+    
+    
+    function selectOperLay(){
+        hideOperLay();
+        doList();
+    }
+//-->
+</script>
+
+<div class="board-paging">
+    <p class="total"></p>
+    <div class="fr">
+        <span class="date" id="maxTrdDtSpan"></span>
+        <a href="javascript:initList();" class="refresh">초기화</a>
+    </div>
+</div>
+
+<div class="search-code">
+	<form>
+    <div class="fl">    	
+        <a name="compareBtn" href="#" class="btn4" title="팝업 띄움">체크비교</a>
+        <label for="fund0-1" class="single"><input type="checkbox" name="fundGrop" id="fund0-1" value="Y">대표펀드보기</label>
+        <ul class="sorting2" list_type="간략보기" >
+            <li class="on"><a href="#" class="list">간략보기</a></li>
+            <li><a href="#" class="list2">자세히보기</a></li>
+        </ul>
+    </div>
+    </form>
+    <div class="fr">
+        <ul class="sorting">
+            <li class="off" ><a href="#" column="FstSetDt" class="down" title="내림차순으로 정렬">설정일</a></li>
+            <li class="off"><a href="#" column="fundClasSum" class="down" title="내림차순으로 정렬">총설정액</a></li>
+            <li class="off"><a href="#" column="TotRwrt" class="up" title="올림차순으로 정렬">총보수</a></li>
+        </ul>
+        <fieldset>
+        <legend>펀드 결과목록 선택사항</legend>
+        	
+            <select name="" id="fundAttr" title="펀드속성 선택">
+                <option value="" selected>펀드속성</option>
+                <option value="recomYn">추천</option>
+                <option value="bestYn">판매베스트</option>
+                <option value="newYn">신규</option>
+                <option value="rankYn">랭킹</option>
+                <option value="themeYn">테마</option>
+            </select>
+            <select id="listRow" name="listRow" title="리스트 개수 선택">
+	            <option value="10" selected>10개씩</option>    
+	            <option value="20" >20개씩</option>
+                <option value="40">40개씩</option>
+                <option value="60">60개씩</option>
+            </select>
+            <a href="javascript:goListCnt();" class="btn3" title="펀드 검색결과 보기">보기</a>
+        </fieldset>
+    </div>
+</div>
+<table class="tbl-type fund fsL">
+<caption><strong>펀드 검색 결과 목록</strong></caption>
+<colgroup>
+    <col style="width:3%">
+    <col>
+    <col style="width:8.5%" span="4">	<!-- 20140615 수정 -->
+    <col style="width:13%">
+    <col style="width:11%">
+</colgroup>
+    <thead class="sort">
+        <tr>
+            <th scope="col" rowspan="2"><input type="checkbox" name="compareAllChk" id="compareAllChk" value="" title="펀드 전체 선택"></th>
+            <th scope="col" rowspan="2" class="off"><a column="FundKrNm" href="#" class="up" title="올림차순으로 정렬">펀드명</a></th>
+            <th scope="colgroup" colspan="4">수익률(%)</th>
+            <th scope="col" rowspan="2">3개월 설정액 추이<br>(억)</th>
+            <th scope="col" rowspan="2">바로가기</th>
+        </tr>
+        <tr>
+            <th scope="col" class="off"><a column="Yield1M" href="#" class="down" title="내림차순으로 정렬">1개월</a></th>
+            <th scope="col" class="off"><a column="Yield3M" href="#" class="down" title="내림차순으로 정렬">3개월</a></th>
+            <th scope="col" class="off"><a column="Yield6M" href="#" class="down" title="내림차순으로 정렬">6개월</a></th>
+            <th scope="col" class="off"><a column="AnnYield" href="#" class="down" title="내림차순으로 정렬">1년</a></th>
+        </tr>
+    </thead>
+    
+    <tbody id="bodyList">
+    </tbody>
+</table>
+<div class="btn-area">
+    <span class="fl">
+        <a name="compareBtn" href="#" class="btn4" title="팝업 띄움">체크비교</a>
+    </span>
+    <div class="pagingNav">
+    </div>
+</div>
+
+<div class="guide">
+    <p>알려드립니다!</p>
+    <ul>
+     
+        <li>본 자료는 정보제공을 목적으로 하는 것이며 상품의 판매나 권유를 위해 작성되는 것이 아닙니다.</li>
+        <li>상기 수익률은 세전 수익률로 표기되었으며, 과거의 운용실적이 미래의 수익을 보장하는 것은 아닙니다. MMF 펀드의 경우, 연환산수익률로 제공됩니다.</li>
+        <li>집합투자증권은 예금자보호법에 따라 예금보험공사가 보호하지 않으며, 운용결과에 따른 이익 또는 손실이 투자자에게 귀속됩니다. 가입하시기 전에 투자대상, 환매방법 및 보수 등에 관하여 (간이)투자설명서를 반드시 읽어보시기 바랍니다.</li>
+        <li>해외펀드는 환율변동에 따라 투자자산의 가치가 변동될 수 있습니다.</li>
+        <li>적립식 투자 시 매입하는 시점과 환매하는 시점에 따라 투자손익이 달라질 수 있습니다.</li>
+        <li>당일 기준가는 8:30분에 갱신이 되며, 8:30분 이전에 전일가 기준으로 조회됩니다.<br>(단, 해외뮤추얼펀드의 경우 9:30분에 갱신됩니다.)</li>
+        <li>자본시장과 금융투자업에 관한 법률 시행령 제 223조에 따라 사모집합기구가 아닌 투자신탁을 설정하고 1년이 지난 후 1개월간 계속하여 투자신탁의 원본액이 50억원 미만인 경우 투자신탁의 해지 사유에 해당됩니다.</li>
+        
+    
+    </ul>
+</div>
+                </div>
+                
+                
+                <div id="mutuelListDiv" style="display:none;">
+                    
+<!-- 2014.10.28 코드 인스펙션 수정 -->
+<script type="text/javascript">document.write('<script src="/js/finance/bond/bond.utils.js?cb='+_CACHE_BUSTER+'" charset="utf-8"></'+'script>');</script>
+<!-- // 2014.10.28 코드 인스펙션 수정 -->
+<script type="text/javascript">
+<!--
+    
+    function initMutuelList() {
+        
+        
+        $.cs.event.sortEvent('thead.sort tr th a, ul.sorting li a', 'sortMutuelList');
+        
+        
+        //$.cs.event.enterEvent('#SearchText',loadMutuelList);
+        $('#SearchText').keyup(function(e){
+				if(e.keyCode == 13){
+			        var $f = $.form('frm');
+			        $f.val('currentPage',1);
+			        $f.val('rowsPerPage', $("#mListRow>option:selected").val());
+					loadMutuelList(true);
+				}
+		});
+        
+        
+        $('a[column=AnnYieldOrd]').trigger('click'); 
+    }
+    
+    
+    function goMutuelListCnt() {
+    	n_click_logging('/finance/fund/goods.do?MENU_ID='+getMenuCode()+'&ACTION_ID=SR01&ITEM_CD=&WRAP_SVC_CD=&START_DATE=&END_DATE=&KEYWORD=&CAMPAIGN_ID=&CAMPAIGN_ACT_ID=&CAMPAIGN_LINKUSR_ID=');
+        var $f = $.form('frm');
+        $f.val('currentPage',1);
+        $f.val('rowsPerPage', $("#mListRow>option:selected").val());
+        loadMutuelList();
+    }
+    
+    
+    function loadMutuelList(isKeyword) {
+    	
+        var $f = $.form('frm');
+        var $list = $("#bodyMutuelList").empty();
+        $(".mutuelTotal").empty();
+        $f.val('rowsPerPage', $("#mListRow>option:selected").val());
+        $("#maxTrdDtSpan").html('기준일자 : ');
+        
+        $.cs.ajax({
+            async: true,
+            url: '/finance/fund/goods.do',
+            data: $f.toParameterString('list_mutuel_data', false),
+            loadingStart: true,
+            loadingEnd: true,      
+            success: function(data){
+                if(typeof data.errorMsg != 'undefined') {
+                    alert(data.errorMsg);
+                    return;
+                }
+                
+                var currentPage = $f.val('currentPage');
+                var rowsPerPage = $f.val('rowsPerPage');
+                var totalCount = 0;
+                var strHtml = "";
+                if(typeof data.list == 'undefined') {
+                    strHtml += $.util.noTableData(6, $.msg.NO_SEARCH_RESULT, '', $f.val('SearchText'));
+                } else {
+                    totalCount = data.totalCount;
+                    for(var i = 0; i < data.list.length; i++){
+                        strHtml += '<tr>';
+                        strHtml += '    <td class="l"><p class="title"><a href="javascript:goMutuelDetail(\'' + data.list[i].FundCd + '\',\'' + data.list[i].fundInvtTypeCode + '\');">' + data.list[i].FundKrNm + (data.list[i].OnlineYN == 'Y' ? '(온라인)' : '') + '</a></p></td>';
+                        strHtml += '    <td>' + data.list[i].FundType + '</td>';
+                        strHtml += '    <td class="r">' + BondUtil.to_percent(data.list[i].StdPrc, 2) + ' ' + data.list[i].CrrCd + '</td>';
+                        strHtml += '    <td class="r">' + BondUtil.to_percent(data.list[i].StdPrc2, 4) + '</td>';
+                        if(data.list[i].AnnYield == '') {
+                            strHtml += '    <td class="r">-</td>';
+                        } else if(data.list[i].AnnYield == 0) {
+                            strHtml += '    <td class="r">0.00%</td>';
+                        } else if(data.list[i].AnnYield >= 0) {
+                            strHtml += '    <td class="r"><em class="up">' + BondUtil.to_percent(data.list[i].AnnYield, 2) + '%</em></td>';
+                        } else {
+                            strHtml += '    <td class="r"><em class="down">' + BondUtil.to_percent(data.list[i].AnnYield, 2) + '%</em></td>';
+                        }
+                        strHtml += '    <td>';
+                        strHtml += '        <ul class="btn-list type2">';
+//                        if('Y' == data.list[i].HTSBuyPossYN && 'Y' == data.list[i].NewPossYN) {
+//                            strHtml += '            <li><a href="javascript:buyFund(\'' + data.list[i].FundCd + '\');" class="btn2">매수</a></li>';
+//                        } else  if('N' == data.list[i].HTSBuyPossYN && 'Y' == data.list[i].NewPossYN) {
+                            strHtml += '            <li><a href="javascript:openMenu(\'M1231757535406\');" class="btn3 branch">지점가입</a></li>';
+//                        } else {
+//                            strHtml += '            <li><a href="#" class="btn3 cancel default">가입불가</a></li>';
+//                        }
+                        strHtml += '        </ul>';
+                        strHtml += '    </td>';
+                        strHtml += '</tr>';
+                    }
+                }
+                
+                $("#maxTrdDtSpan").html('기준일자 : ' + $.util.dateFormat(data.maxTrdDt, 'yyyy-MM-dd'));
+                $(".mutuelTotal").html($.util.getTotal(totalCount, rowsPerPage, currentPage, $f.val('SearchText')));
+                $list.html(strHtml);
+                _common.reinit_ui();
+                
+                
+                _common.build_paging_ui($('#divMutuel'), totalCount, rowsPerPage, currentPage, function(n) {
+                    goMutuelPage(n);                 
+                });
+                
+            }
+        });
+    }
+    
+    
+    function sortMutuelList(sortColumn, sortType) {
+        var $f = $.form('frm');
+        $f.val('currentPage', '1');
+        $f.val('sortColumn', sortColumn);
+        $f.val('sortType', sortType);
+    
+        
+        loadMutuelList();
+    }
+    
+    
+    function getParam2() {
+        var $f = $.form('frm');
+        var listType = 'smart';
+        var oParam = {};
+        if(listType == 'smart') {
+            oParam.openMenuCode = 'M1303804003625';
+            oParam.openMenuName = '스마트검색';
+            oParam.openMenuUrl = '/finance/fund/search_cached.pop';
+        }
+        if(listType == 'mutuel') {
+            oParam.openMenuCode = 'M1397118137044';
+            oParam.openMenuName = '해외뮤추얼';
+            oParam.openMenuUrl = '/finance/fund/goods/mutuel.pop';
+        }
+        oParam.openMenuUrl += '?openMenuUrl=' + encodeURIComponent(encodeURIComponent($f.toParameterString()));
+        
+        return oParam;
+    }
+    
+    
+    function goMutuelDetail(FundCd, fundInvtTypeCode) {
+        var oParam = getParam2();
+        var listType = 'smart';
+        var param = '?cmd=details_mutuel'
+                  + '&listType='         + listType
+                  + '&FundCd='           + FundCd
+                  + '&fundInvtTypeCode=' + fundInvtTypeCode
+                  + '&openMenuCode='     + oParam.openMenuCode
+                  + '&openMenuName='     + oParam.openMenuName
+                  + '&openMenuUrl='      + encodeURIComponent(encodeURIComponent(oParam.openMenuUrl));
+        
+        openMenu(oParam.openMenuCode, '/finance/fund/goods.do' + param, "뮤추얼펀드상세");
+    }
+    
+    
+    function goMutuelRowsPerPage() {
+        var $f = $.form('frm');
+        $f.val('currentPage', '1');
+        $f.val('rowsPerPage', $("#mListRow>option:selected").val());
+        loadMutuelList();
+    }
+    
+    
+    function goMutuelPage(page) {
+        var $f = $.form('frm');
+        $f.val('currentPage', page);
+        loadMutuelList();
+    }
+    
+        
+    function clearMutuelList() {
+    	/*
+        var $f = $.form('frm');
+        location.href = '/finance/fund/goods/mutuel.pop?SearchText=' + encodeURIComponent($.trim($f.val('SearchText')));
+        */
+        $("#mListRow").val("20").change();
+        var sortColumn = $("#sortColumn").val();
+        var sortType = $("#sortType").val();
+        if(sortColumn == "AnnYieldOrd" && sortType == "DESC"){
+        	loadMutuelList();	
+        }else{
+        	 $('a[column=AnnYieldOrd]').trigger('click');
+        }
+    }
+    
+    
+    
+    function buyFund(FundCd){
+        $.util.buyFund(FundCd);
+    }
+//-->
+</script>
+</head>
+            
+<div class="board-paging">
+    <p class="total mutuelTotal"></p>
+    <div class="fr">
+
+        <span class="date" id="maxTrdDtSpan"></span>
+        <a href="javascript:clearMutuelList();" class="refresh">초기화</a>
+    </div>
+</div>
+
+<div class="search-code">
+    <div class="fr">
+        <ul class="sorting">
+            <li class="off"><a column="OPRN_BEGN_DATE" href="#" class="down" title="내림차순으로 정렬">신상품</a></li>
+        </ul>
+        <fieldset>
+        <legend>펀드 결과목록 선택사항</legend>
+            <select id="mListRow" name="listRow" title="리스트 개수 선택">
+                <option value="20" selected>20개씩</option>
+                <option value="40">40개씩</option>
+                <option value="60">60개씩</option>
+            </select>
+            <a href="javascript:goMutuelListCnt();" class="btn3" title="펀드 검색결과 보기">보기</a>
+        </fieldset>
+    </div>
+</div>
+
+<table class="tbl-type fund">
+<caption><strong>펀드 검색 결과 목록</strong></caption>
+<colgroup>
+    <col>
+    <col style="width:11%" span="4">
+    <col style="width:13%">
+</colgroup>
+    <thead class="sort">
+        <tr>
+            <th scope="col" class="off"><a column="FundKrNm" href="#" class="up" title="올림차순으로 정렬">펀드명</a></th>
+            <th scope="col" >유형</th>
+            <th scope="col" >기준가</th>
+            <th scope="col" >대비</th>
+            <th scope="col" class="off"><a column="AnnYieldOrd" href="#" class="down" title="내림차순으로 정렬">연 수익률</a></th>
+            <th scope="col" >바로가기</th>
+        </tr>
+    </thead>
+    
+    <tbody id="bodyMutuelList">
+    </tbody>
+</table>
+
+<div class="btn-area">
+    <div class="pagingNav" id="divMutuel"">
+    </div>
+</div>
+                </div>
+            </div>
+            
+            <div id="tab_content2" style="display:none;">
+                
+            </div>
+            
+            <div id="tab_content3" style="display:none;">
+                
+            </div>
+            
+            <div id="tab_content4" style="display:none;">
+                
+            </div>
+            
+        </div>
+        <!-- // Contents -->
+    </div>
+    <!-- // Container -->
+    <!-- Footer -->
+    
+
+<script>
+	
+	function completeFooter(){
+// 		if(getCookie_qa("open_lay_qna") != "done"){
+// 			$('#lay-qna').show();
+// 		}else{
+			$('#lay-qna').hide();
+// 		}
+		
+		relationMenuAppend();
+		
+		
+
+	};
+
+	
+	function relationMenuAppend(){
+		var html = "";
+		var _getMenuCode = "";
+		_getMenuCode = window.getMenuCode();
+		if(_getMenuCode != "$INDEX"){
+			//console.log(window.getMenuCode());
+			$.cs.ajax({
+				url		 : '/common/relationMenu.do',
+				data	 : "cmd=menu_info&menuCode="+window.getMenuCode(),
+				dataType : 'json',
+				async 	 : false,
+				loadingStart: false,
+				loadingEnd: false,
+				success  : function(data) {
+					if(typeof data.errorMsg != 'undefined') {
+						alert(data.errorMsg);
+						return;
+					}
+					else
+					{
+						if(data.menuData.length != 0){
+							$('.related-menu').show();
+							html+="<dt>연관메뉴</dt>";
+							html+="<dd>";
+							html+="		<ul>";
+							for(var i = 0 ; i < data.menuData.length ; i++){
+								html+="			<li><a href=\"javascript:window.openMenu('"+data.menuData[i].MENU_CODE+"');\">"+data.menuData[i].TITLE+"</a></li>";
+							}
+							html+="		</ul>";
+							html+="</dd>";
+							$('.related-menu').append(html);
+						}
+					};
+				}
+			});
+		}
+	}
+
+	function openFamilySite(){
+		switch(String($('#family option:selected').val())){
+			case '1':
+				window.open('http://www.samsungsecurities.co.kr/common/main.do?cmd=main');
+				break;
+
+			case '2':
+				window.open('http://www.samsungsecurities.com/common/main.do?cmd=main');
+				break;
+
+			case '3':
+				//window.location.href='/retirerich/';
+				window.open('/retirerich/index.html?menuCode=M1338337488062');
+				break;
+			case '4':
+				window.open('http://english.samsungpop.com');
+				break;
+		};
+	}
+	
+	function QADayClose(){
+		var cookieName = "open_lay_qna";	// 금융복합센터
+		setCookie_qa( cookieName , "done" , 1 );
+		$('#lay-qna').hide();
+	}
+	
+	function setCookie_qa( name, value, expiredays ) { 
+    	var todayDate = new Date(); 
+        todayDate.setDate( todayDate.getDate() + expiredays ); 
+        document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"; 
+	} 	
+	
+	function getCookie_qa(name) {
+		var name = name + "=";
+		var startIndex = document.cookie.indexOf(name);
+		if (startIndex == -1) return null;
+
+		var endIndex = document.cookie.indexOf(";", startIndex + name.length);
+
+		if (endIndex == -1) endIndex = document.cookie.length;
+
+		return unescape(document.cookie.substring(startIndex + name.length, endIndex));
+	}
+	// 검색
+	$(function(){
+		try {	// POPUP등 userSession 없는 경우 예외처리
+			top.getUserSession().grade2 == 'X' ? $('.quick_menu').eq(3).find('li').eq(3).show() : $('.quick_menu').eq(3).find('li').eq(3).hide();
+		} catch (e) {
+			$('.quick_menu').eq(3).find('li').eq(3).show();
+		}
+	});
+	
+	$("#inpMenuSearch").on("click keyup keypress focus blur", function (e) {
+		$(this).val().trim() == "" ? $(this).prev("label:first").show() : $(this).prev("label:first").hide();
+		if (e.keyCode ==  13) {
+			goMenuSearch();
+		}
+	});
+	$("#btnTotalSearch").click(function () {
+		openMenu("M1231762629937", "/sscommon/jsp/search_ux/search.jsp?query=" + $("#textPlaceHoder").val());
+	});
+	$("#btnMenuSearch").click(function() {goMenuSearch()});
+</script>
+
+
+
+<div id="footer" data-role="common-ui-footer">
+	<span class="blind">바닥글</span>
+
+	<div class="lay-qna" data-role="common-ui-footer-floating" id="lay-qna" style="display: none;">
+		<a href="javascript:window.openModal('QNA');" class="qna">Q&amp;A</a>
+		<a href="javascript:QADayClose();" class="qna-close" title="Q&amp;A 하루동안 보이지 않기">Q&amp;A 하루동안 보이지 않기</a>
+		
+	</div>
+
+	<div class="section">
+		<dl class="related-menu" style="display:none">
+		</dl>
+	</div>
+
+	<div class="customer">
+		<ul>
+			<li><a href="javascript:window.openMenu('M1454044981520');">처음 오셨나요?</a></li>
+			<li><a href="javascript:window.openMenu('M1454049358088');">온라인계좌개설</a></li>
+			<li><a href="javascript:window.openMenu('M1454052579079');">ID 등록</a></li>
+			<li><a href="javascript:window.openMenu('M1232546869750');">ID 비밀번호재등록</a></li>
+			<li><a href="javascript:window.openMenu('M1231757398796');">공인인증서/OTP</a></li>
+			<li><a href="javascript:window.openMenu('M1454054560185');">시스템다운로드</a></li>
+		</ul>
+	</div>
+	<div class="section">
+		<div class="fl">
+			<ul>
+				<li><a href="javascript:window.openMenu('M1231757933578');" >개인정보취급/처리방침</a></li>
+				<li><a href="javascript:window.openMenu('M1243932395609');">보호금융상품등록</a></li>
+				<li><a href="javascript:window.openWindow('http://dis.kofia.or.kr/fs/dis2/com/COMOutItemAnn.jsp?certifyKey=56b5dcf368687fc83006dbd912ef0320168-7b75','_blank','700','678');" title="새창열림">상품공시실</a></li>
+				<li><a href="javascript:window.openPopup('/company/moral/popup_moral.pop');" title="새창열림">사이버감사팀</a></li>
+				<li><a href="http://www.fss.or.kr/fss/scop/main.jsp" target="_blank" title="새창열림">증권불공정거래 신고</a></li>
+				<!-- <li><a href="javascript:window.openMenu('M1231757755500','/customer/guide.do?cmd=notice_view&MenuSeqNo=3809');">전자금융사기접수</a></li> -->
+			</ul>
+			<ul>
+				<li><a href="javascript:window.openMenuPopup('M1231757755500','/customer/guide.do?cmd=notice_view&tabIndex=0&MenuSeqNo=4205');" title="팝업열림">투자권유대행인지원</a>/<a href="javascript:window.openMenu('M1342572656687');">등록인력조회</a></li>
+				<!-- <li><a href="http://www.samsungpop.com/jsp/company/moral/p_moral01.jsp" target="_blank" title="새창열림">사이버감사팀</a></li> -->
+
+
+				<!-- <li><a href="#" onclick="window.open('http://dis.kofia.or.kr/fs/dis2/com/COMOutItemAnn.jsp?certifyKey=56b5dcf368687fc83006dbd912ef0320168-7b75','_blank','scrollbars=no,status=yes,toolbar=no,resizable=yes,location=no,menubar=no,width=700,height=678');">상품공시실</a></li> -->
+				<li><a href="javascript:window.openMenu('M1231757939656', 'terms=05');">온라인서비스장애 대처방법</a></li>
+				<li><a href="http://203.244.122.181" target="_blank">POP 고객원격지원</a></li>
+				<li><a href="javascript:window.openMenu('M1231757398796');">공인인증제도</a></li>
+				<li><a href="javascript:window.openMenu('M1454329737235');">고객보안서비스</a></li>
+				<li><a href="javascript:window.openMenu('M1232546899156')">사이트맵</a></li>
+			</ul>
+			<ul class="popPhoneInfo">
+				<li><a href="javascript:window.openMenu('M1231757535406');"><b>지점안내</b></a> <em>1588-3305</em></li>
+				<li><a href="javascript:window.openMenu('M1401710120030');"><b>주식/금융상품상담</b></a> <em>1577-4100</em></li>
+				<li><a href="javascript:window.openMenu('M1231757557468');"><b>Family Center</b></a> <em>1588-2323 / 1544-1544</em></li>
+				<li><b>VOC 접수전용</b> <em>080-911-0900</em></li>
+				<li><a href="http://www.ssfutures.com" target="_blank" title="새창열림"><b>달러선물/해외선물(삼성선물)</b></a> <em>02-3707-3999</em></li>
+				<li><b>해외주식 야간데스크</b> <em>02-2020-7306</em><br>(23:30~06:00, 서머타임 22:30~05:00)</li>
+				<li><b>퇴직연금상담센터</b> <em>1644-5500</em></li>
+
+			</ul>
+			<ul class="adr">
+				<li>서울특별시 중구 세종대로 67 삼성본관빌딩<span>|</span>대표이사 사장 윤용암<span>|</span>사업자등록번호 202-81-48588</li>
+			</ul>
+		</div>
+
+		<div class="fr">
+			<p><img src="/ux/images/common/footer/samsung_logo.gif" alt="삼성증권"></p>
+			<p>
+				<img src="/ux/images/common/footer/award.gif" alt="고객만족도 증권업부문 1위 수상 | NCSI, KS-SQI, KCSI">
+			</p>
+			<p>
+				<img src="/ux/images/common/footer/award2.gif" alt="고객만족도 증권업부문 1위 수상 | NCSI, KS-SQI, KCSI">
+				<a href="http://webwatch.or.kr/certification/situation.html" target="_blank" title="새창열림"><img src="/ux/images/common/footer/wa.gif" alt="미래창조과학부 WEB ACCESSIBILITY 마크(웹 접근성 품질인증 마크)"></a>
+				<img src="/ux/images/common/footer/award3.gif" alt="고객만족도 증권업부문 1위 수상 | NCSI, KS-SQI, KCSI">
+			</p>
+			<select id="family" name="family" title="패밀리사이트 선택" data-position-top="Y" onchange="openFamilySite();">
+				<option selected>Family Site</option>
+				<option value="1" title="새창열림">회사소개</option>
+				<option value="2" title="새창열림">회사소개 English</option>
+				<option value="3">은퇴자산관리</option>
+				<option value="4">English</option>
+			</select>
+
+		</div>
+	</div>
+</div>
+    <!-- // Footer -->
+</div>
+
+<script>
+
+</script>
+<form name="frmFrameCheck" method="post" target="_self">
+
+    <input type="hidden" name="rtnHfnURL" value="/finance/fund/search_cached.pop">
+
+</form>
+<script>
+	
+	if(
+			window.parent==window.self &&
+			window.opener==null
+	){
+		
+			//alert("잘못된 접근입니다. 메뉴를 이용하시기 바랍니다.\n\n메인화면으로 이동합니다.");
+			
+		$.form("frmFrameCheck").action="/";
+		//$.form("frmFrameCheck").submit();
+	}
+
+	
+	function initFooter() {
+		if($('#wrap')[0] == undefined && $('#popWrap')[0] == undefined ) {
+			try {
+				if(!existTnKey()) {
+					var $f=$.form("frmFrameCheck");
+					$f.val('url', $f.val('rtnHfnURL'));
+					$f.action="/sscommon/jsp/trustnet_gw.jsp";
+					$f.submit();
+				}
+			} catch(e) { }
+		}
+	}
+</script>
+
+</body>
+</html>

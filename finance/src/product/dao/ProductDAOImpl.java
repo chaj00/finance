@@ -1,7 +1,7 @@
 package product.dao;
 
 import static fw.JdbcTemplate.close;
-import static fw.Query.*;
+import static fw.PrdSearchQuery.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

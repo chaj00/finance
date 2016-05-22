@@ -42,10 +42,14 @@ public class ProductLoadServlet extends HttpServlet {
 
 			
 		}*/
+		
+		String pathurl ="/product/ProductSearch.jsp";		
+		String forwardview = "/layout/mainLayout.jsp";
 		req.setAttribute("opNamelist", opNamelist);
 		req.setAttribute("productlist", productlist);
+		req.setAttribute("pathurl", pathurl);
 		
-		RequestDispatcher rd = req.getRequestDispatcher("/product/product_main.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher(forwardview);
 		rd.forward(req, res);
 		
 		

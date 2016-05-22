@@ -1,0 +1,16 @@
+@CHARSET "EUC-KR";
+#contents h1{
+	font-size:26px;
+	margin-bottom:20px;
+	padding-bottom:8px;
+	border-bottom:8px; 
+	solid #e6e6e9;
+	letter-spacing:-1.5px
+	}
+	
+#contents h2{
+	font-size:22px;
+	margin-top:-3px;
+	margin-bottom:10px
+	}
+	

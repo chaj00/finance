@@ -25,7 +25,7 @@ public class ProductSearchServlet extends HttpServlet {
 		String pattern = "#.####";
 		request.setCharacterEncoding("euc-kr");
 		response.setContentType("application/json;charset=utf-8");
-		System.out.println("넘어오긴했냐?");
+		//System.out.println("넘어오긴했냐?");
 		ArrayList<ProductDTO> prdlist =null;
 		ProductDTO prd = new ProductDTO();
 		ProductService service = new ProductServiceImpl();
@@ -40,7 +40,7 @@ public class ProductSearchServlet extends HttpServlet {
 		prd.setOpname(request.getParameter("opname"));
 		
 		
-		System.out.println("컨트롤러 통과");
+		//System.out.println("컨트롤러 통과");
 		prdlist = service.search(prd);
 		/*System.out.println("dds");
 		int length = opNamelist.size();
@@ -93,7 +93,7 @@ public class ProductSearchServlet extends HttpServlet {
 				
 				jObject.put("threeprofit", dfomat.format(Float.parseFloat(prd2.getThreeprofit())*100));
 			}
-			System.out.println(prd2.getSixprofit());
+			//System.out.println(prd2.getSixprofit());
 			if(prd2.getSixprofit()==null){
 				jObject.put("sixprofit", " - ");
 			}else{
@@ -116,11 +116,11 @@ public class ProductSearchServlet extends HttpServlet {
 			}
 					
 			jArray.add(i,jObject);
-			System.out.println(jArray.get(i).toString());
+			//System.out.println(jArray.get(i).toString());
 			
 			
 		}
-		System.out.println(jArray.toJSONString());
+		//System.out.println(jArray.toJSONString());
 		PrintWriter pw = response.getWriter();
 		pw.print(jArray.toJSONString());
 		
