@@ -1,6 +1,6 @@
 package analysis.dao;
 
-import static fw.Query.*;
+import static fw.AnalysisQuery.*;
 import static fw.JdbcTemplate.*;
 
 import java.sql.Connection;
