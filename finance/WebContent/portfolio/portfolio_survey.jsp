@@ -441,7 +441,7 @@
                             })
                             }
                             
-                            alert(sPlan)
+                           // alert(sPlan)
 							var $form_plan = $("#form_plan");
 							var rp =
 								$('<input type="hidden" id="vRiskPoint" name="vRiskPoint" value="' + vRiskPoint + '" />');
@@ -543,7 +543,7 @@
                 onFinish: function (data) {
                     var objRisk = new Object();
                     objRisk.param01 = data.from;
-                    alert(objRisk.param01+ " test")
+                    //alert(objRisk.param01+ " test")
                     var json_data = JSON.stringify({ data: objRisk });
                     
                     

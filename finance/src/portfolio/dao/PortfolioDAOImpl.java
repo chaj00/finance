@@ -13,7 +13,7 @@ public class PortfolioDAOImpl implements PortfolioDAO{
 	public ArrayList<PortfolioDTO> getPlist(String type, String std, String rownum, Connection con) throws SQLException {
 		ArrayList<PortfolioDTO> pf_plist = new ArrayList<PortfolioDTO>();
 		PortfolioDTO dto = null;
-		System.out.println("--DAO-- checked!");
+		//System.out.println("--DAO-- checked!");
 		
 		Statement stmt = con.createStatement();
 		StringBuffer test = new StringBuffer();
@@ -29,7 +29,7 @@ public class PortfolioDAOImpl implements PortfolioDAO{
 		test.append(PLIST6);
 		test.append(rownum);
 		//test.append(PLIST7);
-		System.out.println(test.toString());
+		//System.out.println(test.toString());
 
 		 
 		ResultSet rs = stmt.executeQuery(test.toString());
@@ -45,7 +45,7 @@ public class PortfolioDAOImpl implements PortfolioDAO{
 					rs.getString(6));
 			pf_plist.add(dto);
 		}
-		System.out.println(pf_plist.size());
+		//System.out.println(pf_plist.size());
 		close(rs);
 		close(stmt);
 		
