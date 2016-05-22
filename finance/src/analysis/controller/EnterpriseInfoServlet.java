@@ -30,21 +30,23 @@ public class EnterpriseInfoServlet extends HttpServlet {
 		
 		ProductService service = new ProductServiceImpl();
 //		LOGIC logic = new LOGICimpl();
-		ArrayList<EnterpriseDTO> entlist = service.select_ent1(encode);
-		ArrayList<EnterpriseinfoDTO> entinfolist = service.select_ent(encode);
+		ArrayList<EnterpriseDTO> entlist = service.select_ent(encode);
+		ArrayList<EnterpriseinfoDTO> entinfolist = service.select_entinfo(encode);
 		ArrayList<BpsepsDTO> bpsEpsList = service.bps(entinfolist);
 		ArrayList<StockinfoDTO> stoinfo = service.select_sto(encode);	
 		
-		System.out.println(bpsEpsList);
+//		System.out.println(bpsEpsList);
 		//데이터 공유(이름 잘 기억해둘 것) 공유와 꺼내쓰는 것 같도록 (list.jsp와 같도록)
+		req.setAttribute("entlist", entlist);
 		req.setAttribute("entinfolist", entinfolist);
 		req.setAttribute("bpsEps", bpsEpsList);
 		req.setAttribute("stoinfo", stoinfo);
+		System.out.println("servlet>> entlist : "+entlist);
 //		System.out.println(bpsEps.toString());
 		
 		req.setAttribute("pathurl", pathurl);
 		forwardview="/layout/mainLayout.jsp";
-		System.out.println(page);
+//		System.out.println(page);
 		
 		/*if(page.equals("analysis")){
 			req.setAttribute("pathurl", pathurl);

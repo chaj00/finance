@@ -20,13 +20,13 @@ import analysis.logic.LOGICimpl;
 public class ProductServiceImpl implements ProductService{
 	
 	@Override
-	public ArrayList<EnterpriseDTO> select_ent1(String encode) {
+	public ArrayList<EnterpriseDTO> select_ent(String encode) {
 		ArrayList<EnterpriseDTO> list = new ArrayList<EnterpriseDTO>();
 		Connection con = getConnect();
 		AnalysisDAO dao = new AnalysisDAOImpl();
 		try {
-			list = dao.select_ent1(con, encode);
-//			System.out.println("service=>" + list.size());
+			list = dao.select_ent(con, encode);
+			System.out.println("service=>" + list.size());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -34,12 +34,12 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	@Override
-	public ArrayList<EnterpriseinfoDTO> select_ent(String encode) {
+	public ArrayList<EnterpriseinfoDTO> select_entinfo(String encode) {
 		ArrayList<EnterpriseinfoDTO> list = new ArrayList<EnterpriseinfoDTO>();
 		Connection con = getConnect();
 		AnalysisDAO dao = new AnalysisDAOImpl();
 		try {
-			list = dao.select_ent(con, encode);
+			list = dao.select_entinfo(con, encode);
 //			System.out.println("service=>" + list.size());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -66,7 +66,7 @@ public class ProductServiceImpl implements ProductService{
 		LOGIC logic = new LOGICimpl();
 		
 		ArrayList<BpsepsDTO> bpsEpsList = logic.bps(list);
-		System.out.println("service>>"+bpsEpsList);
+//		System.out.println("service>>"+bpsEpsList);
 		return bpsEpsList;
 	}
 

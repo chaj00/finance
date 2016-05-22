@@ -1,3 +1,4 @@
+<%@page import="analysis.dto.EnterpriseDTO"%>
 <%@page import="analysis.dto.EnterpriseinfoDTO"%>
 <%@page import="analysis.dto.StockinfoDTO"%>
 <%@page import="analysis.dto.BpsepsDTO"%>
@@ -82,7 +83,7 @@ div.col-md-10{
 ArrayList<EnterpriseinfoDTO> entinfolist = (ArrayList<EnterpriseinfoDTO>)request.getAttribute("entinfolist");
 ArrayList<BpsepsDTO> bpsEpsList = (ArrayList<BpsepsDTO>)request.getAttribute("bpsEps");
 ArrayList<StockinfoDTO> stolist = (ArrayList<StockinfoDTO>)request.getAttribute("stoinfo");
-
+ArrayList<EnterpriseDTO> entlist = (ArrayList<EnterpriseDTO>)request.getAttribute("entlist");
 %>
 </script>
 	<!--/.container--> 
@@ -93,16 +94,25 @@ ArrayList<StockinfoDTO> stolist = (ArrayList<StockinfoDTO>)request.getAttribute(
 				<ul class="list-group">
 
 					<li> **PBR Band & 기업정보** </li>
+					
 					<li class="list-group-item">
-					<a href="/finance/stocklist.do?page=analysis&pathurl=/analysis/0pbrband/pbr_samsung.jsp">삼성전자</a></li>
+					<script type="text/javascript">
+					<%
+				 		int size= entlist.size();
+				 		String enterlist;
+					for (int i = 0; i<= size;i++){ %>
+				 		enterlist = "<li class='list-group-item'><a href=/finance/stocklist.do?page=analysis&pathurl=/analysis/0pbrband/pbr_samsung.jsp" +<%= entlist.get(0)%>+"</a></li>";
+						<%}%>
+					</script>
+					<!-- <a href="/finance/stocklist.do?page=analysis&pathurl=/analysis/0pbrband/pbr_samsung.jsp">삼성전자</a></li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">아모레퍼시픽</a></li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">포스코</a></li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">네이버</a></li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">한국전력</a></li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">현대차</a></li>
-					<li class="list-group-item"><a href="/finance/stocklist.do">하이닉스</a></li>
+					<li class="list-group-item"><a href="/finance/stocklist.do">하이닉스</a></li> -->
 					
-
+					
 					<!-- <li> **기업정보** </li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">삼성전자</a></li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">현대차</a></li>

@@ -12,10 +12,10 @@ import analysis.dto.StockinfoDTO;
 
 public interface ProductService {
 	
-	ArrayList<EnterpriseDTO> select_ent1(String encode);
+	ArrayList<EnterpriseDTO> select_ent(String encode);
 	
 	// 기업 정보 조회하기
-	ArrayList<EnterpriseinfoDTO> select_ent(String encode);
+	ArrayList<EnterpriseinfoDTO> select_entinfo(String encode);
 	
 	// 주가 정보 조회하기
 	ArrayList<StockinfoDTO> select_sto(String encode);

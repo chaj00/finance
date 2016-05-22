@@ -15,21 +15,39 @@ import analysis.dto.StockinfoDTO;
 
 public class AnalysisDAOImpl implements AnalysisDAO{
 	@Override
-	public ArrayList<EnterpriseinfoDTO> select_ent(Connection con, String encode) throws SQLException {
-		EnterpriseinfoDTO stoinfo = null; // 항상 객체로 넘겨
+	public ArrayList<EnterpriseDTO> select_ent(Connection con, String encode) throws SQLException{
+	EnterpriseDTO ent = null; // 항상 객체로 넘겨
+	PreparedStatement ptmt = con.prepareStatement(ENTERPRISE);
+	ptmt.setString(1, encode);
+	ResultSet rs = ptmt.executeQuery();
+	ArrayList<EnterpriseDTO> dlist = new ArrayList<EnterpriseDTO>();
+	
+	while (rs.next()) {
+		ent = new EnterpriseDTO (rs.getString(1), rs.getString(2));				
+		dlist.add(ent);
+		System.out.println("DAO >> "+ent);								
+	}
+	close(rs);
+	close(ptmt);
+	return dlist;
+	}
+	
+	@Override
+	public ArrayList<EnterpriseinfoDTO> select_entinfo(Connection con, String encode) throws SQLException {
+		EnterpriseinfoDTO entinfo = null; // 항상 객체로 넘겨
 		PreparedStatement ptmt = con.prepareStatement(ENTERPRISEINFO);
 		ptmt.setString(1, encode);
 		ResultSet rs = ptmt.executeQuery();
 		ArrayList<EnterpriseinfoDTO> dlist = new ArrayList<EnterpriseinfoDTO>();
 		
 		while (rs.next()) {
-			stoinfo = new EnterpriseinfoDTO (rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),			
+			entinfo = new EnterpriseinfoDTO (rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5),			
 														rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10),
 															rs.getInt(11), rs.getInt(12), rs.getInt(13), rs.getInt(14), rs.getInt(15),
 																rs.getInt(16), rs.getInt(17), rs.getInt(18), rs.getInt(18) ,rs.getInt(20),
 																	rs.getInt(21), rs.getInt(22), rs.getInt(23), rs.getInt(24), rs.getInt(25), rs.getInt(26));
 //				System.out.println(stoinfo);												
-			dlist.add(stoinfo);
+			dlist.add(entinfo);
 		}
 		
 		close(rs);
@@ -57,22 +75,5 @@ public class AnalysisDAOImpl implements AnalysisDAO{
 		return dlist;
 	}
 
-	@Override
-	public ArrayList<EnterpriseDTO> select_ent1(Connection con, String encode) throws SQLException{
-	EnterpriseDTO stoinfo = null; // 항상 객체로 넘겨
-	PreparedStatement ptmt = con.prepareStatement(ENTERPRISE);
-	ptmt.setString(1, encode);
-	ResultSet rs = ptmt.executeQuery();
-	ArrayList<EnterpriseDTO> dlist = new ArrayList<EnterpriseDTO>();
 	
-	while (rs.next()) {
-		stoinfo = new EnterpriseDTO (rs.getString(1), rs.getString(2));
-//			System.out.println(stoinfo);												
-		dlist.add(stoinfo);
-	}
-	
-	close(rs);
-	close(ptmt);
-	return dlist;
-	}
 }
