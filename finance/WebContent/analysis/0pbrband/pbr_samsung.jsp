@@ -193,7 +193,7 @@ String c1="15", c2="14", c3="13", c4="12", c5="11", c6="10", c7="9", c8="8", c9=
        
  		for (int i = 0; i< bpsepssize;i++){ 
 		 %>
-
+		
 [ "<%=entinfolist.get(i).getYear()+b4%>" , <%= stolist.get(i).getAprPrice() %>, 
 									<%=(double)bpsEpsList.get(i).getFiBps()*(double)(1+(Math.pow((bpsEpsList.get(i).getSeBps()/bpsEpsList.get(i).getFiBps()),(1/12.0))-1))%>,
 								    <%=(double)bpsEpsList.get(i).getFiBps2()*(double)(1+(Math.pow((bpsEpsList.get(i).getSeBps2()/bpsEpsList.get(i).getFiBps2()),(1/12.0))-1))%>,
