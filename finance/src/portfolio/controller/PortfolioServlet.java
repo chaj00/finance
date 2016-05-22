@@ -63,7 +63,7 @@ public class PortfolioServlet extends HttpServlet {
 		String Life = req.getParameter("txt_Life");
 		
 		
-		System.out.println("현재나이    : "+NowAge);
+		/*System.out.println("현재나이    : "+NowAge);
 		System.out.println("투자가능액 : "+MonthSavePrice);
 		System.out.println("은퇴흐소득 : "+ForecastRetire);
 		System.out.println("투자년       : "+InvestTerm);
@@ -71,7 +71,7 @@ public class PortfolioServlet extends HttpServlet {
 		System.out.println("목표금액    : "+TargetPrice);
 		System.out.println("은퇴후소득 : "+TargetPriceRetire);
 		System.out.println("은퇴나이    : "+ForecastRetire);
-		System.out.println("평균수명    : "+Life);
+		System.out.println("평균수명    : "+Life);*/
 		
 		
 
@@ -292,7 +292,7 @@ public class PortfolioServlet extends HttpServlet {
 			req.setAttribute("List_Result", List_Result);
 			
 		}else{
-			System.out.println("failed");
+			//System.out.println("failed");
 		}
 		
 
