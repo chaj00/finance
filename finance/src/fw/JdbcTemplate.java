@@ -1,10 +1,6 @@
 package fw;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 //모든 DB처리 메소드에서 중복되는 기능을 모아놓은 클래스
 public class JdbcTemplate {
