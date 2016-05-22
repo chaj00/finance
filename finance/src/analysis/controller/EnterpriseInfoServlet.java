@@ -17,8 +17,8 @@ import analysis.dto.StockinfoDTO;
 import analysis.service.ProductService;
 import analysis.service.ProductServiceImpl;
 
-
 @WebServlet(name = "stocklist", urlPatterns = { "/stocklist.do" })
+
 public class EnterpriseInfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		

@@ -136,16 +136,9 @@ ArrayList<EnterpriseDTO> entlist = (ArrayList<EnterpriseDTO>)request.getAttribut
 		</div>
 		<div class="col-md-10">
 			<div class="section">
-				<h3>★★기본적 기업 분석 툴 제공★★</h3>
-				<h4>1. PBR밴드</h4>
-				<h4>2. 재무제표</h4>
-				
+
 				<img src= "analysis/image/PBR.jpg">
-				<h5>[해석예시]</h5>
-				<h5>위 기업의 경우 과거 5년동안 순자산비율(Price-Book-value Ratio)이 0.73배에서 1.78배를 기록하고 있습니다.
-				즉 1주당 순자산(BPS)의 최저 0.73배에서 최고 1.78배의 시장가격(주가)을 형성하고 있습니다.</h5>
-				<h5>평균적으로 1.12배의 PBR을 나타내고 있고, 오늘의 PBR은 0.84배로써 분석기간 내 하위 25%미만에 속하여 
-						자산가치(Book-value)측면에서 저평가 구간에 속해있다고 판단할 수 있습니다.</h5>	
+				
 						
 			</div>
 		</div>

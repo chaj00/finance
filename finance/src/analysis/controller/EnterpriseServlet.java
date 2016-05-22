@@ -18,7 +18,7 @@ import analysis.service.ProductService;
 import analysis.service.ProductServiceImpl;
 
 
-@WebServlet(name = "entlist", urlPatterns = { "/entlist.do" }) 
+@WebServlet(name = "entlist", urlPatterns = { "/entlist.do" })
 public class EnterpriseServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		String pathurl = "/analysis/layout/analysis_layout.jsp";
