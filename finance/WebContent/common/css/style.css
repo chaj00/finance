@@ -6,7 +6,7 @@
 	src:local(¡Ø), url(webfont/NotoSans-Regular.wofff') format('woff');
 }
 
-@import url(../../fonts.googleapis.com/css�family=Roboto_400,500,700.css);
+@import url(/finance/common/fonts.googleapis.com/css�family=Roboto_400,500,700.css);
 
 
 /* --------------------------------------------------------	*/
@@ -32,7 +32,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-webkit-text-size-adjust: 100%;	
 	cursor:default;
-	1overflow:hidden;
+	overflow:hidden;
 	background: #f3f3f3;
 }
 
@@ -156,11 +156,17 @@ a:hover, a:active, a:focus {
 	cursor:pointer;
 	color:#000000;
 	letter-spacing: -2px;
+	
+	-webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
 }
 
 .btn_common_on:hover {
 	background-color:#c52d2f;
 	color:#FFFFFF;
+	
+	-webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
 }
 
 .btn_common_on a{
@@ -175,11 +181,19 @@ a:hover, a:active, a:focus {
 	cursor:pointer;
 	color:#FFFFFF;
 	letter-spacing: -2px;
+	
+	
+	-webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
 }
 
 .btn_common_off:hover {
 	background-color:#c52d2f;
 	color:#FFFFFF;
+	
+	
+	-webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
 }
 
 .btn_common_off a{
