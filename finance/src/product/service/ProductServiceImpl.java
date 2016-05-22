@@ -17,7 +17,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public ArrayList<String> opNameSelect() {
 		ArrayList<String> opNamelist = new ArrayList<String>();
-		System.out.println("서비스");
+		//System.out.println("서비스");
 		Connection con = getConnect();
 		ProductDAO dao = new ProductDAOImpl();
 		try{
@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public ArrayList<ProductDTO> select() {
 		ArrayList<ProductDTO> productlist = new ArrayList<ProductDTO>();
-		System.out.println("서비스");
+		//System.out.println("서비스");
 		Connection con = getConnect();
 		ProductDAO dao = new ProductDAOImpl();
 		try{

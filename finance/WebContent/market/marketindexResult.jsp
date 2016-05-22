@@ -78,17 +78,7 @@ li{list-style:none;}
 .market_data .head_info span{display:inline-block;vertical-align:middle}
 </style>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-$(function(){
-    $(".head_info").hide();
-    $(".data_lst").mouseover(function(){
-        $(".head_info:visible").slideUp("middle");
-        $(this).next('.head_info:hidden').slideDown("middle");
-        return false;
-    })
-});
-</script> 
+
 
 </head>
 <body>
