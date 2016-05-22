@@ -1,6 +1,5 @@
 <%@page import="analysis.dto.StockinfoDTO"%>
 <%@page import="analysis.dto.BpsepsDTO"%>
-<%@page import="analysis.dto.EnterpriseDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>

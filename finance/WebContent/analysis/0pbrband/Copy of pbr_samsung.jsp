@@ -218,8 +218,8 @@ String c05="05", c06="06", c07="07", c08="08", c09="09", c10="10", c11="11", c12
   									  <%=(int)bpsEpsList.get(i).getFoBps()*(int)(1+(Math.pow((bpsEpsList.get(i+1).getFoBps()/bpsEpsList.get(i).getFoBps()),(1/12.0))-1))%>,
 								      <%=(int)bpsEpsList.get(i).getFoBps2()*(int)(1+(Math.pow((bpsEpsList.get(i+1).getFoBps2()/bpsEpsList.get(i).getFoBps2()),(1/12.0))-1))%>,
 									  <%=(int)bpsEpsList.get(i).getFoBps3()*(int)(1+(Math.pow((bpsEpsList.get(i+1).getFoBps3()/bpsEpsList.get(i).getFoBps3()),(1/12.0))-1))%>,
-									  <%=(int)bpsEpsList.get(i).getFoBps4()*(int)(1+(Math.pow((bpsEpsList.get(i+1).getFoBps4()/bpsEpsList.get(i).getFoBps4()),(1/12.0))-1))%>
-									  ], <%}%>
+									  <%=(int)bpsEpsList.get(i).getFoBps4()*(int)(1+(Math.pow((bpsEpsList.get(i+1).getFoBps4()/bpsEpsList.get(i).getFoBps4()),(1/12.0))-1))%>], 
+									  <%}%>
         
         
         ]);

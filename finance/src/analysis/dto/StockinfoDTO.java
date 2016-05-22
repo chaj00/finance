@@ -1,27 +1,27 @@
 package analysis.dto;
 
 public class StockinfoDTO {	//변수명 DB랑 똑같이
-	public int encode;
-	public int year;
-	public int janPrice;
-	public int febPrice;
-	public int marPrice;
-	public int aprPrice;
-	public int mayPrice;
-	public int junPrice;
-	public int julyPrice;
-	public int augPrice;
+	 String encode;
+	 String year;
+	 int janPrice;
+	 int febPrice;
+	 int marPrice;
+	 int aprPrice;
+	 int mayPrice;
+	 int junPrice;
+	 int julyPrice;
+	 int augPrice;
 	
-	public int sepPrice;
-	public int octPrice;
-	public int novPrice;
-	public int decPrice;
+	 int sepPrice;
+	 int octPrice;
+	 int novPrice;
+	 int decPrice;
 	
 	public StockinfoDTO(){
 		super();
 	}
 
-	public StockinfoDTO(int encode, int year, int janPrice, int febPrice,
+	public StockinfoDTO(String encode, String year, int janPrice, int febPrice,
 			int marPrice, int aprPrice, int mayPrice, int junPrice,
 			int julyPrice, int augPrice, int sepPrice, int octPrice,
 			int novPrice, int decPrice) {
@@ -44,7 +44,7 @@ public class StockinfoDTO {	//변수명 DB랑 똑같이
 
 	@Override
 	public String toString() {
-		return "DTO_STOCKINFO [encode=" + encode + ", year=" + year
+		return "StockinfoDTO [encode=" + encode + ", year=" + year
 				+ ", janPrice=" + janPrice + ", febPrice=" + febPrice
 				+ ", marPrice=" + marPrice + ", aprPrice=" + aprPrice
 				+ ", mayPrice=" + mayPrice + ", junPrice=" + junPrice
@@ -53,19 +53,19 @@ public class StockinfoDTO {	//변수명 DB랑 똑같이
 				+ ", novPrice=" + novPrice + ", decPrice=" + decPrice + "]";
 	}
 
-	public int getEncode() {
+	public String getEncode() {
 		return encode;
 	}
 
-	public void setEncode(int encode) {
+	public void setEncode(String encode) {
 		this.encode = encode;
 	}
 
-	public int getYear() {
+	public String getYear() {
 		return year;
 	}
 
-	public void setYear(int year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 

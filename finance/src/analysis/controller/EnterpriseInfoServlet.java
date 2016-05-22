@@ -21,29 +21,35 @@ import analysis.service.ProductServiceImpl;
 @WebServlet(name = "stocklist", urlPatterns = { "/stocklist.do" })
 public class EnterpriseInfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String encode="005930";	
+		
+		String encode=req.getParameter("encode");	
 		String page = req.getParameter("page");
 		String pathurl = req.getParameter("pathurl");
 		String forwardview = "";
-		
+//		System.out.println(encode);
 		//비지니스 메소드 call
 		
 		ProductService service = new ProductServiceImpl();
 //		LOGIC logic = new LOGICimpl();
-		ArrayList<EnterpriseDTO> entlist = service.select_ent(encode);
 		ArrayList<EnterpriseinfoDTO> entinfolist = service.select_entinfo(encode);
 		ArrayList<BpsepsDTO> bpsEpsList = service.bps(entinfolist);
-		ArrayList<StockinfoDTO> stoinfo = service.select_sto(encode);	
+		ArrayList<StockinfoDTO> stoinfo = service.select_sto(encode);
+		ArrayList<EnterpriseDTO> entlist = service.select_entname();
+		
+//		System.out.println(bpsEpsList.size());
+//		System.out.println(entinfolist.size());
+//		System.out.println(stoinfo.size());
+//		System.out.println(entlist.size());
 		
 //		System.out.println(bpsEpsList);
 		//데이터 공유(이름 잘 기억해둘 것) 공유와 꺼내쓰는 것 같도록 (list.jsp와 같도록)
-		req.setAttribute("entlist", entlist);
 		req.setAttribute("entinfolist", entinfolist);
 		req.setAttribute("bpsEps", bpsEpsList);
 		req.setAttribute("stoinfo", stoinfo);
-		System.out.println("servlet>> entlist : "+entlist);
-//		System.out.println(bpsEps.toString());
+		req.setAttribute("entlist", entlist);
 		
+//		System.out.println(bpsEps.toString());
+		pathurl ="/analysis/0pbrband/pbr_samsung.jsp";
 		req.setAttribute("pathurl", pathurl);
 		forwardview="/layout/mainLayout.jsp";
 //		System.out.println(page);

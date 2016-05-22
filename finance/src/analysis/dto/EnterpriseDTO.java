@@ -5,13 +5,18 @@ public class EnterpriseDTO {
 	String encode;
 	String ename;
 	
+	
 	public EnterpriseDTO() {
+	}
+	public EnterpriseDTO(String ename) {
+		this.ename = ename;
 	}
 	public EnterpriseDTO(String encode, String ename) {
 		super();
 		this.encode = encode;
 		this.ename = ename;
 	}
+	
 	@Override
 	public String toString() {
 		return "EnterpriseDTO [encode=" + encode + ", ename=" + ename + "]";

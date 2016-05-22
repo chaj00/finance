@@ -2,8 +2,12 @@ package analysis.dto;
 
 public class EnterpriseinfoDTO {
 
+	/*String ename;*/
+	
 	String encode;
 	String year;
+	
+	
 	int focapitalstock;
 	int foasset;
 	int fodept;
@@ -29,17 +33,20 @@ public class EnterpriseinfoDTO {
 	int fiprofit;
 	int finetprofit;
 	
+	
+	
 	public EnterpriseinfoDTO() {
 	}
 	
-	public EnterpriseinfoDTO(String encode, String year, int focapitalstock,
+	public EnterpriseinfoDTO( String encode, String year, int focapitalstock,
 			int foasset, int fodept, int foqsales, int foprofit,
 			int fonetprofit, int thcapitalstock, int thasset, int thdept,
 			int thqsales, int thprofit, int thnetprofit, int secapitalstock,
 			int seasset, int sedept, int seqsales, int seprofit,
 			int senetprofit, int ficapitalstock, int fiasset, int fidept,
-			int fiqsales, int fiprofit, int finetprofit) {
+			int fiqsales, int fiprofit, int finetprofit/*, String ename*/) {
 		super();
+		
 		this.encode = encode;
 		this.year = year;
 		this.focapitalstock = focapitalstock;
@@ -66,6 +73,7 @@ public class EnterpriseinfoDTO {
 		this.fiqsales = fiqsales;
 		this.fiprofit = fiprofit;
 		this.finetprofit = finetprofit;
+	/*	this.ename = ename;*/
 	}
 	@Override
 	public String toString() {
@@ -240,6 +248,14 @@ public class EnterpriseinfoDTO {
 	public void setFinetprofit(int finetprofit) {
 		this.finetprofit = finetprofit;
 	}
+
+	/*public String getEname() {
+		return ename;
+	}
+
+	public void setEname(String ename) {
+		this.ename = ename;
+	}*/
 	
 	
 	

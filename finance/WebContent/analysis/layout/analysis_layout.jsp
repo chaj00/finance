@@ -1,3 +1,4 @@
+<%@page import="com.sun.xml.internal.txw2.Document"%>
 <%@page import="analysis.dto.EnterpriseDTO"%>
 <%@page import="analysis.dto.EnterpriseinfoDTO"%>
 <%@page import="analysis.dto.StockinfoDTO"%>
@@ -45,12 +46,12 @@
 
 <style type="text/css">
 ol.groove {
-	border-style: groove;
+/* 	border-style: groove; */
 	margin-top: 10px;
 }
 
 ol.groove1 {
-	border-style: groove;
+/* 	border-style: groove; */
 	margin-top: inherit;
 	margin-left: inherit;
 }
@@ -60,13 +61,16 @@ div.groove {
 }
 
 div.col-md-12 {
-	border-style: groove;
+/* 	border-style: groove; */
 	margin-top: 35px;
 }
 
 div.section {
-	border-style: groove;
-	margin-top: 35px;
+/* 	border-style: groove; */
+	margin-top: inherit;
+	font-size: 20px;
+	font:Monospace;
+	color:navy;
 }
 
 div.col-md-10{
@@ -84,6 +88,7 @@ ArrayList<EnterpriseinfoDTO> entinfolist = (ArrayList<EnterpriseinfoDTO>)request
 ArrayList<BpsepsDTO> bpsEpsList = (ArrayList<BpsepsDTO>)request.getAttribute("bpsEps");
 ArrayList<StockinfoDTO> stolist = (ArrayList<StockinfoDTO>)request.getAttribute("stoinfo");
 ArrayList<EnterpriseDTO> entlist = (ArrayList<EnterpriseDTO>)request.getAttribute("entlist");
+
 %>
 </script>
 	<!--/.container--> 
@@ -93,17 +98,20 @@ ArrayList<EnterpriseDTO> entlist = (ArrayList<EnterpriseDTO>)request.getAttribut
 
 				<ul class="list-group">
 
-					<li> **PBR Band & 기업정보** </li>
-					
-					<li class="list-group-item">
-					<script type="text/javascript">
 					<%
 				 		int size= entlist.size();
-				 		String enterlist;
-					for (int i = 0; i<= size;i++){ %>
-				 		enterlist = "<li class='list-group-item'><a href=/finance/stocklist.do?page=analysis&pathurl=/analysis/0pbrband/pbr_samsung.jsp" +<%= entlist.get(0)%>+"</a></li>";
+				 		
+						for (int i = 0; i< size;i++){ 
+							EnterpriseDTO dto = new EnterpriseDTO();
+							dto=entlist.get(i);		
+							
+						%>
+				 			<li class="list-group-item">
+				 		
+				 			<a href="/finance/stocklist.do?encode=<%=dto.getEncode() %>"><%=dto.getEname() %></a></li>
+				 			<%-- <%=dto.getEncode() %> --%>
 						<%}%>
-					</script>
+						
 					<!-- <a href="/finance/stocklist.do?page=analysis&pathurl=/analysis/0pbrband/pbr_samsung.jsp">삼성전자</a></li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">아모레퍼시픽</a></li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">포스코</a></li>
@@ -117,7 +125,6 @@ ArrayList<EnterpriseDTO> entlist = (ArrayList<EnterpriseDTO>)request.getAttribut
 					<li class="list-group-item"><a href="/finance/stocklist.do">삼성전자</a></li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">현대차</a></li>
 					<li class="list-group-item"><a href="/finance/stocklist.do">아모레퍼시픽</a></li> -->
-					<li><a href="./" class="current">시작 페이지로</a></li>
 				</ul>
 
 				<!-- <ul>
@@ -129,11 +136,17 @@ ArrayList<EnterpriseDTO> entlist = (ArrayList<EnterpriseDTO>)request.getAttribut
 		</div>
 		<div class="col-md-10">
 			<div class="section">
-				<ol>
-					<li>One</li>
-					<li>Two</li>
-					<li>Three</li>
-				</ol>
+				<h3>★★기본적 기업 분석 툴 제공★★</h3>
+				<h4>1. PBR밴드</h4>
+				<h4>2. 재무제표</h4>
+				
+				<img src= "analysis/image/PBR.jpg">
+				<h5>[해석예시]</h5>
+				<h5>위 기업의 경우 과거 5년동안 순자산비율(Price-Book-value Ratio)이 0.73배에서 1.78배를 기록하고 있습니다.
+				즉 1주당 순자산(BPS)의 최저 0.73배에서 최고 1.78배의 시장가격(주가)을 형성하고 있습니다.</h5>
+				<h5>평균적으로 1.12배의 PBR을 나타내고 있고, 오늘의 PBR은 0.84배로써 분석기간 내 하위 25%미만에 속하여 
+						자산가치(Book-value)측면에서 저평가 구간에 속해있다고 판단할 수 있습니다.</h5>	
+						
 			</div>
 		</div>
 	</div>
