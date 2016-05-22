@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-    
-<%@ page import = "java.util.*, portfolio.controller.ParamSetting" %>
+<%@ page import = "portfolio.dto.PortfolioDTO" %>
+<%@ page import = "java.util.*, java.lang.*, java.util.Date, portfolio.controller.ParamSetting" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,7 +29,7 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
-<link rel="shortcut icon" href="/finance/images/ico/favicon.ico">
+<link rel="shortcut icon`" href="/finance/images/ico/favicon.ico">
 <link rel="apple-touch-icon-precomposed" sizes="144x144"
 	href="/finance/images/ico/apple-touch-icon-144-precomposed.png">
 <link rel="apple-touch-icon-precomposed" sizes="114x114"
@@ -59,7 +59,7 @@
 <script src="/finance/common/js/jquery-migrate-1.2.1.min.js"
 	type="text/javascript"></script>
 <script src="/finance/common/js/default.js" type="text/javascript"></script>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
@@ -80,20 +80,47 @@
 	type="text/javascript"></script>
 <script type="text/javascript" src="/finance/common/js/resizewindow.js"></script>
 <script type="text/javascript">
+
+
 <%
 
-ParamSetting ps = new ParamSetting();
+
+
+/* PortfolioDTO pf_data = new PortfolioDTO();
+String st_title = pf_data.getTitle();
+String st_classfy = pf_data.getClassify();
+String st_opcode = pf_data.getOpcode();
+String st_std = pf_data.getStd();
+double st_threepoint = 	Double.parseDouble(String.format("%.3f", pf_data.getThreeprofit()));
+*/
+
+
+
+PortfolioDTO dto = new PortfolioDTO();
+ParamSetting ps = new ParamSetting(); 
+
+int list1 = ((ArrayList<PortfolioDTO>)request.getAttribute("list1")).size();
+int list2 = ((ArrayList<PortfolioDTO>)request.getAttribute("list2")).size();
+int list3 = ((ArrayList<PortfolioDTO>)request.getAttribute("list3")).size();
+int list4 = ((ArrayList<PortfolioDTO>)request.getAttribute("list4")).size(); 
 
 
 String sRiskPoint = request.getParameter("vRiskPoint");
 String sPlan = request.getParameter("sPlan");
+
+
+
+String ETF_Per = request.getParameter("ETF_Per");
+String ETF_GPer = request.getParameter("ETF_GPer");
+String ETF_KPer = request.getParameter("ETF_KPer");
 //sPlan==1
-
-
 String iinitInvestPrice = request.getParameter("txt_initInvestPrice");
 String iMonthSavePrice = request.getParameter("txt_MonthSavePrice");
 String iInvestTerm = request.getParameter("txt_InvestTerm");
 String iInvestTermMon = request.getParameter("txt_InvestTermMon");
+
+
+
 
 //sPlan==2
 //initInvestPrice
@@ -111,76 +138,39 @@ String iNowAge = request.getParameter("txt_NowAge");
 String iTargetPriceRetire = request.getParameter("txt_TargetPriceRetire");
 String iForecastRetire = request.getParameter("txt_ForecastRetire");
 String iLife = request.getParameter("txt_Life");
+String iExpectedPrice = "";
 
 
 
-int val1,val2,val3,val4 = 0;
-
-if(iInvestTermMon != null){
-	val1 = Integer.parseInt(ps.removeNum(iinitInvestPrice));
-	val2 = Integer.parseInt(ps.removeNum(iMonthSavePrice));
-	val3 = Integer.parseInt(ps.removeNum(iInvestTerm));
-	val4 = 0;
-	
-	%>
-	<%-- alert('val 값은 0?'+<%= val4 %>) --%>
-	alert('ee' + <%=iInvestTermMon%>)
-	<%
-}else{
-	val4 = Integer.parseInt(ps.removeNum(iInvestTermMon));
-	%>
-	alert('val 값은 0이 아님'+<%=val4%>)
-
-	<%	
-}
+ArrayList<PortfolioDTO> result_list = (ArrayList<PortfolioDTO>) request.getAttribute("List_Result");
+int size = result_list.size();
 
 
-
-/* int ep = Integer.parseInt(iinitInvestPrice) 
-+ (Integer.parseInt(iMonthSavePrice)*((Integer.parseInt(iInvestTerm)*12)
-										+Integer.parseInt(iInvestTermMon))); 
-	int ep = val1 + val2*((val3*12)+val4);
-
-	String iExpectedPrice = String.valueOf(ep); */
 %>
 
 
-	sPlan = "<%=sPlan%>";
-	sRiskPoint = "<%=sRiskPoint%>";
-	alert(<%=sRiskPoint%>) 
-<%-- 	alert(<%= iExpectedPrice %>+'만원') --%>
+ sPlan = "<%=sPlan%>";
+ sRiskPoint = "<%=sRiskPoint%>";
+ vInvestTermMon = "<%=iInvestTermMon%>";
+ ETF_Per = "<%=ETF_Per%>";
 
-     $(window).load(function () {
-     
-       /* $("#txt_NowAge").autoNumeric('init');
-         $("#txt_ForecastRetire").autoNumeric('init');
-         $("#txt_Life").autoNumeric('init');
-         $("#txt_TargetPriceRetire").autoNumeric('init');
-         $("#txt_initInvestPrice").autoNumeric('init');
-         $("#txt_MonthSavePrice").autoNumeric('init');
-         $("#txt_InvestTerm").autoNumeric('init');
-         $("#txt_InvestTermMon").autoNumeric('init');
-         $("#txt_TargetPrice").autoNumeric('init');  */ 
-         
-        
-         
-        // $("#txt_NowAge").val(test);
+
+$(window).load(function () {
+
 
          $("#RiskPoint").html(sRiskPoint);
          $("#txt_initInvestPrice").val("<%= iinitInvestPrice %>");
          $("#txt_ForecastRetire").val("<%= iForecastRetire%>");
          $("#txt_Life").val("<%= iLife%>");
+         $("#txt_NowAge").val("<%=iNowAge%>");
          $("#txt_TargetPriceRetire").val("<%= iTargetPriceRetire %>");
          $("#txt_initInvestPrice").val("<%= iinitInvestPrice%>");
          $("#txt_MonthSavePrice").val("<%= iMonthSavePrice%>");
          $("#txt_InvestTerm").val("<%= iInvestTerm%>");
          $("#txt_InvestTermMon").val("<%= iInvestTermMon%>");
          $("#txt_TargetPrice").val("<%= iTargetPrice%>");
+    
  
-<%--    var a = "<%= iinitInvestPrice%>tttttt";
-         alert(a) 
-         $("#txt_initInvestPrice").val("<%= iinitInvestPrice%>tttttt");
-         --%>
 <%
 		if(sPlan.equals("1")){
 %>	
@@ -189,13 +179,59 @@ if(iInvestTermMon != null){
 		$(".middle_div3").css("display", "none");
 		//$("#TopHead1_Title").text("기대 금액");
 		$("#targetplan5").removeClass("disp_none");
+		$(".resultmiddlebox").css("display", "none");
+		
 <%
+		int val1 = 0;
+		int val2 = 0;
+		int val3 = 0;
+		int val4 = 0;
+			 if(iInvestTermMon == ""){
+				val1 = Integer.parseInt(ps.removeChar(iinitInvestPrice));
+				val2 = Integer.parseInt(ps.removeChar(iMonthSavePrice));
+				val3 = Integer.parseInt(ps.removeChar(iInvestTerm));
+
+		 	}else{
+				val1 = Integer.parseInt(ps.removeChar(iinitInvestPrice));
+				val2 = Integer.parseInt(ps.removeChar(iMonthSavePrice));
+				val3 = Integer.parseInt(ps.removeChar(iInvestTerm));
+				val4 = Integer.parseInt(ps.removeChar(iInvestTermMon));
+				} 
+		int ep = val1 + val2*((val3*12)+val4);
+		iExpectedPrice = String.valueOf(ep);
+		
+
 		}else if(sPlan.equals("2")){
 %>
 		$(".resultmiddlebox").removeClass("disp_none").addClass("disp_block");
 		$("#middle_plan3").css("display", "none");
 		$("#targetplan5").removeClass("disp_none");
 		$("#targetplan6").removeClass("disp_none");
+<%
+			int val1 = 0;
+			int val2 = 0;
+			int val3 = 0;
+			int val4 = 0;
+			int val5 = 0;
+			
+			 if(iInvestTermMon == ""){
+				val1 = Integer.parseInt(ps.removeChar(iinitInvestPrice));
+				val2 = Integer.parseInt(ps.removeChar(iMonthSavePrice));
+				val3 = Integer.parseInt(ps.removeChar(iInvestTerm));
+//				val5 = Integer.parseInt(ps.removeChar(iTargetPrice));
+				
+		 	}else{
+		 		val1 = Integer.parseInt(ps.removeChar(iinitInvestPrice));
+				val2 = Integer.parseInt(ps.removeChar(iMonthSavePrice));
+				val3 = Integer.parseInt(ps.removeChar(iInvestTerm));
+				val4 = Integer.parseInt(ps.removeChar(iInvestTermMon));
+//				val5 = Integer.parseInt(ps.removeChar(iTargetPrice));
+		 		
+			 	}
+			int ep = val1 + val2*((val3*12) + val4);
+			iExpectedPrice = String.valueOf(ep);
+%>
+
 
 <%
 		}else if(sPlan.equals("3")){
@@ -207,73 +243,111 @@ if(iInvestTermMon != null){
 		$("#targetplan2").removeClass("disp_none");
 		$("#targetplan3").removeClass("disp_none");
 		$("#targetplan4").removeClass("disp_none");
-<%
-		}else{
-%>
-		alert('error = null')
-<%			
+
+<%		
+ 			if(iinitInvestPrice != ""){
+				
+			int val1 = 0;
+			int val2 = 0;
+			int val3 = 0;
+			int val4 = 0;
+			int val5 = 0;
+			 
+/*  			val1 = Integer.parseInt(ps.removeChar(iinitInvestPrice));
+				val2 = Integer.parseInt(ps.removeChar(iNowAge));  */
+				val3 = Integer.parseInt(ps.removeChar(iTargetPriceRetire));
+				val4 = Integer.parseInt(ps.removeChar(iForecastRetire));
+				val5 = Integer.parseInt(ps.removeChar(iLife));
+			 
+			int ep = ((val5 - val4) * 12) * val3;
+				iExpectedPrice = String.valueOf(ep);
+			}
+
+
 		}
 %>
 
-            
-            //$("#Riskbar_img").attr("src", "/finance/images/roboadvisor/img_bar_" + $("#txt_Riskpoint").val() + ".png");
-
+     
+     
+            $("#Riskbar_img").attr("src", "/finance/images/roboadvisor/img_bar_" + <%= sRiskPoint %> + ".png");
             $("#btnResearch").click();
         });
 
 
         $(document).ready(function () {
+            
+          	var idate = new Date();
+    		var std_year = idate.getFullYear();
+    		var std_mon = idate.getMonth();
+    		//parseInt(value, 10)
+	     	var vTargetPrice = parseInt(ps.removeChar("<%=iTargetPrice%>"));
+    		var vExpectedPrice = parseInt(ps.removeChar("<%=iExpectedPrice%>"));
+    		
+  
+		  $("#AssetClassP1").text(<%=list1%>*10+"%");
+		  $("#AssetClassP2").text(<%=list2%>*10+"%");	
+		  $("#AssetClassP3").text(<%=list3%>*10+"%");	
+		  $("#AssetClassP4").text(<%=list4%>*10+"%");	
+			
+  			
+     		if(iTargetPrice != ""){
+            $("#TopHead1_Value").text(vTargetPrice); //iTargetPrice
+            $("#TopHead2_Value").text(vExpectedPrice); //iExpectedPrice
+            $("#middle_date1").html(idate.getFullYear()+ parseInt(<%=ps.removeChar(iInvestTerm))%>);
+			$("#middle_date2").html(idate.getMonth());
+    		} 
+            
+			
+			
+  
+            //목표달성 
+            if($("#TopHead1_Value").val() > $("#TopHead2_Value").val() ){
+                $("#middle_ud").text("높음.");
+                $("#middle_ud").css("color", "#62b5e0");
+                $(".resultmiddlebox").css("display", "block");
+                $(".resultmiddlebox").removeClass("resultmiddlebox_min").removeClass("resultmiddlebox_max");
+                $(".resultmiddlebox").addClass("resultmiddlebox_min");
+                $(".middle_itembox1").removeClass("disp_none").removeClass("disp_block");
+                $("#middle_item").css("display", "none");
+                $("#middle_appcomment").text("");
+                
+                                
+            
+            }else{
+                $("#middle_ud").text("낮음.");
+                $("#middle_ud").css("color", "#cb1010");
+                $(".resultmiddlebox").css("display", "block");
+                $(".resultmiddlebox").removeClass("resultmiddlebox_min").removeClass("resultmiddlebox_max");
+                $(".resultmiddlebox").addClass("resultmiddlebox_max");
+                $("#middle_item").css("display", "block");
+<%--                 $("#middle_value1").val(<%=Integer.parseInt(ps.removeChar(iTargetPrice))%>-<%=iExpectedPrice%>);//x --%>
+                
+                
+            }//index
+           
+            
+              
+ 		
 
-            $("#btnResearch").click(function () {
+
+			if(ETF_Per == 1){
+				$("#TopHead3_Value").html(Math.round("<%=Integer.parseInt(ps.removeChar(ETF_GPer))*0.1%>"*100)/100);
+			    $("#TopHead3_Title").text("국내");
+				}
+			else{
+				$("#TopHead3_Value").html(Math.round("<%=Integer.parseInt(ps.removeChar(ETF_KPer))*0.1%>"*100)/100);
+			    $("#TopHead3_Title").text("해외");
+				
+			}
+    
+/*             $("#btnResearch").click(function (){
             	
                 if (fn_InputCheck()) return;
-                var std_date = d.getFullYear() + "-" + d.getMonth();
-                document.getElementById("CAupdate").innerHTML = 
-                std_datevar objPlanData = new Object();
-            	objPlanData.param01 = $("#txt_Riskpoint").val();
-                objPlanData.param02 = $("#txt_Region").val();
-                objPlanData.param03 = $("#txt_Plantype").val();
-                objPlanData.param04 = $("#txt_NowAge").val();
-                objPlanData.param05 = $("#txt_ForecastRetire").val();
-                objPlanData.param06 = $("#txt_Life").val();
-                objPlanData.param07 = $("#txt_TargetPriceRetire").val();
-                objPlanData.param08 = $("#txt_initInvestPrice").val();
-                objPlanData.param09 = $("#txt_MonthSavePrice").val();
-                objPlanData.param10 = $("#txt_InvestTerm").val();
-                objPlanData.param11 = $("#txt_InvestTermMon").val();
-                objPlanData.param12 = $("#txt_TargetPrice").val(); 
 
-                
-                
-               // $("#loadingview").css("display", "block");
-
-/*                 var json_data = JSON.stringify({ data: objPlanData });
-                $.ajax({
-                    type: "POST",
-                    async: false,
-                    url: "/portfolio.do",
-                    data: json_data,
-                    processData: false,
-                    contentType: "Application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (data) {
-
-                        setTimeout(function () {
-                            resultdata(data)
-                        }, 100);
-
-                    },
-                    error: function (request, status, error) {
-                        alert("code:" + request.status + "\n\nmessage: " + request.responseText + "\n\nerror:" + error);
-                        $('#loadingview').css("display", "none");
-                    }
-                });
- */
-
-                function resultdata(data) {
+                 function resultdata(data) {
 
                     //$('#loadingview').css("display", "none");
-                    //var json_obj = JSON.parse(data.d);
+/* 	                var json_obj = JSON.parse(data.d);
                     var splandata = json_obj[0].PlanData;
                     var sAssetdata = json_obj[0].AssetClassData;
                     var sPortpoliodata = json_obj[0].PortpolioData;
@@ -283,29 +357,30 @@ if(iInvestTermMon != null){
                     var sUpdateAssetClass = json_obj[0].UpdateAssetClass;
                     var sUpdatePortpolio = json_obj[0].UpdatePortpolio;
                     var sExpectedUpDown = json_obj[0].ExpectedUpDown;
-
+*/
                     //Data View
-                    //$("#CAupdate").text(json_obj[0].UpdateAssetClass + " 기준");
-                    //$("#Portupdate").text(json_obj[0].UpdatePortpolio + " 기준");
-                    var sDispRst1 = json_obj[0].TargetPrice; //목표금액
-                    var sDispRst2 = json_obj[0].RequiedRtn;  //기대금액
-                    if ($("#txt_Plantype").val() == "1") {
+/*                  $("#CAupdate").text(json_obj[0].UpdateAssetClass + " 기준");
+                    $("#Portupdate").text(json_obj[0].UpdatePortpolio + " 기준");
+                    var sDispRst1 = json_obj[0].TargetPrice;
+                    var sDispRst2 = json_obj[0].RequiedRtn;*/
+                    
+/*                     if ($("#txt_Plantype").val() == "1") {
                         sDispRst1 = json_obj[0].ExpectedPrice;
                         sDispRst2 = "-";
-                    }
-                    $("#TopHead1_Value").text(sDispRst1);//목표금액
-                    $("#TopHead2_Value").text(sDispRst2);//기대금액
-                    $("#TopHead3_Value").text(json_obj[0].RiskPointG);//해외 ETF
+                    } */
 
-                    if ($("#txt_Region").val() == "K") {
-                        $("#TopHead3_Value").text(json_obj[0].RiskPointK);
-                        $("#TopHead3_Title").text("국내");
-                    }
-                    
-                    
-                    var sTargetDate = splandata.split("|")[splandata.split("|").length - 1].split(",")[0];
+/*                  $("#TopHead3_Value").text(json_obj[0].RiskPointG);//
                     $("#middle_date1").text(sTargetDate.split(".")[0]);//목표년도
-                    $("#middle_date2").text(eval(sTargetDate.split(".")[1]));//목표월
+                    $("#middle_date2").text(eval(sTargetDate.split(".")[1]));//목표월 */
+					
+                    
+
+                    
+                    
+                    
+/*                     var sTargetDate = splandata.split("|")[splandata.split("|").length - 1].split(",")[0];
+                    $("#middle_date1").text(sTargetDate.split(".")[0]);//목표년도
+                    
                     $("#middle_value1").text(json_obj[0].InitAppendPrice);	//초기투자
                     $("#middle_value2").text(json_obj[0].MonthlyAppendPrice);//월투자
                     $("#middle_value3").text(json_obj[0].InvestTermY);	//투자년
@@ -315,7 +390,7 @@ if(iInvestTermMon != null){
                     if ($("#txt_Plantype").val() != "1") {
                         $("#middle_ud").removeClass("TargetRate_down").removeClass("TargetRate_up");
                     
-                        switch (sExpectedUpDown) {
+                        switch (sExpectedUpDown) {	//
                             case "-":
                                 $(".resultmiddlebox").css("display", "none");
                                 break;
@@ -339,13 +414,16 @@ if(iInvestTermMon != null){
                                 $("#middle_appcomment").text("목표달성을 위해 다음조건을 검토하세요.");
                                 break;
                         }
-                    }
-
+                    } 
+ 
                     //Google Chart View
                     GChart_Display(splandata, sAssetdata, sPortpoliodata, sColordata, dbPortpolioMax, sDispRst1);
                 }
 
-            });
+            }); */
+            
+            
+            //middle_value1
 
             $("#middle_add1, #middle_add2, #middle_add3").click(function () {
                 var sID = $(this).attr("id");
@@ -390,7 +468,9 @@ if(iInvestTermMon != null){
                 $("#btnResearch").click();
             });
 
-   /*          $("#tab_result01, #tab_result02").click(function () {
+            
+            
+            /* $("#tab_result01, #tab_result02").click(function () {
                 var sTabID = $(this).attr("id");
                 $("#tab_result01, #tab_result02").removeClass("bottom_div1_select");
                 $("#" + sTabID).addClass("bottom_div1_select");
@@ -404,26 +484,25 @@ if(iInvestTermMon != null){
                     $("#chartA, .chart_plan_m").css("display", "none");
                     $("#chartB").css("margin-top", "40px");
                 }
-            }); */
-
+            }); 
+ */
             $("#btn_close, #btn_Portpolio").click(function () {
                 var sTabID = $(this).attr("id");
 
                 if (sTabID == "btn_close") {
-                    //$("#portpolio_detail").css("display", "none");
-                    $("#portpolio_detail").fadeOut(500);
+                    $("#portpolio_detail").css("display", "none");
+                    $("#portpolio_detail").fadeOut(1000);
                     $("#chartB").css("margin-top", "40px");
                 }
 
                 if (sTabID == "btn_Portpolio") {
-                    //$("#portpolio_detail").css("display", "block");
+                    $("#portpolio_detail").css("display", "block");
                     $("#portpolio_detail").fadeIn(1000);
                     $("#chartB").css("margin-top", "-12000px");
                 }
             });
 
             $(".numeric_up, .numeric_down").click(function () {
-            	
                 var sid = $(this).attr("class");
                 var sud = sid.split("_")[1];
                 var stxtID = $(this).parent()[0].childNodes[3].id;
@@ -580,7 +659,6 @@ if(iInvestTermMon != null){
                     $("#txt_TargetPriceRetire_err").text("30만원 이상 작성바랍니다.");
                     bErr = true;
                 }
-                //sTargetPrice = Convert.ToString((Convert.ToInt64(sLife) - Convert.ToInt64(sForecastRetire)) * 12 * Convert.ToInt64(sTargetPriceRetire));
                 var inewTargetPrice = (iLife - iForecastRetire) * 12 * iTargetPriceRetire;
 
                 if (inewTargetPrice < iinitInvestPrice + ((iMonthSavePrice * 12) * (iForecastRetire - iNowAge))) {
@@ -595,202 +673,46 @@ if(iInvestTermMon != null){
         
 
         //Google 사용선언
-        google.load("visualization", "1", { packages: ["corechart"] });
-        google.charts.setOnLoadCallback(drawChart);
-        function drawChart() {
-            var d_data = google.visualization.arrayToDataTable([
-              ['Task', '10'],
-              ['Work',     4],
-              ['Eat',      1],
-              ['Commute',  4],
-              ['Watch TV', 1],
-
-            ]);
-
-            var d_options = {
-            		
-            		
-              //title: 'My Daily Activities',
-              pieHole: 0.3,
-              slices: { 0: { color: '#2D7DA4' }, 1: { color: '#6AA42F' }, 2: { color: '#FFBD20' }, 3: { color: '#DB3615' }},
-              'legend': { position: 'none' },
-              width: 340,
-              height: 330,
-              pieSliceText: 'percentage',
-              fontSize: 20,
-              backgroundColor: "#ffffff",
-              'is3D': true,
-              enableInteractivity: true,
-              tooltip: { isHtml: true },
-    	
-              chartArea: {
-                  left: 20,
-                  top: 15,
-                  height: 300,
-                  width: 300
-              }	
-            };
-
-            var chart = new google.visualization.PieChart(document.getElementById('chart_div_AssetClass'));
-            chart.draw(d_data, d_options);
-          }
-
- /*        function GChart_Display(pPlanData, pAssetClassData, pPortpolioData, pColorData, pdbPortpolioMax, pTP) {
- 
-            var iPlanCnt = pPlanData.split("|").length;
-            var iAssetClassCnt = pAssetClassData.split("|").length;
-            var iPortpolioCnt = pPortpolioData.split("|").length;
- */
-            // Create the data table.
-/*             var data1 = new google.visualization.DataTable();
-            data1.addColumn('string', 'YearMonth');
-
-            data1.addColumn('number', '위험상향');
-            data1.addColumn({ type: 'string', role: 'tooltip', 'p': { 'html': true} });
-            data1.addColumn('number', '투자 기대 수익');
-            data1.addColumn({ type: 'string', role: 'tooltip', 'p': { 'html': true} });
-            data1.addColumn('number', '위험하향');
-            data1.addColumn({ type: 'string', role: 'tooltip', 'p': { 'html': true} });
-            data1.addColumn('number', 'TG');
-            data1.addColumn({ type: 'string', role: 'tooltip', 'p': { 'html': true} });
-
-            $("#chart_mdt1, #chart_mdt2, #chart_mdt3").css("opacity", "0.0");
-            if (iPlanCnt >= 36) $("#chart_mdt2").css("opacity", "1.0");
-            if (iPlanCnt >= 48) $("#chart_mdt1, #chart_mdt3").css("opacity", "1.0");
-
-            for (i = 0; i < iPlanCnt; i++) {
-                sData1 = pPlanData.split("|")[i].split(",")[0];
-                sData2 = pPlanData.split("|")[i].split(",")[1].replace(/ /g, '');
-                sData3 = pPlanData.split("|")[i].split(",")[2].replace(/ /g, '');
-                sData4 = pPlanData.split("|")[i].split(",")[3].replace(/ /g, '');
-                sData5 = pPlanData.split("|")[i].split(",")[4].replace(/ /g, '');
-                sData6 = null;
-                sData6Text = "";
-                if (i == 0) $("#chart_fdt").text(sData1.substring(0, 4));
-                if (i == parseInt(((iPlanCnt / 4) * 1)) + 2) $("#chart_mdt1").text(sData1.substring(0, 4));
-                if (i == parseInt((iPlanCnt / 4) * 2)) $("#chart_mdt2").text(sData1.substring(0, 4));
-                if (i == parseInt((iPlanCnt / 4) * 3)) $("#chart_mdt3").text(sData1.substring(0, 4));
-
-                if ((iPlanCnt - 1) == i) {
-                    $("#chart_ldt").text(sData1.substring(0, 4));
-                    if ($("#txt_Plantype").val() != "1") {
-                        sData6 = eval(pTP.replace(/,/g, '')) * 100;
-                        sData6Text = "<div class='chart_plan_tooltip'><b>목표금액</b><br>" + sData5 + " " + set_comma(eval(sData6)) + " 만원</div>";
-                    }
-                }
-
-                sData2Text = "<div class='chart_plan_tooltip'><b>위험상향</b><br>" + sData5 + " " + set_comma(eval(sData2)) + " 만원</div>";
-                sData3Text = "<div class='chart_plan_tooltip'><b>투자 기대 수익</b><br>" + sData5 + " " + set_comma(eval(sData3)) + " 만원</div>";
-                sData4Text = "<div class='chart_plan_tooltip'><b>위험하향</b><br>" + sData5 + " " + set_comma(eval(sData4)) + " 만원</div>";
-
-                data1.addRow([sData1, eval(sData2), sData2Text, eval(sData3), sData3Text, eval(sData4), sData4Text, sData6, sData6Text]);
-            }
- */
-            // Create the data table.
-/*             var data2 = new google.visualization.DataTable();
-            data2.addColumn('string', '자산군');
-            data2.addColumn('number', '%');
-            data2.addColumn({ type: 'string', role: 'tooltip', 'p': { 'html': true} });
-
-            $("#ACGroup1, #ACGroup2, #ACGroup3, #ACGroup4, #ACGroup5, #ACGroup6").css("display", "none");
-            var arrColor = pColorData.split("|");
-
-            for (i = 0; i < iAssetClassCnt; i++) {
-                sData1 = pAssetClassData.split("|")[i].split("#")[0];
-                sData2 = pAssetClassData.split("|")[i].split("#")[1];
-
-                $("#AssetClass" + (i + 1)).text(sData1);
-                $("#AssetClassP" + (i + 1)).text(sData2 + "%");
-                $("#ACGroup" + (i + 1)).css("display", "block");
-                data2.addRow([sData1, eval(sData2), "<div class='chart_asset_tooltip'>" + sData1 + ": " + sData2 + "%</div>"]);
-            }
-
-            var sInnerHTML = "";
-            var sColor1 = "";
-            var sColor2 = "";
-            var iColorCnt = -1;
-            var sTmpData4 = "-";
-
-            var iOnePer = pdbPortpolioMax;
-            for (i = 0; i < iPortpolioCnt; i++) {
-                sData1 = pPortpolioData.split("|")[i].split("#")[0];
-                sData2 = pPortpolioData.split("|")[i].split("#")[1];
-                sData3 = pPortpolioData.split("|")[i].split("#")[2];
-                sData4 = pPortpolioData.split("|")[i].split("#")[3];
-                sData5 = pPortpolioData.split("|")[i].split("#")[4];
-                sData6 = pPortpolioData.split("|")[i].split("#")[5];
-                sData7 = pPortpolioData.split("|")[i].split("#")[6];
-                sData8 = pPortpolioData.split("|")[i].split("#")[7];
-                sData9 = pPortpolioData.split("|")[i].split("#")[8];
-
-                if (sTmpData4 != sData4) {
-                    iColorCnt += 1;
-                    sColor1 = arrColor[iColorCnt].split("#")[0];
-                    sColor2 = arrColor[iColorCnt].split("#")[1];
-                }
-                var iBarSize = 500;
-                if (pdbPortpolioMax != eval(sData2)) iBarSize = ((100 + ((eval(sData2) - pdbPortpolioMax) / pdbPortpolioMax) * 100)) * 5;
-
-                sInnerHTML += "<div class='isel' onclick='fnETFView(this)' id='" + sData1 + "'>";
-                sInnerHTML += "<div class='portpolio_list'><img src='/Images/Roboadvisor/" + sColor1 + ".png' alt='' />";
-                sInnerHTML += "<div class='portpolio_tickerG'>" + sData1 + "</div><div class='portpolio_data'>" + sData3 + " <span>|</span> " + sData4 + " <br />" + sData5 + " <span>|</span> " + sData6 + " <span>|</span> " + sData7 + "</div>";
-                sInnerHTML += "<div class='portpolio_Value'>" + sData2 + "<span>%</span></div>"
-                sInnerHTML += "<div class='portpolio_bottombar'><div class='portpolio_bottominbar' style='width:" + parseInt(iBarSize) + "px;background-color:#" + sColor2 + ";'></div></div></div>";
-                sInnerHTML += "</div>";
-                sTmpData4 = sData4;
-            }
-            $("#portpolio_input").html(sInnerHTML); */
-
-            //isStacked: 누적, legend: 계열내용,  enableInteractivity: 라인 세부내용
-/*             var options1 = {
-                isStacked: false,
-                'is3D': true,
-                series: { 0: { color: '#78d1ff', lineWidth: 1.5 }, 1: { type: "line", color: '#9d498c', lineWidth: 3 }, 2: { color: '#228fc7', lineWidth: 1.5 }, 3: { type: "scatter", color: '#348779', pointSize: 9} },
-                colors: ['#999999'],
-                backgroundColor: "#ffffff",
-                legend: { position: 'none' },
-                title: '',
-                hAxis: { title: '', titleTextStyle: { color: '#999999', fontStyle: 'normal', fontName: 'Arial', fontSize: '14' }, textPosition: 'none' },
-                vAxis: { title: '', titleTextStyle: { color: '#999999', fontStyle: 'normal', fontName: 'Arial', fontSize: '14' }, textPosition: 'out' },
-                width: 690,
-                height: 360,
-                fontSize: 11,
-                enableInteractivity: true,
-                tooltip: { isHtml: true },
-                chartArea: { left: 50, top: 10, width: "615", height: "330", backgroundColor: '#fbfbfb' }
-            };
-
-            // Instantiate and draw our chart, passing in some options.
-            var chart1 = new google.visualization.AreaChart(document.getElementById('chart_div_plan'));
-            chart1.draw(data1, options1);
-
-            var options2 = {
-                slices: { 0: { color: '#41bee9' }, 1: { color: '#9d498c' }, 2: { color: '#cbc450' }, 3: { color: '#5fbcbb' }, 4: { color: '#348779' }, 5: { color: '#85ba54' }, 6: { color: '#e7ad2f' }, 7: { color: '#51c7a8' }, 8: { color: '#3a91dd' }, 9: { color: '#5f5fdd' }, 10: { color: '#8e5fdd' }, 11: { color: '#dd895f'} },
-                'legend': { position: 'none' },
-                width: 340,
-                height: 330,
-                pieSliceText: 'percentage',
-                fontSize: 20,
-                backgroundColor: "#ffffff",
-                'is3D': false,
-                enableInteractivity: true,
-                tooltip: { isHtml: true },
-                chartArea: {
-                    left: 20,
-                    top: 15,
-                    height: 300,
-                    width: 300
-                }
-            }; */
-
-            //var chart2 = new google.visualization.PieChart(document.getElementById('chart_div_AssetClass'));
-            //chart2.draw(data2, options2);
-            
-            
-            
-            
-            
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+		  ['추천상품', '10'],
+		  ['주식형', <%=list1%>],
+          ['파생상품', <%=list2%>],
+          ['채권형', <%=list3%>],
+          ['기타', <%=list4%>],
+        ]);
         
+        
+
+        var options = {
+        		
+          pieHole: 0.3,
+          slices: { 0: { color: '#2D7DA4' }, 1: { color: '#6AA42F' }, 2: { color: '#FFBD20' }, 3: { color: '#DB3615' }},
+          'legend': { position: 'none' },
+          width: 290,
+          height: 290,
+          pieSliceText: 'percentage',
+          fontSize: 16,
+          backgroundColor: "#ffffff",
+          'is3D': false,
+          enableInteractivity: true,
+          tooltip: { isHtml: true },
+	
+          chartArea: {
+              left: 20,
+              top: 15,
+              height: 400,
+              width: 400
+          }	
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div_AssetClass'));
+        chart.draw(data, options);
+      }
+      
+
 
         function sleep(delay) {
             var start = new Date().getTime();
@@ -836,9 +758,9 @@ if(iInvestTermMon != null){
 <section>
 
 	<!-- Loadng View -->
-	<!-- <div class="loadingView" id="loadingview">
+<!-- 	<div class="loadingView" id="loadingview">
 		<img src="/finance/common/images/img_loading.gif" alt="" />
-	 </div> -->
+	 </div>  -->
 
 	<!-- 설문 Tab -->
 	<div class="tab_box1">
@@ -985,8 +907,8 @@ if(iInvestTermMon != null){
 									<div class="spacer5"></div>
 								</div>
 							</form>
-							<div class="btn_common_on btn_research" id="btnResearch">
-								재조회 <img src="/finance/images/roboadvisor/btn_re.png" alt=""
+							<div class="btn_common_on btn_research" id="btnResearch"><a href="portfolio/portfolio_survey.jsp">
+								재조회 </a><img src="/finance/images/roboadvisor/btn_re.png" alt=""
 									class="img_research" />
 							</div>
 							<div class="err_desctiption" id="txt_Validation_err"></div>
@@ -1002,19 +924,19 @@ if(iInvestTermMon != null){
 						<div class="resultTop1_A Head1">
 							<div class="Head_Title1" id="TopHead1_Title">목표 금액</div>
 							<!--표 금액/기대 금액-->
-							<div class="Head_Value1" id="TopHead1_Value"><%= iTargetPrice %></div>
-							<div class="Head_Value1unit"></div><!-- 백만원 -->
+							<div class="Head_Value1" id="TopHead1_Value">-</div>
+							<div class="Head_Value1unit">만원</div><!-- 백만원 -->
 						</div>
 						<div class="resultTop1_A Head2">
 							<div class="Head_Title1">기대 금액</div>
-							<div class="Head_Value2" id="TopHead2_Value"><%-- <%= iExpectedPrice%> --%></div>
+							<div class="Head_Value2" id="TopHead2_Value">만원</div>
 							<div class="Head_Value2unit">만원</div>
 						</div>
 						<div class="resultTop1_A Head3">
 							<div class="Head_Title2">
-								<span id="TopHead3_Title">해외</span> 상장 ETF<br />투자 기대 수익률
+								<span id="TopHead3_Title"></span><br />투자 기대 수익률
 							</div>
-							<div class="Head_Value3" id="TopHead3_Value">0</div>
+							<div class="Head_Value3" id="TopHead3_Value">-</div>
 							<div class="Head_Value3unit">%</div>
 						</div>
 
@@ -1024,10 +946,10 @@ if(iInvestTermMon != null){
 							목표가 달성될 확률이 <span class="middle_updown" id="middle_ud">낮음.</span>
 							<span class="span_commnet" id="middle_appcomment"></span><br />
 <!--  -->
-							<div id="middle_item">
+							<!-- <div id="middle_item">
 								<div class="middle_itembox1" id="middle_add1">
 									초기 투자금액<br />
-									<div class="middle_value1" id="middle_value1"></div>
+									<div class="middle_value1" id="middle_value1">-</div>
 									<div class="middle_value1">만원 추가</div>
 								</div>
 								<div class="middle_itembox1" id="middle_add2">
@@ -1049,11 +971,10 @@ if(iInvestTermMon != null){
 										<div class="middle_value1">세</div>
 									</div>
 								</div>
-							</div>
-						</div>
-<!--</div>-->
-<!-- 예상수익 -->
-<!-- 						<div class="bottom_div1 bottom_div1_focus bottom_div1_select"
+							</div> -->
+						</div> <!--</div>-->
+
+						<div class="bottom_div1 bottom_div1_focus bottom_div1_select"
 							id="tab_result01" style="display:none">예상 수익</div>
 							
 							
@@ -1072,21 +993,18 @@ if(iInvestTermMon != null){
 							<div class="chart_plan" id="chart_div_plan"></div>
 						</div>
 						
-						<div class="bottom_div3_B" id="chartB" style="margin-top:40px">
-						 -->
-						
-						
-						
-							<!-- 구글 차트  -->		
-						<div id="chart_div_AssetClass" class="chart_asset" style="width = 300px; height: 400px;"]></div>
-							<div class="chart_asset_detail" style="display:block">
+						<div class="bottom_div3_B" id="chartB" style="margin-top:40px">	<!-- chart B 포트폴리오 -->
+							<!-- 구글 차트  -->
+							
+							<div id="chart_div_AssetClass" class="chart_asset"></div>
+							<div class="chart_asset_detail">
 								<table>
 									<tr>
 										<td><div id="ACGroup1">
 												<img src="/finance/images/roboadvisor/img_color_dot1.png"
 													alt="" />
 												<div id="AssetClass1" class="AC_div1">주식형</div>
-												<div id="AssetClassP1" class="AC_div2">0%</div>
+												<div id="AssetClassP1" class="AC_div2"><div id ="_AssetClassP1">%</div></div>
 											</div></td>
 									</tr>
 									<tr>
@@ -1094,7 +1012,7 @@ if(iInvestTermMon != null){
 												<img src="/finance/images/roboadvisor/img_color_dot2.png"
 													alt="" />
 												<div id="AssetClass2" class="AC_div1">파생상품형</div>
-												<div id="AssetClassP2" class="AC_div2">0%</div>
+												<div id="AssetClassP2" class="AC_div2"><div id ="_AssetClassP2">%</div></div>
 											</div></td>
 									</tr>
 									<tr>
@@ -1102,7 +1020,7 @@ if(iInvestTermMon != null){
 												<img src="/finance/images/roboadvisor/img_color_dot3.png"
 													alt="" />
 												<div id="AssetClass3" class="AC_div1">채권형</div>
-												<div id="AssetClassP3" class="AC_div2">0%</div>
+												<div id="AssetClassP3" class="AC_div2"><div id ="_AssetClassP3">%</div></div>
 											</div></td>
 									</tr>
 									<tr>
@@ -1110,7 +1028,7 @@ if(iInvestTermMon != null){
 												<img src="/finance/images/roboadvisor/img_color_dot4.png"
 													alt="" />
 												<div id="AssetClass4" class="AC_div1">기타</div>
-												<div id="AssetClassP4" class="AC_div2">0%</div>
+												<div id="AssetClassP4" class="AC_div2"><div id ="_AssetClassP4">%</div></div>
 											</div></td>
 									</tr>
 								</table>
@@ -1119,10 +1037,38 @@ if(iInvestTermMon != null){
 									종목별 비중 보기<img src="/finance/images/roboadvisor/btn_re.png" alt="" />
 								</div>
 							</div>
-							<div class="lastupdate" id="CAupdate">0000-00-00 기준</div><!-- 날짜 -->
+<!-- 							 <div class="lastupdate" id="iYear">
+ 							 	<P id="iYear"></P>-
+							 	<p id ="iMon"></p>
+							 
+							 </div> -->
+							 
+							 <div class="lastupdate_txt" style="margin-left:375px">종목별 비중 보기를 클릭하시면 자세한 정보를 확인하실 수 있습니다.</div>
 						</div>
 
 						<div class="result_portpolio disp_none" id="portpolio_detail">
+
+	
+								<div class = result_list style= "margin-top:50px">
+								<table class="result_list_table">
+								<tr >
+									<th>상품유형</th><th>상품구분</th><th>운용사코드</th><th class= a>상품명</th><th>3개월 수익률</th>
+								</tr>
+								<%
+								for(int i = 0; i < size; i++){
+									dto = result_list.get(i);
+								
+									%>
+									<tr onmouseover="this.style.backgroundColor='#ffffff';" onmouseout="this.style.backgroundColor='#f4f4f4';">
+										<td><%= dto.getType() %></td><td><%= dto.getClassify() %></td>
+										<td><%= dto.getOpcode() %></td><td><%= dto.getTitle() %></td>
+										<td><%= Double.parseDouble(String.format("%.3f",dto.getThreeprofit())) %></td>
+									</tr>
+									<% 
+									}
+									%>
+								</table>
+								</div>
 							<img src="/finance/images/roboadvisor/btn_close1.png" alt=""
 								class="btnclose" id="btn_close" />
 							<div id="portpolio_input">
@@ -1135,10 +1081,10 @@ if(iInvestTermMon != null){
 					</td>
 				</tr>
 				<tr>
-					<td class="resultmain_td3" colspan="2">
-						<div class="spacer40"></div> <a href="portfolio_survey.jsp"><div
+<!-- 					<td class="resultmain_td3" colspan="2">
+						<div class="spacer40"></div> <a href="portfolio/portfolio_survey.jsp"><div
 								class="btn_common_on btn_first">다시작성하기</div></a>
-					</td>
+					</td> -->
 				</tr>
 			</table>
 			<div class="spacer30"></div>
@@ -1155,7 +1101,7 @@ if(iInvestTermMon != null){
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-6">
-				&copy; 2016 <a target="_blank" href="#"
+				&copy; 2016 <a target="_blank" href="http://shapebootstrap.net/"
 					title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>.
 				All Rights Reserved.
 			</div>

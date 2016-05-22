@@ -67,7 +67,6 @@
                 }, i[r].l = 1 * new Date(); a = s.createElement(o),
                 m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
                 })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
             ga('create', 'UA-66721842-1', 'auto');
             ga('send', 'pageview');
      </script>
@@ -80,12 +79,7 @@
 	type="text/javascript"></script>
 <script type="text/javascript" src="/finance/common/js/resizewindow.js"></script>
 <script type="text/javascript">
-
-
 <%
-
-
-
 /* PortfolioDTO pf_data = new PortfolioDTO();
 String st_title = pf_data.getTitle();
 String st_classfy = pf_data.getClassify();
@@ -93,23 +87,14 @@ String st_opcode = pf_data.getOpcode();
 String st_std = pf_data.getStd();
 double st_threepoint = 	Double.parseDouble(String.format("%.3f", pf_data.getThreeprofit()));
 */
-
-
-
 PortfolioDTO dto = new PortfolioDTO();
 ParamSetting ps = new ParamSetting(); 
-
 int list1 = ((ArrayList<PortfolioDTO>)request.getAttribute("list1")).size();
 int list2 = ((ArrayList<PortfolioDTO>)request.getAttribute("list2")).size();
 int list3 = ((ArrayList<PortfolioDTO>)request.getAttribute("list3")).size();
 int list4 = ((ArrayList<PortfolioDTO>)request.getAttribute("list4")).size(); 
-
-
 String sRiskPoint = request.getParameter("vRiskPoint");
 String sPlan = request.getParameter("sPlan");
-
-
-
 String ETF_Per = request.getParameter("ETF_Per");
 String ETF_GPer = request.getParameter("ETF_GPer");
 String ETF_KPer = request.getParameter("ETF_KPer");
@@ -118,10 +103,6 @@ String iinitInvestPrice = request.getParameter("txt_initInvestPrice");
 String iMonthSavePrice = request.getParameter("txt_MonthSavePrice");
 String iInvestTerm = request.getParameter("txt_InvestTerm");
 String iInvestTermMon = request.getParameter("txt_InvestTermMon");
-
-
-
-
 //sPlan==2
 //initInvestPrice
 //MonthSavePrice;
@@ -130,7 +111,6 @@ String iInvestTermMon = request.getParameter("txt_InvestTermMon");
 //String iMonthSavePrice = request.getParameter("txt_MonthSavePrice");
 //String iInvestTerm = request.getParameter("txt_InvestTerm");
 String iTargetPrice = request.getParameter("txt_TargetPrice");
-
 //sPlan==3
 //initInvestPrice
 //String iinitInvestPrice = request.getParameter("txt_initInvestPrice");
@@ -139,25 +119,14 @@ String iTargetPriceRetire = request.getParameter("txt_TargetPriceRetire");
 String iForecastRetire = request.getParameter("txt_ForecastRetire");
 String iLife = request.getParameter("txt_Life");
 String iExpectedPrice = "";
-
-
-
 ArrayList<PortfolioDTO> result_list = (ArrayList<PortfolioDTO>) request.getAttribute("List_Result");
 int size = result_list.size();
-
-
 %>
-
-
  sPlan = "<%=sPlan%>";
  sRiskPoint = "<%=sRiskPoint%>";
  vInvestTermMon = "<%=iInvestTermMon%>";
  ETF_Per = "<%=ETF_Per%>";
-
-
 $(window).load(function () {
-
-
          $("#RiskPoint").html(sRiskPoint);
          $("#txt_initInvestPrice").val("<%= iinitInvestPrice %>");
          $("#txt_ForecastRetire").val("<%= iForecastRetire%>");
@@ -190,7 +159,6 @@ $(window).load(function () {
 				val1 = Integer.parseInt(ps.removeChar(iinitInvestPrice));
 				val2 = Integer.parseInt(ps.removeChar(iMonthSavePrice));
 				val3 = Integer.parseInt(ps.removeChar(iInvestTerm));
-
 		 	}else{
 				val1 = Integer.parseInt(ps.removeChar(iinitInvestPrice));
 				val2 = Integer.parseInt(ps.removeChar(iMonthSavePrice));
@@ -200,7 +168,6 @@ $(window).load(function () {
 		int ep = val1 + val2*((val3*12)+val4);
 		iExpectedPrice = String.valueOf(ep);
 		
-
 		}else if(sPlan.equals("2")){
 %>
 		$(".resultmiddlebox").removeClass("disp_none").addClass("disp_block");
@@ -231,8 +198,6 @@ $(window).load(function () {
 			int ep = val1 + val2*((val3*12) + val4);
 			iExpectedPrice = String.valueOf(ep);
 %>
-
-
 <%
 		}else if(sPlan.equals("3")){
 %>
@@ -243,7 +208,6 @@ $(window).load(function () {
 		$("#targetplan2").removeClass("disp_none");
 		$("#targetplan3").removeClass("disp_none");
 		$("#targetplan4").removeClass("disp_none");
-
 <%		
  			if(iinitInvestPrice != ""){
 				
@@ -262,30 +226,22 @@ $(window).load(function () {
 			int ep = ((val5 - val4) * 12) * val3;
 				iExpectedPrice = String.valueOf(ep);
 			}
-
-
 		}
 %>
-
      
      
             $("#Riskbar_img").attr("src", "/finance/images/roboadvisor/img_bar_" + <%= sRiskPoint %> + ".png");
             $("#btnResearch").click();
         });
-
-
         $(document).ready(function () {
             
           	var idate = new Date();
     		var std_year = idate.getFullYear();
     		var std_mon = idate.getMonth();
-<%--     	var vTargetPrice = Integer.parseInt(ps.removeChar("<%=iTargetPrice%>"));
-    		var vExpectedPrice = Integer.parseInt(ps.removeChar("<%=iExpectedPrice%>"));
-  --%>   		
-  
-  
+	
+
     		
-            $("#TopHead1_Value").text("<%= ps.removeChar(iTargetPrice)%>"); //iTargetPrice
+            $("#TopHead1_Value").text($("#txt_TargetPrice").val()); //iTargetPrice
             $("#TopHead2_Value").text("<%= iExpectedPrice %>"); //iExpectedPrice
             $("#middle_date1").html(idate.getFullYear()+<%=Integer.parseInt(ps.removeChar(iInvestTerm))%>);
 			$("#middle_date2").html(idate.getMonth());
@@ -323,8 +279,6 @@ $(window).load(function () {
             
               
  		
-
-
 			if(ETF_Per == 1){
 				$("#TopHead3_Value").html(Math.round("<%=Integer.parseInt(ps.removeChar(ETF_GPer))*0.1%>"*100)/100);
 			    $("#TopHead3_Title").text("국내");
@@ -338,9 +292,7 @@ $(window).load(function () {
 /*             $("#btnResearch").click(function (){
             	
                 if (fn_InputCheck()) return;
-
                  function resultdata(data) {
-
                     //$('#loadingview').css("display", "none");
 /* 	                var json_obj = JSON.parse(data.d);
                     var splandata = json_obj[0].PlanData;
@@ -348,7 +300,6 @@ $(window).load(function () {
                     var sPortpoliodata = json_obj[0].PortpolioData;
                     var dbPortpolioMax = eval(json_obj[0].PortpolioMaxVal);
                     var sColordata = json_obj[0].OutColor;
-
                     var sUpdateAssetClass = json_obj[0].UpdateAssetClass;
                     var sUpdatePortpolio = json_obj[0].UpdatePortpolio;
                     var sExpectedUpDown = json_obj[0].ExpectedUpDown;
@@ -363,13 +314,11 @@ $(window).load(function () {
                         sDispRst1 = json_obj[0].ExpectedPrice;
                         sDispRst2 = "-";
                     } */
-
 /*                  $("#TopHead3_Value").text(json_obj[0].RiskPointG);//
                     $("#middle_date1").text(sTargetDate.split(".")[0]);//목표년도
                     $("#middle_date2").text(eval(sTargetDate.split(".")[1]));//목표월 */
 					
                     
-
                     
                     
                     
@@ -381,7 +330,6 @@ $(window).load(function () {
                     $("#middle_value3").text(json_obj[0].InvestTermY);	//투자년
                     $("#middle_value4").text(json_obj[0].InvestTermM);	//투자월
                     $("#middle_value5").text(json_obj[0].RetireAge);	//은퇴나이 
-
                     if ($("#txt_Plantype").val() != "1") {
                         $("#middle_ud").removeClass("TargetRate_down").removeClass("TargetRate_up");
                     
@@ -414,29 +362,24 @@ $(window).load(function () {
                     //Google Chart View
                     GChart_Display(splandata, sAssetdata, sPortpoliodata, sColordata, dbPortpolioMax, sDispRst1);
                 }
-
             }); */
             
             
             //middle_value1
-
             $("#middle_add1, #middle_add2, #middle_add3").click(function () {
                 var sID = $(this).attr("id");
                 var iVal = 0;
-
                 if (sID == "middle_add1") {
                     if ($("#txt_initInvestPrice").val() != "") iVal = eval($("#txt_initInvestPrice").autoNumeric('get'));
                     iVal += eval($("#middle_value1").text().replace(/,/g, ""));
                     $("#txt_initInvestPrice").autoNumeric('set', iVal);
                 }
-
                 if (sID == "middle_add2") {
                     iVal = 0;
                     if ($("#txt_MonthSavePrice").val() != "") iVal = eval($("#txt_MonthSavePrice").autoNumeric('get'));
                     iVal += eval($("#middle_value2").text().replace(/,/g, ""));
                     $("#txt_MonthSavePrice").autoNumeric("set", iVal);
                 }
-
                 if (sID == "middle_add3") {
                     if ($("#txt_Plantype").val() == "2") {
                         var iTmpYear = 0;
@@ -444,7 +387,6 @@ $(window).load(function () {
                         if ($("#txt_InvestTerm").autoNumeric("get") != "") iTmpYear = eval($("#txt_InvestTerm").autoNumeric("get")) * 12;
                         if ($("#txt_InvestTermMon").autoNumeric("get") != "") iTmpMonth = eval($("#txt_InvestTermMon").autoNumeric("get"));
                         iVal = iTmpYear + iTmpMonth;
-
                         iTmpYear = 0;
                         iTmpMonth = 0;
                         if ($("#middle_value3").text() != "") iTmpYear = eval($("#middle_value3").text()) * 12;
@@ -453,16 +395,13 @@ $(window).load(function () {
                         $("#txt_InvestTerm").autoNumeric("set", parseInt(iVal / 12));
                         $("#txt_InvestTermMon").autoNumeric("set", iVal % 12);
                     }
-
                     if ($("#txt_Plantype").val() == "3") {
                         iVal = eval($("#middle_value5").text());
                         $("#txt_ForecastRetire").autoNumeric("set", iVal);
                     }
                 }
-
                 $("#btnResearch").click();
             });
-
             
             
             /* $("#tab_result01, #tab_result02").click(function () {
@@ -472,7 +411,6 @@ $(window).load(function () {
                 $("#chartA, #chartB").removeClass("disp_block").removeClass("disp_none");
                 if (sTabID == "tab_result01") {
                     $("#chartA, .chart_plan_m").css("display", "block");
-
                     $("#chartB").css("margin-top", "-12000px");
                 }
                 if (sTabID == "tab_result02") {
@@ -483,35 +421,29 @@ $(window).load(function () {
  */
             $("#btn_close, #btn_Portpolio").click(function () {
                 var sTabID = $(this).attr("id");
-
                 if (sTabID == "btn_close") {
                     $("#portpolio_detail").css("display", "none");
-                    $("#portpolio_detail").fadeOut(1000);
+                    $("#portpolio_detail").fadeOut(5000);
                     $("#chartB").css("margin-top", "40px");
                 }
-
                 if (sTabID == "btn_Portpolio") {
                     $("#portpolio_detail").css("display", "block");
-                    $("#portpolio_detail").fadeIn(1000);
+                    $("#portpolio_detail").fadeIn(5000);
                     $("#chartB").css("margin-top", "-12000px");
                 }
             });
-
             $(".numeric_up, .numeric_down").click(function () {
                 var sid = $(this).attr("class");
                 var sud = sid.split("_")[1];
                 var stxtID = $(this).parent()[0].childNodes[3].id;
                 if (stxtID == "txt_InvestTerm") stxtID = $(this).parent()[0].childNodes[5].id;
-
                 var iVal = 0;
                 var sVal = $("#" + stxtID).val().replace(/세/g, "").replace(/,/g, "").replace(/만원/g, "").replace(/년/g, "").replace(/개월/g, "");
                 if (sVal != "") iVal = eval(sVal);
-
                 if (stxtID != "txt_InvestTermMon") {
                     $("#" + $(this).parent()[0].childNodes[8].id).text("");
                     if (sud == "up") $("#" + stxtID).autoNumeric('set', iVal + 1);
                     if (sud == "down" && (iVal - 1) >= 0) $("#" + stxtID).autoNumeric('set', iVal - 1);
-
                 } else {
                     $("#" + $(this).parent()[0].childNodes[10].id).text("");
                     var sYearID = $(this).parent()[0].childNodes[3].id;
@@ -526,7 +458,6 @@ $(window).load(function () {
                             $("#" + stxtID).autoNumeric('set', iVal + 1);
                         }
                     }
-
                     if (sud == "down") {
                         if (iVal == 0) {
                             if (iYearVal > 0) {
@@ -538,25 +469,17 @@ $(window).load(function () {
                         }
                     }
                 }
-
             });
-
         });
-
-
         function fnETFView(pthis) {
             if ($("#txt_Region").val() == "G") {
                 $("#txt_Ticker").val(pthis.id);
                 $('#form_plan').attr({ action: '/ko/GlobalETF/etfgb.aspx', method: 'post' }).submit();
             }
         }
-
-
         function fn_InputCheck() {
-
             //Error Clear
             $("#txt_initInvestPrice_err ,#txt_MonthSavePrice_err ,#txt_InvestTerm_err ,#txt_TargetPrice_err ,#txt_NowAge_err ,#txt_ForecastRetire_err, #txt_Life_err ,#txt_TargetPriceRetire_err, #txt_Validation_err").text("");
-
             //Err Check
             var iNowAge = eval($("#txt_NowAge").autoNumeric('get'));
             var iForecastRetire = eval($("#txt_ForecastRetire").autoNumeric('get'));
@@ -578,95 +501,77 @@ $(window).load(function () {
             if (typeof (iInvestTerm) == "undefined") iInvestTerm = 0;
             if (typeof (iInvestTermMon) == "undefined") iInvestTermMon = 0;
             if (typeof (iTargetPrice) == "undefined") iTargetPrice = 0;
-
             if (iinitInvestPrice < 100) {
                 $("#txt_initInvestPrice_err").text("100만원 이상 작성바랍니다.");
                 bErr = true;
             }
-
             if (iMonthSavePrice < 0) {
                 $("#txt_MonthSavePrice_err").text("0원 이상 작성바랍니다.");
                 bErr = true;
             }
-
             if (sPlan == "1" || sPlan == "2") {
                 if (iInvestTerm < 2 || iInvestTerm > 100) {
                     $("#txt_InvestTerm_err").text("2년 이상 100년 이하로 작성바랍니다.");
                     bErr = true;
                 }
-
                 if (iInvestTermMon > 11) {
                     $("#txt_InvestTerm_err").text("11개월 이하로 작성바랍니다.");
                     bErr = true;
                 }
-
                 if (((eval(iInvestTerm) * 12) + eval(iInvestTermMon)) > 1200) {
                     $("#txt_InvestTerm_err").text("100년 이하로 작성바랍니다.");
                     bErr = true;
                 }
             }
-
             if (sPlan == "2") {
                 var iSumTargetPrice = iinitInvestPrice + (iMonthSavePrice * ((iInvestTerm * 12) + iInvestTermMon));
                 if ((iSumTargetPrice > iTargetPrice) || iTargetPrice == 0) {
                     $("#txt_TargetPrice_err").text(set_comma(iSumTargetPrice) + "만원 이상 작성바랍니다.");
                     bErr = true;
                 }
-
                 if (bErr == false && iTargetPrice < 100) {
                     $("#txt_TargetPrice_err").text("100만원 이상 작성바랍니다.");
                     bErr = true;
                 }
             }
-
             if (sPlan == "3") {
                 var bParentChk = false;
-
                 if (iNowAge < 19 || iNowAge > 80) {
                     $("#txt_NowAge_err").text("19세 이상 80세 이하로 작성바랍니다.");
                     bErr = true;
                 }
-
                 if (iForecastRetire < 45 || iForecastRetire > 81) {
                     $("#txt_ForecastRetire_err").text("45세 이상 81세 이하로 작성바랍니다.");
                     bErr = true;
                     bParentChk = true;
                 }
-
                 if (bParentChk == false && iForecastRetire <= iNowAge) {
                     $("#txt_ForecastRetire_err").text("은퇴나이는 현재나이 보다 커야합니다.");
                     bErr = true;
                 }
-
                 bParentChk = false;
                 if (iLife < 65 || iLife > 120) {
                     $("#txt_Life_err").text("65세 이상 120세 이하로 작성바랍니다.");
                     bErr = true;
                     bParentChk = true;
                 }
-
                 if (bParentChk == false && iLife <= iForecastRetire) {
                     $("#txt_Life_err").text("기대수명은 은퇴나이 보다 커야합니다.");
                     bErr = true;
                 }
-
                 if (iTargetPriceRetire < 30) {
                     $("#txt_TargetPriceRetire_err").text("30만원 이상 작성바랍니다.");
                     bErr = true;
                 }
                 var inewTargetPrice = (iLife - iForecastRetire) * 12 * iTargetPriceRetire;
-
                 if (inewTargetPrice < iinitInvestPrice + ((iMonthSavePrice * 12) * (iForecastRetire - iNowAge))) {
                     $("#txt_Validation_err").html("은퇴 후 목표 월 소득을 샹향 조정하거나 초기 투자<Br>금액 또는월별 추가 투자금액을 하향 조정하세요.");
                     bErr = true;
                 }
             }
-
             return bErr;
         }
-
         
-
         //Google 사용선언
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
@@ -680,7 +585,6 @@ $(window).load(function () {
         ]);
         
         
-
         var options = {
         		
           pieHole: 0.3,
@@ -702,13 +606,10 @@ $(window).load(function () {
               width: 400
           }	
         };
-
         var chart = new google.visualization.PieChart(document.getElementById('chart_div_AssetClass'));
         chart.draw(data, options);
       }
       
-
-
         function sleep(delay) {
             var start = new Date().getTime();
             while (new Date().getTime() < start + delay);
