@@ -43,7 +43,7 @@
 
 
      
-                        <li><a href="/finance/portfolio/portfolio_survey.html">포트폴리오</a></li>          
+                        <li><a href="/finance/portfolio/portfolio_survey.jsp">포트폴리오</a></li>          
                         <li><a href="/finance/entlist.do">종목분석</a></li>
                         <li><a href="/finance/loadPrd.do">펀드상품</a></li>
                         <li><a href="/finance/marketindex.do">시장지표</a></li>
