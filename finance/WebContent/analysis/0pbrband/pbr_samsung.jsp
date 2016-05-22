@@ -115,7 +115,6 @@ ArrayList<EnterpriseDTO> entlist = (ArrayList<EnterpriseDTO>)request.getAttribut
 int entsize= entlist.size();
 int entinfosize= entinfolist.size();
 int bpsepssize= bpsEpsList.size();
-
 %>
 
 </head>
