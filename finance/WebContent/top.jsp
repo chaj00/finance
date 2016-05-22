@@ -42,9 +42,9 @@
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Home</a></li>          
-                        <li><a href="/finance/ent.do">투자분석</a></li>
+                        <li><a href="/finance/entlist.do">종목분석</a></li>
                         <li><a href="/finance/product/product_main.html">금융상품</a></li>
-                        <li><a href="/finance/portfolio/">포트폴리오</a></li>						
+                        <li><a href="/finance/portfolio/">포트폴리오</a></li>					 	
                     </ul>
                 </div>
             </div><!--/.container-->
