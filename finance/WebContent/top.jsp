@@ -13,12 +13,12 @@
     <link href="/finance/common/css/prettyPhoto.css" rel="stylesheet">
     <link href="/finance/common/css/main.css" rel="stylesheet">
     <link href="/finance/common/css/responsive.css" rel="stylesheet">
+    <link href="/finance/common/css/font-awesome.min.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
 
     <![endif]-->       
-    
 
 </head>
 
@@ -41,11 +41,13 @@
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
 
+
      
-                        <li><a href="/finance/portfolio/">포트폴리오</a></li>          
+                        <li><a href="/finance/portfolio/portfolio_survey.html">포트폴리오</a></li>          
                         <li><a href="/finance/entlist.do">종목분석</a></li>
                         <li><a href="/finance/loadPrd.do">펀드상품</a></li>
                         <li><a href="/finance/marketindex.do">시장지표</a></li>
+
 
                     </ul>
                 </div>

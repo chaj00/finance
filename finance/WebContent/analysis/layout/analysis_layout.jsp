@@ -18,12 +18,12 @@
 <link href="/finance/common/css/animate.min.css" rel="stylesheet">
 <link href="/finance/common/css/prettyPhoto.css" rel="stylesheet">
 <link href="/finance/common/css/main.css" rel="stylesheet">
-<link href="/finance/common/css/responsive.css" rel="stylesheet">
+<link href="/finance/common/css/responsive.css" rel="stylesheet"> 
 <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
-<link rel="shortcut icon" href="/finance//images/ico/favicon.ico">
+ <link rel="shortcut icon" href="/finance//images/ico/favicon.ico">
 <link rel="apple-touch-icon-precomposed" sizes="144x144"
 	href="/finance/images/ico/apple-touch-icon-144-precomposed.png">
 <link rel="apple-touch-icon-precomposed" sizes="114x114"
@@ -33,6 +33,7 @@
 <link rel="apple-touch-icon-precomposed"
 	href="/finance/images/ico/apple-touch-icon-57-precomposed.png">
 
+<<<<<<< HEAD
 <!-- <script type="text/javascript"
 	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script type="text/javascript"
@@ -43,6 +44,8 @@
 <link
 	href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
 	rel="stylesheet" type="text/css"> -->
+=======
+>>>>>>> branch 'master' of https://github.com/chaj00/finance.git
 
 <style type="text/css">
 ol.groove {
