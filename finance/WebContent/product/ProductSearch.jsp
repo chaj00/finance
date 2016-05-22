@@ -140,7 +140,7 @@ function prdView(prd){
 		for (var i = 0; i<prdCount; i++){
 
 			strHtml +='<tr>';
-			strHtml +='   	<td><input type="checkbox" name="compareChk" id="compareChk" value=" " title=""></td>';		
+			strHtml +='   	<td>'+(i+1)+'</td>';		
 			strHtml +='		<td class="prd">';
 			strHtml +='			<p class="title">';
 			strHtml +='				<a href="">'+prd[i].title+'</a>';
@@ -200,8 +200,9 @@ function prdView(prd){
 
 		}
 	if(schText!=null){
-		
-
+		var cmt2 ="";
+		cmt2 +='<h2>'+schText+' 검색결과 '+prdCount+' 건</h3>';
+		$("#rstCmt").html(cmt2);
 	}else{
 		var cmt ="";
 		cmt +='<h2> 전체: '+prdCount+' 건</h3>';
@@ -417,7 +418,6 @@ function doSmartSearchList(){
 <div class="search-code">
 	<form>
     <div class="fl">    	
-        <a name="compareBtn" href="#" class="btn4" title="팝업 띄움">체크비교</a>
      </div>
     </form>
     <div class="fr">
@@ -458,7 +458,7 @@ function doSmartSearchList(){
 </colgroup>
     <thead class="sort">
         <tr>
-          <th scope="col" rowspan="2"><input type="checkbox" name="compareAllChk" id="compareAllChk" value="" title="펀드 전체 선택"></th>
+          <th scope="col" rowspan="2"></th>
             <th scope="col" rowspan="4" class="off"><a column="FundKrNm" href="#" class="up" title="올림차순으로 정렬">펀드명</a></th>
             <th scope="colgroup" colspan="6">수익률(%)</th>
           <!--   <th scope="col" rowspan="2"><input type="checkbox" name="compareAllChk" id="compareAllChk" value="" title="펀드 전체 선택"></th>
@@ -474,8 +474,8 @@ function doSmartSearchList(){
             <th scope="col" class="off"><a column="AnnYield" href="#" class="down" title="내림차순으로 정렬">1년</a></th>
         </tr>
     </thead>
-    
-    <tbody id="bodyList">
+    <tbody id="bodyList"></tbody>
+    <%-- <tbody id="bodyList">
      <%	  
     	  String pattern = "#.####";
     	  DecimalFormat dfomat = new DecimalFormat(pattern);
@@ -485,7 +485,7 @@ function doSmartSearchList(){
                          
     %> 
     <tr>
-    	<td><input type="checkbox" name="compareChk" id="compareChk" value=" " title=""></td>
+    	<td><%=i+1%></td>
     
     	<td class="prd">
     		<p class="title">
@@ -574,7 +574,7 @@ function doSmartSearchList(){
        
      </tr>
      <%} %>   
-    </tbody>
+    </tbody> --%>
 </table>
 <!-- <div class="btn-area">
     <span class="fl">
