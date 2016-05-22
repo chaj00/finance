@@ -33,14 +33,14 @@
 </head>
 <body>
 
-	<div style="width: 1600px; margin-left: auto; margin-right: auto;">
+	<div style="width: 1800px; margin-left: auto; margin-right: auto;">
 
 		<div>
 			<jsp:include page="../top.jsp"></jsp:include>
 		</div>
 
 
-		<div style="width: 1600px; margin-left: auto; margin-right: auto;">
+		<div style="width: 1800px; margin-left: auto; margin-right: auto;">
 
 			<jsp:include page="${pathurl}"></jsp:include>
 		</div>

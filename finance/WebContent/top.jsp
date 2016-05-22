@@ -40,12 +40,12 @@
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
+
      
                         <li><a href="/finance/portfolio/">포트폴리오</a></li>          
-                        <li><a href="/finance/ent.do">종목분석</a></li>
+                        <li><a href="/finance/entlist.do">종목분석</a></li>
                         <li><a href="/finance/loadPrd.do">펀드상품</a></li>
                         <li><a href="/finance/marketindex.do">시장지표</a></li>
-
 
                     </ul>
                 </div>
