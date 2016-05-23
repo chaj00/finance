@@ -7,9 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div style="width: 800px;margin-left: auto;margin-right: auto;">
+	<div style="width: 1800px;margin-left: auto;margin-right: auto;">
+		
 		<div>
-			<jsp:include page="../top.jsp"></jsp:include>
+			<jsp:include page="/portfolio/portfolio_survey.jsp"></jsp:include>
 		</div>
 		
 	</div>
