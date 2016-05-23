@@ -23,6 +23,24 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/finance/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="/finance/images/ico/apple-touch-icon-57-precomposed.png">
 </head>
+<%
+		String a = "1";
+		String b = "2";
+		String c = "3";
+		String d = "4";
+		
+		int ep = Integer.parseInt(a) 
+		+ (Integer.parseInt(b)*((Integer.parseInt(c)*12)
+												+Integer.parseInt(d)));
+
+		String iExpectedPrice = String.valueOf(ep);
+
+%>
+<script type = "text/javascript">
+alert (<%= ep %>);
+
+</script>
+
 <body class="homepage">
 
     <header id="header">
@@ -44,12 +62,15 @@
                         <li class="active"><a href="#">Home</a></li>          
                         <li><a href="/finance/analysis/analysis_main.html">투자분석</a></li>
                         <li><a href="/finance/product/product_main.html">금융상품</a></li>
-                        <li><a href="/finance/portfolio/portfolio_survey.html">포트폴리오</a></li>
+                        <li><a href="/finance/portfolio/portfolio_survey.jsp">포트폴리오</a></li>
                      	
                     </ul>
                 </div>
             </div><!--/.container-->
         </nav><!--/nav-->
+		
+
+		
 		
     </header><!--/header-->
 </body>
