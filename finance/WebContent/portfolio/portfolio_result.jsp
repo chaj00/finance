@@ -185,14 +185,14 @@ $(window).load(function () {
 				val1 = Integer.parseInt(ps.removeChar(iinitInvestPrice));
 				val2 = Integer.parseInt(ps.removeChar(iMonthSavePrice));
 				val3 = Integer.parseInt(ps.removeChar(iInvestTerm));
-//				val5 = Integer.parseInt(ps.removeChar(iTargetPrice));
+				val5 = Integer.parseInt(ps.removeChar(iTargetPrice));
 				
 		 	}else{
 		 		val1 = Integer.parseInt(ps.removeChar(iinitInvestPrice));
 				val2 = Integer.parseInt(ps.removeChar(iMonthSavePrice));
 				val3 = Integer.parseInt(ps.removeChar(iInvestTerm));
 				val4 = Integer.parseInt(ps.removeChar(iInvestTermMon));
-//				val5 = Integer.parseInt(ps.removeChar(iTargetPrice));
+				val5 = Integer.parseInt(ps.removeChar(iTargetPrice));
 		 		
 			 	}
 			int ep = val1 + val2*((val3*12) + val4);
@@ -241,8 +241,8 @@ $(window).load(function () {
 	
 
     		
-            $("#TopHead1_Value").text($("#txt_TargetPrice").val()); //iTargetPrice
-            $("#TopHead2_Value").text("<%= iExpectedPrice %>"); //iExpectedPrice
+            $("#TopHead1_Value").text("<%=Integer.parseInt(ps.removeChar(iTargetPrice)) %>"); //iTargetPrice
+            $("#TopHead2_Value").text("<%= iExpectedPrice %>"); //iExpectedPrice $("#txt_TargetPrice").val()
             $("#middle_date1").html(idate.getFullYear()+<%=Integer.parseInt(ps.removeChar(iInvestTerm))%>);
 			$("#middle_date2").html(idate.getMonth());
 			$("#AssetClassP1").text(<%=list1%>*10+"%");
