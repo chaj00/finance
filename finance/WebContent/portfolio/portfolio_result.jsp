@@ -240,11 +240,15 @@ $(window).load(function () {
     		var std_mon = idate.getMonth();
 	
 
-    		
-            $("#TopHead1_Value").text("<%=Integer.parseInt(ps.removeChar(iTargetPrice)) %>"); //iTargetPrice
-            $("#TopHead2_Value").text("<%= iExpectedPrice %>"); //iExpectedPrice $("#txt_TargetPrice").val()
-            $("#middle_date1").html(idate.getFullYear()+<%=Integer.parseInt(ps.removeChar(iInvestTerm))%>);
-			$("#middle_date2").html(idate.getMonth());
+    		<%if(sPlan.equals("2")){%>
+            	$("#TopHead1_Value").text("<%=Integer.parseInt(ps.removeChar(iTargetPrice)) %>"); //iTargetPrice
+            	$("#TopHead2_Value").text("<%= iExpectedPrice %>"); //iExpectedPrice $("#txt_TargetPrice").val()
+            <%}%>
+            
+            <%if(sPlan.equals("1")| sPlan.equals("2")){%>
+            	$("#middle_date1").html(idate.getFullYear()+<%=Integer.parseInt(ps.removeChar(iInvestTerm))%>);
+				$("#middle_date2").html(idate.getMonth());
+			<%} %>
 			$("#AssetClassP1").text(<%=list1%>*10+"%");
 			$("#AssetClassP2").text(<%=list2%>*10+"%");	
 			$("#AssetClassP3").text(<%=list3%>*10+"%");	
@@ -271,8 +275,9 @@ $(window).load(function () {
                 $(".resultmiddlebox").removeClass("resultmiddlebox_min").removeClass("resultmiddlebox_max");
                 $(".resultmiddlebox").addClass("resultmiddlebox_max");
                 $("#middle_item").css("display", "block");
-                $("#middle_value1").val(<%=Integer.parseInt(ps.removeChar(iTargetPrice))%>-<%=iExpectedPrice%>);//x
-                
+                <%if(sPlan.equals("2")){%>
+                	$("#middle_value1").val(<%=Integer.parseInt(ps.removeChar(iTargetPrice))%>-<%=iExpectedPrice%>);//x
+                <%}%>
                 
             }//index
            
