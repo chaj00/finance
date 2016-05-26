@@ -19,7 +19,7 @@ public class PortfolioServiceImpl implements PortfolioService{
 	public ArrayList<PortfolioDTO> getPlist(String type, String std, String rownum) {
 		ArrayList<PortfolioDTO> pf_plist = new ArrayList<PortfolioDTO>();
 		
-		System.out.println(type + std + rownum);
+//		System.out.println(type + std + rownum);
 		Connection con = getConnect();
 		PortfolioDAO dao = new PortfolioDAOImpl();
 		

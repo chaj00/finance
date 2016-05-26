@@ -387,7 +387,7 @@ function doSmartSearchList(){
    
      <div class="btn-area">
          <a href="javascript:checkSelectedValue();" class="btn big">선택 조건으로 검색</a>
-         <a href="javascript:clearSmartSearch();" class="btn3 big refresh">조건 초기화</a>
+         
       
      </div>
  </div>
@@ -429,7 +429,7 @@ function doSmartSearchList(){
         </ul>
         <fieldset>
         <legend>펀드 결과목록 선택사항</legend>
-        	
+        	<!-- 
             <select name="" id="fundAttr" title="펀드속성 선택">
                 <option value="" selected>펀드속성</option>
                 <option value="recomYn">추천</option>
@@ -443,8 +443,8 @@ function doSmartSearchList(){
 	            <option value="20" >20개씩</option>
                 <option value="40">40개씩</option>
                 <option value="60">60개씩</option>
-            </select>
-            <a href="javascript:goListCnt();" class="btn3" title="펀드 검색결과 보기">보기</a>
+            </select> -->
+         <!--    <a href="javascript:goListCnt();" class="btn3" title="펀드 검색결과 보기">보기</a> -->
         </fieldset>
     </div>
 </div>
@@ -459,7 +459,7 @@ function doSmartSearchList(){
 </colgroup>
     <thead class="sort">
         <tr>
-          <th scope="col" rowspan="2"></th>
+          <th scope="col" rowspan="2">No</th>
             <th scope="col" rowspan="4" class="off"><a column="FundKrNm" href="#" class="up" title="올림차순으로 정렬">펀드명</a></th>
             <th scope="colgroup" colspan="6">수익률(%)</th>
           <!--   <th scope="col" rowspan="2"><input type="checkbox" name="compareAllChk" id="compareAllChk" value="" title="펀드 전체 선택"></th>
