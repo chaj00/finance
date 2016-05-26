@@ -54,6 +54,7 @@
 </script>	     
 </head>
 <body>
+
 <script type="text/javascript">
 function checkSelectedValue(){
 /* 	alert("들어옴"); */
@@ -474,7 +475,7 @@ function doSmartSearchList(){
             <th scope="col" class="off"><a column="AnnYield" href="#" class="down" title="내림차순으로 정렬">1년</a></th>
         </tr>
     </thead>
-    <tbody id="bodyList"></tbody>
+   <tbody id="bodyList"></tbody> 
     <%-- <tbody id="bodyList">
      <%	  
     	  String pattern = "#.####";
