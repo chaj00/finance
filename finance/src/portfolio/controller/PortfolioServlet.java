@@ -34,7 +34,9 @@ public class PortfolioServlet extends HttpServlet {
 		PortfolioService service = new PortfolioServiceImpl();
 		
 		
-		
+		String ETF_Per = req.getParameter("ETF_Per");
+		String ETF_GPer = req.getParameter("ETF_Per");
+		String ETF_KPer = req.getParameter("ETF_Per");
 		String sRiskPoint = req.getParameter("vRiskPoint");
 		String plan = req.getParameter("sPlan");
 		System.out.println(sRiskPoint + plan);
@@ -101,11 +103,22 @@ public class PortfolioServlet extends HttpServlet {
 			
 			ArrayList<PortfolioDTO> list4 = obj.ParamSetting(type, std, rownum);
 
-			System.out.println("==========위험점수 1============");
+/*			System.out.println("==========위험점수 1============");
 			System.out.println(list1.toString());
 			System.out.println(list2.toString());
 			System.out.println(list3.toString());
-			System.out.println(list4.toString());
+			System.out.println(list4.toString());*/
+			
+			ArrayList<PortfolioDTO> List_Result = new ArrayList<PortfolioDTO>();
+			List_Result.addAll(list1);
+			List_Result.addAll(list2);
+			List_Result.addAll(list3);
+			List_Result.addAll(list4);
+			req.setAttribute("list1", list1);
+			req.setAttribute("list2", list2);
+			req.setAttribute("list3", list3);
+			req.setAttribute("list4", list4);
+			req.setAttribute("List_Result", List_Result);
 			
 		}else if(sRiskPoint.equals("2")){	
 
@@ -132,12 +145,23 @@ public class PortfolioServlet extends HttpServlet {
 			rownum = "3";
 			
 			ArrayList<PortfolioDTO> list4 = obj.ParamSetting(type, std, rownum);
-
+/*
 			System.out.println("==========위험점수 2============");
 			System.out.println(list1.toString());
 			System.out.println(list2.toString());
 			System.out.println(list3.toString());
-			System.out.println(list4.toString());
+			System.out.println(list4.toString());*/
+			
+			ArrayList<PortfolioDTO> List_Result = new ArrayList<PortfolioDTO>();
+			List_Result.addAll(list1);
+			List_Result.addAll(list2);
+			List_Result.addAll(list3);
+			List_Result.addAll(list4);
+			req.setAttribute("list1", list1);
+			req.setAttribute("list2", list2);
+			req.setAttribute("list3", list3);
+			req.setAttribute("list4", list4);
+			req.setAttribute("List_Result", List_Result);
 			
 		}else if(sRiskPoint.equals("3")){
 
@@ -165,21 +189,33 @@ public class PortfolioServlet extends HttpServlet {
 			
 			ArrayList<PortfolioDTO> list4 = obj.ParamSetting(type, std, rownum);
 
-			System.out.println("==========위험점수 3============");
+/*			System.out.println("==========위험점수 3============");
 			System.out.println(list1.toString());
 			System.out.println(list2.toString());
 			System.out.println(list3.toString());
 			System.out.println(list4.toString());
+			*/
+			ArrayList<PortfolioDTO> List_Result = new ArrayList<PortfolioDTO>();
+			List_Result.addAll(list1);
+			List_Result.addAll(list2);
+			List_Result.addAll(list3);
+			List_Result.addAll(list4);
+			req.setAttribute("list1", list1);
+			req.setAttribute("list2", list2);
+			req.setAttribute("list3", list3);
+			req.setAttribute("list4", list4);
+			req.setAttribute("List_Result", List_Result);
+			
 		}else if(sRiskPoint.equals("4")){
 			
 			String type = " type='주식형' and ";
-			String std = " std > 15 and std < 25 ";
+			String std = " and std > 15 and std < 25 ";
 			String rownum = "4";
 			
 			ArrayList<PortfolioDTO> list1 = obj.ParamSetting(type, std, rownum);
 			
 			type = " type='파생상품' and ";
-			std = " std > 15 and std < 25 ";
+			std = " and std > 15 and std < 25 ";
 			rownum = "2";
 			
 			ArrayList<PortfolioDTO> list2 = obj.ParamSetting(type, std, rownum);
@@ -196,11 +232,22 @@ public class PortfolioServlet extends HttpServlet {
 			
 			ArrayList<PortfolioDTO> list4 = obj.ParamSetting(type, std, rownum);
 
-			System.out.println("==========위험점수 4============");
+/*			System.out.println("==========위험점수 4============");
 			System.out.println(list1.toString());
 			System.out.println(list2.toString());
 			System.out.println(list3.toString());
 			System.out.println(list4.toString());
+*/			
+			ArrayList<PortfolioDTO> List_Result = new ArrayList<PortfolioDTO>();
+			List_Result.addAll(list1);
+			List_Result.addAll(list2);
+			List_Result.addAll(list3);
+			List_Result.addAll(list4);
+			req.setAttribute("list1", list1);
+			req.setAttribute("list2", list2);
+			req.setAttribute("list3", list3);
+			req.setAttribute("list4", list4);
+			req.setAttribute("List_Result", List_Result);
 			
 		}else if(sRiskPoint.equals("5")){
 			String type = " type='주식형' and ";
@@ -227,16 +274,30 @@ public class PortfolioServlet extends HttpServlet {
 			
 			ArrayList<PortfolioDTO> list4 = obj.ParamSetting(type, std, rownum);
 
-			System.out.println("==========위험점수 5============");
+/*			System.out.println("==========위험점수 5============");
 			System.out.println(list1.toString());
 			System.out.println(list2.toString());
 			System.out.println(list3.toString());
 			System.out.println(list4.toString());
+*/			
+			ArrayList<PortfolioDTO> List_Result = new ArrayList<PortfolioDTO>();
+			List_Result.addAll(list1);
+			List_Result.addAll(list2);
+			List_Result.addAll(list3);
+			List_Result.addAll(list4);
+			req.setAttribute("list1", list1);
+			req.setAttribute("list2", list2);
+			req.setAttribute("list3", list3);
+			req.setAttribute("list4", list4);
+			req.setAttribute("List_Result", List_Result);
+			
 		}else{
 			System.out.println("failed");
 		}
 		
+
 		
+	
 		
 		 RequestDispatcher rd = req.getRequestDispatcher("/portfolio/portfolio_result.jsp");
 		 rd.forward(req, res);

@@ -106,7 +106,7 @@
 }
 
 .test_box1 .table_step0 {
-	margin-left:280px;
+	margin-left:400px;
 }
 
 .test_box1 .table_step0_td1 {
@@ -127,15 +127,15 @@
 }
 
 .test_box1 .table_step0_td2 div {
-	margin-left:280px;
+	margin-left:220px;
 	height:4px;
 	width:60px;
-	background-color:#fcd50c;
+	background-color:#6aa42f;
 }
 
 .test_box1 .table_step0_td3 {
 	font-size:16px;
-	color: #999999;
+	color: #2d7da4;
 	line-height: 28px;
 }
 
@@ -150,7 +150,7 @@
 	height:60px;
 	font-size:19px;
 	padding-top:20px;
-	margin-left:205px;
+	margin-left:150px;
 	-webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
 	
@@ -997,19 +997,29 @@
 }
 
 .result_box .btn_research {
+	background-color:#93999d;
 	position:relative;
 	display: inline-block;
 	width:240px;
 	height:45px;
 	font-size:19px;
 	padding-top:13px;
+<<<<<<< HEAD
 	color:#000000;
+=======
+	color:#FFFFFF;
+>>>>>>> branch 'jung' of https://github.com/chaj00/finance.git
 	-webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
 }
 
 .result_box .btn_research:hover {
+<<<<<<< HEAD
 	color:#FFFFFF;
+=======
+	background-color:#3e4950;
+	color:#000000;
+>>>>>>> branch 'jung' of https://github.com/chaj00/finance.git
 	-webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
 }
@@ -1080,7 +1090,11 @@
 	font-weight:bold;
 	text-align:right;
 	padding-top:20px;
+<<<<<<< HEAD
 	display: inline-block;
+=======
+	display:inline-block;
+>>>>>>> branch 'jung' of https://github.com/chaj00/finance.git
 	color:#FFFFFF;
 }
 
@@ -1234,7 +1248,7 @@
 }
 
 .result_box .resultmain_table .resultmain_td2 .bottom_div2 {
-	width:370px;
+	width:525px;
 	height:50px;
 	margin-top:20px;
 	float: left;
@@ -1400,6 +1414,10 @@
 	margin-top:25px;
 }
 
+.lastupdate_txt {
+	margin-left:380px;
+}
+
 .result_box .resultmain_table .resultmain_td2 .bottom_div3_C {
 	width:690px;
 	height:430px;
@@ -1464,17 +1482,20 @@
 	position:absolute;
 	background-color:#ffffff;
 	border: 1px solid #dddddd;
-	width:690px;
-	height:740px;
+	width:658px;
+	height:600px;
 	text-align:left;
 	margin-left:30px;
 	padding-left:30px;
+
 }
 
 .result_box .resultmain_table .resultmain_td2 .result_portpolio .btnclose {
 	cursor:pointer;
-	margin-left:659px;
-	margin-top:-1px;
+	margin-left:597px;
+	margin-top:-480px;
+	
+	
 }
 
 .result_box .resultmain_table .resultmain_td2 .result_portpolio .portpolio_list {
@@ -1575,6 +1596,7 @@
 	color:#000000;
 	-webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
+
 }
 
 .result_box .resultmain_table .resultmain_td3 .btn_first:hover {
@@ -1585,6 +1607,50 @@
 
 
 
+
+/*********************************************************************
+		css table
+**********************************************************************/
+
+table.result_list_table {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: ##DB3615;
+	border-collapse: collapse;
+	text-align: center;
+}
+table.result_list_table th {
+	width: 80px;
+	font-weight: normal;
+	background-color:#c52d2f;
+	color:#FFFFFF;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #FFFFFF;
+	text-align: center;
+}
+table.result_list_table tr {
+	background-color:#f4f4f4;
+	text-align: center;
+}
+table.result_list_table td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #f4f4f4;
+	text-align: center;
+}
+
+.AssetClassP1 {
+	
+	font-weight: bold;
+}
+
+
+</style>
 
 
 

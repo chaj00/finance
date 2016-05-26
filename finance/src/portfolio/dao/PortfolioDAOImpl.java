@@ -1,6 +1,6 @@
 package portfolio.dao;
 
-import static fw.Query.*;
+import static fw.PortfolioQuery.*;
 import static fw.JdbcTemplate.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import portfolio.dto.PortfolioDTO;
 public class PortfolioDAOImpl implements PortfolioDAO{
 
 	@Override
-	public ArrayList<PortfolioDTO> getPlist(String type, String std, String riskpoint, Connection con) throws SQLException {
+	public ArrayList<PortfolioDTO> getPlist(String type, String std, String rownum, Connection con) throws SQLException {
 		ArrayList<PortfolioDTO> pf_plist = new ArrayList<PortfolioDTO>();
 		PortfolioDTO dto = null;
 		System.out.println("--DAO-- checked!");
@@ -27,19 +27,20 @@ public class PortfolioDAOImpl implements PortfolioDAO{
 		test.append(std);
 		test.append(PLIST5);
 		test.append(PLIST6);
-		test.append(riskpoint);
+		test.append(rownum);
 		//test.append(PLIST7);
 		System.out.println(test.toString());
 
-		 
+		
 		ResultSet rs = stmt.executeQuery(test.toString());
 
 		while(rs.next()){
 			dto = new PortfolioDTO
-					(rs.getString(1), 
+					(
+					rs.getString(1), 
 					rs.getString(2), 
 					rs.getString(3), 
-					rs.getString(4), 
+					rs.getString(4),
 					rs.getDouble(5)*100, 
 					rs.getString(6));
 			pf_plist.add(dto);

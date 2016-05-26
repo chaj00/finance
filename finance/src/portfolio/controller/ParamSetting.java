@@ -18,7 +18,8 @@ public class ParamSetting {
 		
 	}
 	
-	public String removeNum(String str) {
+
+	public String removeChar(String str) {
 	    return str.replaceAll("[^0-9]", "");
 	}
 }

@@ -88,6 +88,9 @@
             var iCheckNum_total = 0;
             var sRiskPoint = 0;
             var vRiskPoint = 0;
+            var ETF_Per = 0;
+            var ETF_GPer = "";
+            var ETF_KPer = "";
             //Prev / Next Button Click
             $("#btn_step0_next, #btn_step1_next, #btn_step2_next, #btn_step3_next, #btn_step4_next, #btn_step5_next, #btn_step1_prev, #btn_step2_prev, #btn_step3_prev, #btn_step4_prev, #btn_step5_prev, #btn_step6_next, #btn_step7_next, #btn_step8_prev, #btn_step8_next, #btn_step9_prev, #btn_step9_next").click(function () {
                 //Box : step0 ~ step5
@@ -101,6 +104,7 @@
                 var iNextNum = eval(sSelBoxID.substring(4, 5)) + 1;
                 var iCheckNumber = 0;     //문항 Select Number
                 
+                  
                 $("#sel" + iSelNum.toString()).css("display", "none");
                 $("#txt_NowAge_err, #txt_ForecastRetire_err,#txt_Life_err, #txt_TargetPriceRetire_err, #txt_initInvestPrice_err, #txt_MonthSavePrice_err, #txt_InvestTerm_err, #txt_TargetPrice_err, #txt_Validation_err").text("");
 
@@ -144,6 +148,7 @@
  
                  
                       if(iSelNum ==5) {
+                    	  
                           
                       	 iCheckNum_total
                       	 if(iCheckNum_total >= 5 && iCheckNum_total <= 7){
@@ -154,8 +159,11 @@
                                    from: eval(sRiskPoint)
                                });
                       		$("#result_point").html("1");
-                      		$("#ETF_GPer").text("1%");
-                      		$("#ETF_KPer").text("1%");
+                      		$("#ETF_GPer").text("6.3%");
+                      		$("#ETF_KPer").text("3.9%");
+                      		ETF_GPer = $("#ETF_GPer").text();
+                      		ETF_KPer = $("#ETF_KPer").text();
+ 
                       	}if(iCheckNum_total >=8 && iCheckNum_total <=10){
                       		sRiskPoint = 2;
                       		vRiskPoint = sRiskPoint;
@@ -164,8 +172,11 @@
                                   from: eval(sRiskPoint)
                               });
                       		$("#result_point").html("2");
-                      		$("#ETF_GPer").text("2%");
-                      		$("#ETF_KPer").text("2%");
+                      		$("#ETF_GPer").text("7.1%");
+                      		$("#ETF_KPer").text("4.4%");
+                      		ETF_GPer = $("#ETF_GPer").text();
+                      		ETF_KPer = $("#ETF_KPer").text();
+                      		
               			}if(iCheckNum_total >=11 && iCheckNum_total <=14){
                       		sRiskPoint = 3;
                       		vRiskPoint = sRiskPoint;
@@ -174,8 +185,10 @@
                                   from: eval(sRiskPoint)
                               });
               				$("#result_point").html("3");
-                      		$("#ETF_GPer").text("3%");
-                      		$("#ETF_KPer").text("3%");
+                      		$("#ETF_GPer").text("7.8%");
+                      		$("#ETF_KPer").text("4.9%");
+                      		ETF_GPer = $("#ETF_GPer").text();
+                      		ETF_KPer = $("#ETF_KPer").text();
               			}if(iCheckNum_total >=15 && iCheckNum_total <=17){
                       		sRiskPoint = 4;
                       		vRiskPoint = sRiskPoint;
@@ -184,8 +197,10 @@
                                   from: eval(sRiskPoint)
                               });
               				$("#result_point").html("4");
-                      		$("#ETF_GPer").text("4%");
-                      		$("#ETF_KPer").text("4%");
+                      		$("#ETF_GPer").text("8.5%");
+                      		$("#ETF_KPer").text("5.4%");
+                      		ETF_GPer = $("#ETF_GPer").text();
+                      		ETF_KPer = $("#ETF_KPer").text();
                       	}else if(iCheckNum_total >=18 && iCheckNum_total <=20){
                       		sRiskPoint = 5;
                       		vRiskPoint = sRiskPoint;
@@ -194,8 +209,10 @@
                                   from: eval(sRiskPoint)
                               });
                       		$("#result_point").html("5");
-                      		$("#ETF_GPer").text("5%");
-                      		$("#ETF_KPer").text("5%");
+                      		$("#ETF_GPer").text("9.2%");
+                      		$("#ETF_KPer").text("5.9%");
+                      		ETF_GPer = $("#ETF_GPer").text();
+                      		ETF_KPer = $("#ETF_KPer").text();
                       	}
               			
                			iCheckNum_total = 0;
@@ -207,21 +224,26 @@
                     if (iSelNum == 6 || iSelNum == 7) {	//G, K
                         if (iSelNum == 6) {
                             iNextNum = iSelNum + 2;
-                            objSurveyData.param06 = "G";
+                            ETF_Per = 0;
+                        	
                         }
 
                         if (iSelNum == 7) {
                             sSelBoxID = sSelBoxID.substring(0, 4) + (iSelNum - 1);
-                            objSurveyData.param06 = "K";
+                            ETF_Per = 1;
+                        	
                         }
-
+                        
                         //투자목적 TAB 변경
                         $("#tab01").removeClass("tab_select");
                         $("#tab02").addClass("tab_select");
+                        
+                        
                     }
 
                     //PLAN 선택
                     if (iSelNum == 8) {
+                    	
                         if (iCheckNumber == 1) $("#plantitle").text("여유자금 투자");
                         if (iCheckNumber == 2) $("#plantitle").text("재무목표 달성");
                         if (iCheckNumber == 3) $("#plantitle").text("은퇴 설계");
@@ -326,7 +348,6 @@
                         
                         
                         if (sPlan == "2") {	//여유자금 투자  :: 
-                            //var iSumTargetPrice = iinitInvestPrice + (iMonthSavePrice * iInvestTerm * 12);
                             var iSumTargetPrice = iinitInvestPrice + (iMonthSavePrice * ((iInvestTerm * 12) + iInvestTermMon));
                             if ((iSumTargetPrice > iTargetPrice) || iTargetPrice == 0) {
                                 $("#txt_TargetPrice_err").text(set_comma(iSumTargetPrice) + "만원 이상 작성바랍니다.");
@@ -376,10 +397,10 @@
                         }
 
                         if (!bErr) {	//vRiskPoint 보내기. 
-                            $("#txt_Riskpoint").val(objPlanData.param01);
-                            $("#txt_Region").val(objSurveyData.param06);
-                            $("#txt_Plantype").val(objSurveyData.param07);
-                            
+/*                             $("#txt_Riskpoint").val(objPlanData.param01);
+	                            $("#txt_Region").val(objSurveyData.param06);
+	                            $("#txt_Plantype").val(objSurveyData.param07);
+                             */
                             if (sPlan == 1){
                             $("#btn_step9_next").on('click', function(event){
 
@@ -387,7 +408,6 @@
                             var initInvestPrice = $("#txt_initInvestPrice").val()
                             var MonthSavePrice = $("#txt_MonthSavePrice").val()
                             var InvestTerm = $("#txt_InvestTerm").val();
-                            alert(vRiskPoint+"." + vPlan +": " + initInvestPrice + MonthSavePrice + InvestTerm)
 
                             
                             
@@ -399,8 +419,7 @@
                             var MonthSavePrice = $("#txt_MonthSavePrice").val()
                             var InvestTerm = $("#txt_InvestTerm").val();
                            	var TargetPrice = $("#txt_TargetPrice").val();
-                           	alert(vRiskPoint + "." + vPlan +": " + initInvestPrice + MonthSavePrice + InvestTerm
-                           						+ TargetPrice)
+
  
 			
                             
@@ -414,10 +433,7 @@
                             var MonthSavePrice = $("#txt_MonthSavePrice").val()
                             var ForecastRetire = $("#txt_ForecastRetire").val();
 							var Life = $("#txt_Life").val();	//90
-                            
- 							alert(vRiskPoint + "."  + vPlan + ": "+ NowAge + TargetPriceRetire + 
-									initInvestPrice + MonthSavePrice + MonthSavePrice + 
-									ForecastRetire + Life) 
+ 
 							
 							///finance/portfolio.do
 
@@ -431,9 +447,17 @@
 								$('<input type="hidden" id="vRiskPoint" name="vRiskPoint" value="' + vRiskPoint + '" />');
 							var rp2 =
 								$('<input type="hidden" id="sPlan" name="sPlan" value="' + sPlan + '" />');
-								
+							var rp3 = 
+								$('<input type="hidden" id="ETF_GPer" name="ETF_GPer" value="' + ETF_GPer + '" />');
+							var rp4 = 
+								$('<input type="hidden" id="ETF_KPer" name="ETF_KPer" value="' + ETF_KPer + '" />');
+							var rp5 = 
+								$('<input type="hidden" id="ETF_Per" name="ETF_Per" value="' + ETF_Per + '" />');
 								rp.appendTo($form_plan);
 								rp2.appendTo($form_plan);///portfolio_result.jsp
+								rp3.appendTo($form_plan);
+								rp4.appendTo($form_plan);
+								rp5.appendTo($form_plan);
 								$form_plan.attr({ action: '/finance/portfolio.do', method: 'post' }).submit();
                            			
             	            
@@ -597,74 +621,7 @@
 	onselectstart="return false">-->
 
 <header id="header">
-<!-- 	<div class="top-bar">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6 col-xs-4">
-					<div class="top-number">
-						<p>
-							<i class="fa fa-phone-square"></i> +0123 456 70 90
-						</p>
-					</div>
-				</div>
-				<div class="col-sm-6 col-xs-8">
-					<div class="social">
-						<ul class="social-share">
-							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-							<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-							<li><a href="#"><i class="fa fa-skype"></i></a></li>
-						</ul>
-						<div class="search">
-							<form role="form">
-								<input type="text" class="search-form" autocomplete="off"
-									placeholder="Search"> <i class="fa fa-search"></i>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		/.container
-	</div>
-	/.top-bar
 
-	<nav class="navbar navbar-inverse" role="banner">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="index.html"><img
-					src="/finance/images/logo.png" alt="logo"></a>
-			</div>
-
-			<div class="collapse navbar-collapse navbar-right">
-				<ul class="nav navbar-nav">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="about-us.html">About Us</a></li>
-					<li><a href="services.html">Services</a></li>
-					<li class="active"><a href="portfolio.html">Portfolio</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Pages <i class="fa fa-angle-down"></i></a>
-						<ul class="dropdown-menu">
-							<li><a href="blog-item.html">Blog Single</a></li>
-							<li><a href="pricing.html">Pricing</a></li>
-							<li><a href="404.html">404</a></li>
-							<li><a href="shortcodes.html">Shortcodes</a></li>
-						</ul></li>
-					<li><a href="blog.html">Blog</a></li>
-					<li><a href="contact-us.html">Contact</a></li>
-				</ul>
-			</div>
-		</div>
-		/.container
-	</nav>
-	/nav -->
         <nav class="navbar navbar-inverse" role="banner">
             <div class="container">
                 <div class="navbar-header">
@@ -1183,9 +1140,11 @@
 					</td>
 				</tr>
 				<tr>
-					<td>	<!-- 투자 기대 수익률  제거-->
+					<td>	
+					
+					
 						<div class="spacer40"></div>
-						<div class="btn_common_off btnETF" id="btn_step6_next">
+						<div class="btn_common_off btnETF" id="btn_step6_next" >
 							해외 상장 ETF<br />투자 기대 수익률<br />
 							<div class="ETF_Perfomance" id="ETF_GPer">0.0%</div>
 							<div class="ETF_Link">
@@ -1401,25 +1360,6 @@
 </section>
 
 
-<footer id="footer" class="midnight-blue">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-6">
-				&copy; 2016 <a target="_blank" href="http://shapebootstrap.net/"
-					title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>.
-				All Rights Reserved.
-			</div>
-			<div class="col-sm-6">
-				<ul class="pull-right">
-					<li><a href="#">Home</a></li>
-					<li><a href="#">About Us</a></li>
-					<li><a href="#">Faq</a></li>
-					<li><a href="#">Contact Us</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</footer>
 
 </body>
 </html><!-- backup -->

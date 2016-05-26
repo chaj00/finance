@@ -15,15 +15,15 @@ public class PortfolioServiceImpl implements PortfolioService{
 
 	//초고위험
 	@Override
-	public ArrayList<PortfolioDTO> getPlist(String type, String std, String riskpoint) {
+	public ArrayList<PortfolioDTO> getPlist(String type, String std, String rownum) {
 		ArrayList<PortfolioDTO> pf_plist = new ArrayList<PortfolioDTO>();
 		
-		System.out.println(type + std + riskpoint);
+		System.out.println(type + std + rownum);
 		Connection con = getConnect();
 		PortfolioDAO dao = new PortfolioDAOImpl();
 		
 		try{
-			pf_plist = dao.getPlist(type, std, riskpoint, con);
+			pf_plist = dao.getPlist(type, std, rownum, con);
 		}catch(SQLException e){
 			e.printStackTrace();
 		}

@@ -9,11 +9,12 @@ public class PortfolioDTO {
 	private double threeprofit;
 	private String std;
 	
-	public PortfolioDTO(){
-	}
-	
-	public PortfolioDTO(String type, String classify, String opcode, String title, double threeprofit, String std) {
+	public PortfolioDTO(){}
+
+	public PortfolioDTO(String type, String classify, String opcode, String title, double threeprofit,
+			String std) {
 		super();
+
 		this.type = type;
 		this.classify = classify;
 		this.opcode = opcode;
@@ -21,6 +22,7 @@ public class PortfolioDTO {
 		this.threeprofit = threeprofit;
 		this.std = std;
 	}
+
 
 	public String getType() {
 		return type;
@@ -72,12 +74,10 @@ public class PortfolioDTO {
 
 	@Override
 	public String toString() {
-		return "PortfolioDTO [type=" + type + ", classify=" + classify + ", opcode=" + opcode + ", title=" + title
-				+ ", threeprofit=" + threeprofit + ", std=" + std + "]";
+		return "PortfolioDTO [type=" + type + ", classify=" + classify + ", opcode=" + opcode
+				+ ", title=" + title + ", threeprofit=" + threeprofit + ", std=" + std + "]";
 	}
+	
 
-	
-	
-	
 	
 }
