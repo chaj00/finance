@@ -39,7 +39,7 @@ public class PortfolioServlet extends HttpServlet {
 		String ETF_KPer = req.getParameter("ETF_Per");
 		String sRiskPoint = req.getParameter("vRiskPoint");
 		String plan = req.getParameter("sPlan");
-		System.out.println(sRiskPoint + plan);
+//		System.out.println(sRiskPoint + plan);
 
 		//sPlan1
 		String initInvestPrice = req.getParameter("txt_initInvestPrice");

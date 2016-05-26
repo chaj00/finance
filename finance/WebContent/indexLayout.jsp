@@ -12,7 +12,6 @@
 		<div>
 			<jsp:include page="/portfolio/portfolio_survey.jsp"></jsp:include>
 		</div>
-		
 	</div>
 </body>
 </html>
