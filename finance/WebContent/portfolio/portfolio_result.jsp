@@ -242,8 +242,9 @@ $(window).load(function () {
 
     		<%if(sPlan.equals("2")){%>
             	$("#TopHead1_Value").text("<%=Integer.parseInt(ps.removeChar(iTargetPrice)) %>"); //iTargetPrice
-            	$("#TopHead2_Value").text("<%= iExpectedPrice %>"); //iExpectedPrice $("#txt_TargetPrice").val()
             <%}%>
+            
+            $("#TopHead2_Value").text("<%= iExpectedPrice %>"); //iExpectedPrice $("#txt_TargetPrice").val()
             
             <%if(sPlan.equals("1")| sPlan.equals("2")){%>
             	$("#middle_date1").html(idate.getFullYear()+<%=Integer.parseInt(ps.removeChar(iInvestTerm))%>);
