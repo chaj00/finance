@@ -174,6 +174,7 @@ $(window).load(function () {
 		$("#middle_plan3").css("display", "none");
 		$("#targetplan5").removeClass("disp_none");
 		$("#targetplan6").removeClass("disp_none");
+
 <%
 			int val1 = 0;
 			int val2 = 0;
@@ -185,14 +186,14 @@ $(window).load(function () {
 				val1 = Integer.parseInt(ps.removeChar(iinitInvestPrice));
 				val2 = Integer.parseInt(ps.removeChar(iMonthSavePrice));
 				val3 = Integer.parseInt(ps.removeChar(iInvestTerm));
-//				val5 = Integer.parseInt(ps.removeChar(iTargetPrice));
+				val5 = Integer.parseInt(ps.removeChar(iTargetPrice));
 				
 		 	}else{
 		 		val1 = Integer.parseInt(ps.removeChar(iinitInvestPrice));
 				val2 = Integer.parseInt(ps.removeChar(iMonthSavePrice));
 				val3 = Integer.parseInt(ps.removeChar(iInvestTerm));
 				val4 = Integer.parseInt(ps.removeChar(iInvestTermMon));
-//				val5 = Integer.parseInt(ps.removeChar(iTargetPrice));
+				val5 = Integer.parseInt(ps.removeChar(iTargetPrice));
 		 		
 			 	}
 			int ep = val1 + val2*((val3*12) + val4);
@@ -239,12 +240,17 @@ $(window).load(function () {
     		var std_year = idate.getFullYear();
     		var std_mon = idate.getMonth();
 	
-
-    		
-            $("#TopHead1_Value").text($("#txt_TargetPrice").val()); //iTargetPrice
-            $("#TopHead2_Value").text("<%= iExpectedPrice %>"); //iExpectedPrice
-            $("#middle_date1").html(idate.getFullYear()+<%=Integer.parseInt(ps.removeChar(iInvestTerm))%>);
-			$("#middle_date2").html(idate.getMonth());
+    		<%if(sPlan.equals("2")){%>
+            	$("#TopHead1_Value").text(<%=Integer.parseInt(ps.removeChar(iTargetPrice)) %>); //iTargetPrice
+            <%}%>
+            	
+            	$("#TopHead2_Value").text(<%= iExpectedPrice %>); //iExpectedPrice $("#txt_TargetPrice").val()
+            
+            
+            <%if(sPlan.equals("1")| sPlan.equals("2")){%>
+            	$("#middle_date1").html(idate.getFullYear()+<%=Integer.parseInt(ps.removeChar(iInvestTerm))%>);
+				$("#middle_date2").html(idate.getMonth());
+			<%} %>
 			$("#AssetClassP1").text(<%=list1%>*10+"%");
 			$("#AssetClassP2").text(<%=list2%>*10+"%");	
 			$("#AssetClassP3").text(<%=list3%>*10+"%");	
@@ -271,8 +277,9 @@ $(window).load(function () {
                 $(".resultmiddlebox").removeClass("resultmiddlebox_min").removeClass("resultmiddlebox_max");
                 $(".resultmiddlebox").addClass("resultmiddlebox_max");
                 $("#middle_item").css("display", "block");
-                $("#middle_value1").val(<%=Integer.parseInt(ps.removeChar(iTargetPrice))%>-<%=iExpectedPrice%>);//x
-                
+                <%if(sPlan.equals("2")){%>
+                	$("#middle_value1").val(<%=Integer.parseInt(ps.removeChar(iTargetPrice))%>-<%=iExpectedPrice%>);//x
+                <%}%>
                 
             }//index
            
@@ -634,10 +641,10 @@ $(window).load(function () {
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li><a href="#"> Home</a></li>          
-                        <li><a href="/finance/analysis/analysis_main.html">투자분석</a></li>
-                        <li><a href="/finance/product/product_main.html">금융상품</a></li>
-                        <li class ="active"><a href="/finance/portfolio/portfolio_survey.jsp">포트폴리오</a></li>
+                        <li><a href="/finance/portfolio/portfolio_survey.jsp">포트폴리오</a></li>          
+                        <li><a href="/finance/entlist.do">종목분석</a></li>
+                        <li><a href="/finance/loadPrd.do">펀드상품</a></li>
+                        <li><a href="/finance/marketindex.do">시장지표</a></li>
                      	
                     </ul>
                 </div>
@@ -825,7 +832,7 @@ $(window).load(function () {
 						</div>
 						<div class="resultTop1_A Head2">
 							<div class="Head_Title1">기대 금액</div>
-							<div class="Head_Value2" id="TopHead2_Value">만원</div>
+							<div class="Head_Value2" id="TopHead2_Value">-</div>
 							<div class="Head_Value2unit">만원</div>
 						</div>
 						<div class="resultTop1_A Head3">
