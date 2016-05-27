@@ -72,7 +72,11 @@ and rownum <= 10;
 //고위험
 
 
+<<<<<<< HEAD
+select TYPE, CLASSIFY, OPCODE, TITLE, THREEPROFIT, STD, row_number() over (partition by opcode order by threeprofit desc) from pf_products where rowid in (select max(rowid) from pf_products);
+=======
 select rownum, TYPE, CLASSIFY, OPCODE, TITLE, THREEPROFIT, STD, row_number() over (partition by opcode order by threeprofit desc) from pf_products where rowid in (select max(rowid) from pf_products) and rownum <= 10;;
+>>>>>>> branch 'jung' of https://github.com/chaj00/finance.git
 
 //TESTING
 select * from pf_products where type = '주식형';

@@ -174,6 +174,7 @@ $(window).load(function () {
 		$("#middle_plan3").css("display", "none");
 		$("#targetplan5").removeClass("disp_none");
 		$("#targetplan6").removeClass("disp_none");
+
 <%
 			int val1 = 0;
 			int val2 = 0;
@@ -241,10 +242,11 @@ $(window).load(function () {
 	
 
     		<%if(sPlan.equals("2")){%>
-            	$("#TopHead1_Value").text("<%=Integer.parseInt(ps.removeChar(iTargetPrice)) %>"); //iTargetPrice
+            	$("#TopHead1_Value").text(<%=Integer.parseInt(ps.removeChar(iTargetPrice)) %>); //iTargetPrice
             <%}%>
-            
-            $("#TopHead2_Value").text("<%= iExpectedPrice %>"); //iExpectedPrice $("#txt_TargetPrice").val()
+            	
+            	$("#TopHead2_Value").text(<%= iExpectedPrice %>); //iExpectedPrice $("#txt_TargetPrice").val()
+
             
             <%if(sPlan.equals("1")| sPlan.equals("2")){%>
             	$("#middle_date1").html(idate.getFullYear()+<%=Integer.parseInt(ps.removeChar(iInvestTerm))%>);
@@ -831,7 +833,7 @@ $(window).load(function () {
 						</div>
 						<div class="resultTop1_A Head2">
 							<div class="Head_Title1">기대 금액</div>
-							<div class="Head_Value2" id="TopHead2_Value">만원</div>
+							<div class="Head_Value2" id="TopHead2_Value">-</div>
 							<div class="Head_Value2unit">만원</div>
 						</div>
 						<div class="resultTop1_A Head3">

@@ -1862,14 +1862,22 @@
 	height:45px;
 	font-size:19px;
 	padding-top:13px;
+<<<<<<< HEAD
+	color:#000000;
+=======
 	color:#FFFFFF;
+>>>>>>> branch 'jung' of https://github.com/chaj00/finance.git
 	-webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
 }
 
 .result_box .btn_research:hover {
+<<<<<<< HEAD
+	color:#FFFFFF;
+=======
 	background-color:#3e4950;
 	color:#000000;
+>>>>>>> branch 'jung' of https://github.com/chaj00/finance.git
 	-webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
 }
@@ -1952,7 +1960,7 @@
 .result_box .resultmain_table .resultmain_td2 .Head1 .Head_Value1unit {
 	color:#FFFFFF;
 	padding-left:8px;
-	font-size:16px;
+	font-size:22px;
 	font-weight:bold;
 	display:inline-block;
 }
@@ -2447,6 +2455,7 @@
 	color:#000000;
 	-webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
+
 }
 
 .result_box .resultmain_table .resultmain_td3 .btn_first:hover {
@@ -2454,6 +2463,8 @@
 	-webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
 }
+
+
 
 
 /*********************************************************************

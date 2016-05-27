@@ -31,7 +31,7 @@ public class PortfolioDAOImpl implements PortfolioDAO{
 		//test.append(PLIST7);
 		//System.out.println(test.toString());
 
-		 
+		
 		ResultSet rs = stmt.executeQuery(test.toString());
 
 		while(rs.next()){

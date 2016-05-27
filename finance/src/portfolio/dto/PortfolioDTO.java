@@ -2,7 +2,6 @@ package portfolio.dto;
 
 public class PortfolioDTO {
 
-
 	private String type;
 	private String classify;
 	private String opcode;
